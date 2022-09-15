@@ -57,6 +57,18 @@ CREATE TABLE IF NOT EXISTS `pecas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
+-- tabela usuarios
+
+CREATE TABLE IF NOT EXISTS 'usuarios'(
+
+'nome' VARCHAR (150) NOT NULL AUTO_INCREMENT,
+'senha' CHAR (150) NOT NULL, 
+'id' int(11) NOT NULL,
+
+PRIMARY KEY ('id_usuario')
+
+)ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
 -- Exportação de dados foi desmarcado.
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
