@@ -27,10 +27,13 @@ CREATE TABLE IF NOT EXISTS `pecas` (
 
 -- tabela usuarios
 CREATE TABLE IF NOT EXISTS `usuarios`(
-`id` int(11) NOT NULL AUTO_INCREMENT,
-`nome` VARCHAR (150) NOT NULL,
-`senha` CHAR (150) NOT NULL,
-PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR (150) NOT NULL,
+  `senha` CHAR (150) NOT NULL,
+  `criado` DATE NOT NULL,
+  `alterado` DATE,
+  `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- tabela fk equipamentos_atributos
