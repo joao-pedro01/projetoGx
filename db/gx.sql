@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `equipamentos` (
 CREATE TABLE IF NOT EXISTS `pecas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
+  `sku` varchar(20) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
