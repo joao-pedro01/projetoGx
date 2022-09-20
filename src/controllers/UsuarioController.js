@@ -1,14 +1,13 @@
-import usuarios from "./models/Usuario.js";
+import listarUsuarios from "../models/Usuarios.js";
 
 class UsuarioController {
     static listarUsuarios = (req, res) => {
-        usuarios.find((err, usuarios) => {
-            res.status(200).json(usuarios);
+        listarUsuarios.find((err, listarUsuarios) => {
+            res.status(200).find(listarUsuarios);
         });
     }
-    static consultaUsuario = (req, res) => {
-        
-    }
+
+    
 }
 
 export default UsuarioController;

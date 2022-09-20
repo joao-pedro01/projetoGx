@@ -1,9 +1,9 @@
 import express from "express";
-import UsuarioController from "../controllers/UsuariosController.js";
+import UsuarioController from "../controllers/UsuarioController.js";
 
 const router = express.Router();
 
 router
-    .get("/usuarios", UsuariosController.listarUsuarios);
+    .get("/usuarios", UsuarioController.listarUsuarios);
 
 export default router;
