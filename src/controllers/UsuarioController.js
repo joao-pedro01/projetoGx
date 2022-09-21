@@ -1,13 +1,11 @@
-import listarUsuarios from "../models/Usuarios.js";
+import usuarios from "../models/Usuarios.js";
 
+// class responsavel por todas acoes do usuario
 class UsuarioController {
+    // function que retorna os usuarios
     static listarUsuarios = (req, res) => {
-        listarUsuarios.find((err, listarUsuarios) => {
-            res.status(200).find(listarUsuarios);
-        });
-    }
-
-    
-}
+        res.status(200).json(usuarios);
+    };
+};
 
 export default UsuarioController;

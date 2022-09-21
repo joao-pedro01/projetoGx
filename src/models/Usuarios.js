@@ -1,11 +1,14 @@
 import conn from "../config/dbConnect.js"
 
-const usuarios = conn.connect(function(err) {
-    if (err) throw err;
-    conn.query("SELECT * FROM usuarios", function (err, result) {
-      if (err) throw err;
-      console.log(result);
+// function que faz a consulta de todos usuarios
+function listUsuarios() {
+  return new Promise((resolve, reject) => {
+    conn.query('SELECT * from usuarios', function (error, results, fields) {
+      if (error) throw error;
+        resolve(results);
     });
   });
-const listarUsuarios = usuarios
-export default listarUsuarios;
+};
+
+const usuarios = await listUsuarios();
+export default usuarios;
