@@ -10,7 +10,7 @@ function listarPecas() {
   });
 };
 
-function peca(id) {
+function peca(res, req) {
   return new Promise((resolve, reject) => {
     conn.query('SELECT * from pecas WHERE id =1', function (error, results, fields) {
       if (error) throw error;

@@ -6,6 +6,11 @@ class PecasController {
     static listarPecas = (req, res) => {
         res.status(200).json(pecas);
     };
+    static peca = (req, res) => {
+        var id = req.params.id;
+        console.log(id);
+        res.status(200).json(id);
+    };
 };
 
 export default PecasController;
