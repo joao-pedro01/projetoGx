@@ -1,5 +1,7 @@
 import express from "express";
 import usuarios from "./UsuariosRoutes.js";
+import pecas from "./PecasRoutes.js";
+
 const routes = (app) => {
     // rotas principais
     app.route('/').get((req, res) => {
@@ -11,7 +13,8 @@ const routes = (app) => {
     // rotas de arquivos externos
     app.use(
         express.json(),
-        usuarios
+        usuarios,
+        pecas
     );
 };
 
