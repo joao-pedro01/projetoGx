@@ -3,9 +3,8 @@ import conn from "../config/dbConnect.js"
 // function que faz a consulta de todos pecas
 function listarPecas() {
   return new Promise((resolve, reject) => {
-    conn.query('SELECT * from pecas', function (error, results, fields) {
-      if (error) throw error;
-        resolve(results);
+    conn.select('*').table('usuarios').then(users => {
+      console.log(users);
     });
   });
 };
