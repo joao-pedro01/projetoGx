@@ -1,4 +1,4 @@
-import usuarios from "../models/Usuarios.js";
+/* import usuarios from "../models/Usuarios.js"; */
 
 // class responsavel por todas acoes do usuario
 class UsuarioController {
