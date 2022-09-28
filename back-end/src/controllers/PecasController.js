@@ -5,26 +5,22 @@ import conn from "../config/dbConnect.js"
 class PecasController {
     // function que retorna todas as pecas
     static listarPecas = (req, res) => {
-        conn.select('*').table('p').then(users => {
-            console.log(users);
-          });
-        res.status(200).json(pecas);
+        conn.select('*').table('pecas').then(pecas => {
+            console.log(pecas);
+            res.status(200).json(pecas);
+        });
     };
     static peca = (req, res) => {
         var id = req.params.id;
         
-        function peca(id) {
+        conn.select('*').table('pecas').where('id', id).then(peca => {
+            if(peca.length == 0) {
+                res.status(404).json("Peça não encontrada!!!");
+            }else {
+                res.status(200).json(peca);
+            }
+        });
 
-            return new Promise((resolve, reject) => {
-                conn.select('*').table('pecas').where('id', id).then(peca => {
-                    console.log(peca);
-                    resolve (peca);
-                });
-            });
-        }
-        peca = peca(id);
-        console.log(peca);
-        res.status(200).json(peca);
     };
 };
 
