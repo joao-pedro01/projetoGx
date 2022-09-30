@@ -7,6 +7,7 @@ const router = express.Router();
 router
     .get("/api/pecas", PecasController.listarPecas)
     .get("/api/peca/:id", PecasController.peca)
+    .post("/api/peca", PecasController.cadastrarPeca)
     .put("/api/peca/:id", PecasController.desativarPeca)
 
 export default router;

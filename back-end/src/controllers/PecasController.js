@@ -1,5 +1,6 @@
 /* import pecas from "../models/Pecas.js"; */
 import conn from "../config/dbConnect.js";
+import var_dump from "var_dump";
 
 // class responsavel por todas acoes das pecas
 class PecasController {
@@ -10,9 +11,19 @@ class PecasController {
         });
     };
 
+
+    static cadastrarPeca = (req, res) => {
+        let peca = req.body.name;
+
+        console.log(peca);
+        res.status(200).send({message: "deu certo"});
+    };
+
     static desativarPeca = (req, res) => {
         var id = req.params.id;
         
+
+
         conn.select('nome', 'is_active').table('pecas').where('id', id).then(peca => {
             // se a peca nao existir vai entrar no if
             if(peca.length == 0) {
