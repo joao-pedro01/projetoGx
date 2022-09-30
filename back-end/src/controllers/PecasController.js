@@ -1,23 +1,33 @@
 /* import pecas from "../models/Pecas.js"; */
-import conn from "../config/dbConnect.js"
-import knex from "knex";
+import conn from "../config/dbConnect.js";
 
 // class responsavel por todas acoes das pecas
 class PecasController {
     // function que retorna todas as pecas
     static listarPecas = (req, res) => {
-        conn.select('*').table('pecas').then(pecas => {
-            console.log(pecas);
+        conn.select('*').table('pecas').where('is_active', true).then(pecas => {
             res.status(200).json(pecas);
         });
     };
-    static deletarPeca = (req, res) => {
+
+    static desativarPeca = (req, res) => {
         var id = req.params.id;
         
-        conn.where({id: id}).update({is_active: true}).table("pecas").then(data => {
-            console.log(data);
-        })
+        conn.select('nome', 'is_active').table('pecas').where('id', id).then(peca => {
+            // se a peca nao existir vai entrar no if
+            if(peca.length == 0) {
+                res.status(404).json("Peça não existe!!!");
+            }else if(peca[0].is_active == false) {
+                res.status(405).json("Peça já esta desativada");
+            }else {
+                // caso passar por todos os if ira desativar a peca
+                conn.where({id: id}).update({is_active: false}).table('pecas').then(data => {
+                    res.status(200).json(`${peca[0].nome} desativada com sucesso`);
+                });
+            }
+        });
     };
+
     static peca = (req, res) => {
         var id = req.params.id;
         conn.select('*').table('pecas').where('id', id).then(peca => {
@@ -26,7 +36,9 @@ class PecasController {
             }else {
                 res.status(200).json(peca);
             }
-        });
+        }).catch(err => {
+            res.status.send({message: `${err} - falha ao exibir peça`});
+        })
     };
 };
 
