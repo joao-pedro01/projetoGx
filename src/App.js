@@ -1,29 +1,24 @@
-import pms from './assets/logo_pms.png' // import logo prefeitura
-import './stylesLogin.css'  //import estilizacao css
-import bootstrap from 'bootstrap' //import estilizacao bootstrap
+import React from 'react';
+import Login from './pages/login/indexLogin'
+import MainPage from './pages/mainpage/indexMP'
 
-function App() {
+import { 
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+
+const App = () => {
   return ( 
-    <div className="container">
-      <div className="boxLogin">
-        <div className="login"> 
-          <form className="formLogin" action="#" method="post"> {/* capturar dados do form */}
-          <span className="loginTitulo"><img src= {pms} className='img-fluid'></img></span> {/* imagem pms */} 
-            <h1 className="loginTitulo">ESTOQUE</h1> {/* titulo da pagina */}
-            <div className='inputsL'> {/* div lista de inputs */}
-              <input className="input" name="nome" type="text" placeholder="Nome de usuário" required/>
-            </div>
-            <div className='inputsL'>
-              <input className="input" type="password" placeholder="Senha" required/>
-            </div>
-            <div className='containerLoginBotao'>
-              <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-            </div>
-          </form>
-        </div>
-      </div>
+    <div className="app">
+      <Router> {/* Sistema de rotas da pagina */}
+        <Routes>
+          <Route exact path="/" element={<Login />} />   
+          <Route exact path="/pecas" element={<MainPage />} />
+        </Routes>
+      </Router>
     </div>
-  
   );
   }
   
