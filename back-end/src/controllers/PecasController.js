@@ -6,23 +6,19 @@ import var_dump from "var_dump";
 class PecasController {
     // function que retorna todas as pecas
     static listarPecas = (req, res) => {
-        var id = req.params.id, is_active;
-        console.log(id);
-        switch (id) {
-            case '1':
+        var status = req.query.status, is_active = null;
+        console.log(status);
+        switch (status) {
+            case 'ativo':
                     is_active = true;
                 break;
             
-            case '2':
+            case 'inativa':
                     is_active = false;
                 break;
-        
-            default:
-                    is_active = null;
-                break;
         }
-        console.log(is_active);
-        if(is_active === true || is_active === false) {
+
+        if (is_active !== null) {
             conn.select('*').table('pecas').where('is_active', is_active).then(pecas => {
                 res.status(200).json(pecas);
             });
@@ -32,7 +28,6 @@ class PecasController {
             });
         }
     };
-
 
     static cadastrarPeca = (req, res) => {
         let peca = req.body.name;

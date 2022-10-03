@@ -5,7 +5,7 @@ const router = express.Router();
 
 // rotas para acoes usuarios
 router
-    .get("/api/pecas/:id", PecasController.listarPecas)
+    .get("/api/pecas/", PecasController.listarPecas)
     .get("/api/peca/:id", PecasController.peca)
     .post("/api/peca", PecasController.cadastrarPeca)
     .put("/api/peca/:id", PecasController.desativarPeca)
