@@ -6,9 +6,31 @@ import var_dump from "var_dump";
 class PecasController {
     // function que retorna todas as pecas
     static listarPecas = (req, res) => {
-        conn.select('*').table('pecas').where('is_active', true).then(pecas => {
-            res.status(200).json(pecas);
-        });
+        var id = req.params.id, is_active;
+        console.log(id);
+        switch (id) {
+            case '1':
+                    is_active = true;
+                break;
+            
+            case '2':
+                    is_active = false;
+                break;
+        
+            default:
+                    is_active = null;
+                break;
+        }
+        console.log(is_active);
+        if(is_active === true || is_active === false) {
+            conn.select('*').table('pecas').where('is_active', is_active).then(pecas => {
+                res.status(200).json(pecas);
+            });
+        }else {
+            conn.select('*').table('pecas').then(pecas => {
+                res.status(200).json(pecas);
+            });
+        }
     };
 
 
