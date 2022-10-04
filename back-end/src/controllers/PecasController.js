@@ -30,10 +30,11 @@ class PecasController {
     };
 
     static cadastrarPeca = (req, res) => {
-        let peca = req.body.name;
+        let peca = req.body;
 
-        console.log(peca);
-        res.status(200).send({message: "deu certo"});
+        conn.insert(peca).into("pecas").then(peca => {
+            res.status(200).send({message:  `Peça foi cadastrada`});
+        });
     };
 
     static desativarPeca = (req, res) => {
