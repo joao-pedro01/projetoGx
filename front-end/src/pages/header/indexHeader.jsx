@@ -1,23 +1,52 @@
-import React from "react";
-import "./styleHeader.css";
-
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import PmsLogo from './assets/logo_pms.png';
+import '../header/styleHeader.css'
 const Header = () => {
+    
     return (
-        <nav class="navbar navbar-dark bg-dark">
-            <div class="dd">
-                <div class="search">
-                    <form>
-                        <input class="bar_search" type="search" placeholder="Pesquisar" aria-label="Pesquisar"/>
-                        <button class="search_button" type="submit">Pesquisar</button>
-                    </form>
-                </div>
-                <div class="Logo_pms">
-                    <a class="navbar-brand" href="#" /*logo do site*/>
-                        <img src="http://sigat.sorocaba.sp.gov.br/img/logo_pms.png" width="30" height="30" class="d-inline-block align-top" alt=""/> ESTOQUE GX
-                    </a>
-                </div>
-            </div>
-        </nav>
+        <Navbar bg="dark" expand="lg">
+        <Container fluid>
+          <Navbar.Brand><img src= {PmsLogo} className='logo-nav'/><span className='nav-title'><strong>ESTOQUE</strong></span></Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: '100px' }}
+              navbarScroll
+            >
+              <Nav.Link href="#action1">Home</Nav.Link>
+              <Nav.Link href="#action2">Link222</Nav.Link>
+              <NavDropdown title="teste" id="navbarScrollingDropdown">
+                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action4">
+                  Another action
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action5">
+                  Something else here
+                </NavDropdown.Item>
+              </NavDropdown>
+              <Nav.Link href="#" disabled>
+                Link
+              </Nav.Link>
+            </Nav>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button variant="outline-success">Search</Button>
+            </Form>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     );  
 }
 export default Header;
