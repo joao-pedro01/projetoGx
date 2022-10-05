@@ -1,10 +1,16 @@
-.logo-nav{
-    max-width: 5%;
-    padding-bottom: 5px;
+.imgNav { 
+    width:50px;
 }
-.nav-title {
+
+.logoNav { 
+    padding-left: 7px;
+    
+}
+Form.d-flex button{
+    background-color: rgb(80, 62, 238); 
     color: white;
-    margin: 10px;
-    font-size: 25px;
-    padding-top: 10px;
+    border-color: rgb(80, 62, 238); 
+}
+.exit-button {
+    margin-top: 100px;
 }

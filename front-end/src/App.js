@@ -13,12 +13,19 @@ import {
   Route,
   Routes,
   Navigate,
+  Link,
 } from "react-router-dom";
 
 const App = () => {
   return ( 
     <div className="app">
-      <Header/>
+        <Router> {/* Sistema de rotas da pagina */}
+          <Routes>
+            <Route exact path="/" element={<Login />} />   
+            <Route exact path="/pecas" element={<MainPage />} />
+            <Route exact path="/teste" element={<Header/>}/>
+          </Routes>
+        </Router>
     </div>
   );
   }
