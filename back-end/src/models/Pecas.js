@@ -1,23 +1,21 @@
-import conn from "../config/dbConnect.js"
+import var_dump from "var_dump";
+import conn from "../config/dbConnect.js";
 
 // function que faz a consulta de todos pecas
-function listarPecas() {
-  return new Promise((resolve, reject) => {
-    conn.select('*').table('pecas').then(users => {
-      console.log(users);
-    });
-  });
-};
+const listarPecas = async(params) => {
+  return await conn.select('*').table('pecas').where(params);
+}
 
-function peca(req, res) {
-  return new Promise((resolve, reject) => {
-    conn.query('SELECT * from pecas WHERE id =1', function (error, results, fields) {
-      if (error) throw error;
-        resolve(results);
-    });
-  });
-};
+const peca = async(id) => {
+  return await conn.select('nome','sku', 'is_active').table('pecas').where('id', id);
+}
 
-const pecas = await listarPecas();
+const cadastrarPeca = async(dados) => {
+  conn.insert(peca).into("pecas");
+}
 
-export default pecas;
+const desativarPeca = async(id) => {
+  return await conn.where({id: id}).update({is_active: false}).table('pecas');
+}
+
+export { listarPecas, peca, cadastrarPeca, desativarPeca };
