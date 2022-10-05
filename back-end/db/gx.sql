@@ -4,7 +4,7 @@ USE `gx`;
 -- tabela atributos
 CREATE TABLE IF NOT EXISTS `atributos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(150) NOT NULL,
+  `atributo` varchar(150) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -40,8 +40,8 @@ CREATE TABLE IF NOT EXISTS `usuarios`(
 -- tabela fk equipamentos_atributos
 CREATE TABLE IF NOT EXISTS `equipamentos_atributos` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  `id_equipamentos` int(11) NOT NULL,
-  `id_atributos` int(11) NOT NULL,
+  `id_equipamento` int(11) NOT NULL,
+  `id_atributo` int(11) NOT NULL,
   KEY `FK__equipamentos` (`id_equipamentos`),
   KEY `FK__atributos` (`id_atributos`),
   CONSTRAINT `FK__atributos` FOREIGN KEY (`id_atributos`) REFERENCES `atributos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `equipamentos_atributos` (
 -- tabela fk pecas_atributos
 CREATE TABLE IF NOT EXISTS `pecas_atributos` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  `id_pecas` int(11) NOT NULL,
-  `id_atributos` int(11) NOT NULL,
+  `id_peca` int(11) NOT NULL,
+  `id_atributo` int(11) NOT NULL,
   KEY `FK__pecas` (`id_pecas`),
   KEY `FK__atributos` (`id_atributos`),
   FOREIGN KEY (`id_atributos`) REFERENCES `atributos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
