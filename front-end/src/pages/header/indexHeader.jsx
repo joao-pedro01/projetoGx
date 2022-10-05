@@ -23,9 +23,10 @@ function Header() {
       {[false].map((expand) => (
         <Navbar key={expand} bg="dark" expand={expand} className="mb-3" variant="dark">
           <Container fluid>
-            <Navbar.Brand><img className='imgNav' src={Logo}></img>
-            <span className='logoNav'><strong>ESTOQUE</strong></span></Navbar.Brand>
-
+            <div className="removeUnderline">
+              <Link to="/menu"><Navbar.Brand><img className='imgNav' src={Logo}></img>
+              <span className='logoNav'><strong>ESTOQUE</strong></span></Navbar.Brand></Link>
+            </div>
             <Form className="d-flex">
               <Form.Control
                 type="search"
@@ -52,7 +53,7 @@ function Header() {
                   <Nav.Link href="login">Adicionar Peça</Nav.Link>
                   <Nav.Link href="#action2">Remover Peça</Nav.Link>
                   <NavDropdown /* */
-                    title="nao sei mais q opcao tem"
+                    title="Relatórios"
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                   >
                     <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
@@ -64,7 +65,7 @@ function Header() {
                       Something else here
                     </NavDropdown.Item>
                   </NavDropdown>
-                  <span className="exit-button"><Button variant="danger" size="sm" >Sair</Button></span>
+                  <span className="exitSpan"><Button className="exitButton"variant="danger" size="sm" >Sair</Button></span>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
@@ -76,3 +77,6 @@ function Header() {
 }
 
 export default Header
+
+// todo
+// 

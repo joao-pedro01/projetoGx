@@ -11,6 +11,20 @@ Form.d-flex button{
     color: white;
     border-color: rgb(80, 62, 238); 
 }
-.exit-button {
-    margin-top: 100px;
+.exitSpan {
+    position:absolute;
+    bottom: 0;
+    right: 0;
+    padding-bottom: 20px;
+    padding-right: 20px;
+}
+
+.exitButton { 
+    width: 75px;
+    height: 40px;
+
+}
+
+.removeUnderline a { 
+    text-decoration: none;
 }

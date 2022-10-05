@@ -1,7 +1,8 @@
 import React from 'react';
 import Login from './pages/login/indexLogin'
-import MainPage from './pages/mainpage/indexMP'
+import MainPage from './pages/listaPecas/indexMP'
 import Header from './pages/header/indexHeader'
+import Menus from './pages/menus/indexMenus'
 //     <Router> {/* Sistema de rotas da pagina */}
 // <Routes>
 // <Route exact path="/" element={<Login />} />   
@@ -24,6 +25,7 @@ const App = () => {
             <Route exact path="/" element={<Login />} />   
             <Route exact path="/pecas" element={<MainPage />} />
             <Route exact path="/teste" element={<Header/>}/>
+            <Route exact path="/menu" element={<Menus/>}/>
           </Routes>
         </Router>
     </div>
