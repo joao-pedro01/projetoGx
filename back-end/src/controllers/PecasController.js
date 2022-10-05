@@ -1,4 +1,4 @@
-import { cadastrarPeca, desativarPeca, listarPecas, peca } from '../models/Pecas.js';
+import { cadastrarPeca, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
 import var_dump from "var_dump";
 
 // class responsavel por todas acoes das pecas
@@ -66,12 +66,13 @@ class PecasController {
 
     static peca = (req, res) => {
         var id = req.params.id;
-        var select = peca(id);
+        var select = peca_atributos(id);
 
         select.then((dado) => {
             if(dado.length == 0) {
                 res.status(404).json("Peça não encontrada!!!");
             }else {
+                var_dump(dado);
                 res.status(200).json(dado);
             }
         });
