@@ -57,7 +57,7 @@ class PecasController {
             }else {
                 var update = desativarPeca(id);
                 // caso passar por todos os if ira desativar a peca
-                update.then((data) => {
+                update.then(() => {
                     res.status(200).json(`${peca[0].nome} desativada com sucesso`);
                 });
             }
@@ -66,14 +66,21 @@ class PecasController {
 
     static peca = (req, res) => {
         var id = req.params.id;
-        var select = peca_atributos(id);
+        var select = peca(id);
 
-        select.then((dado) => {
-            if(dado.length == 0) {
+        select.then((peca) => {
+            if(peca.length === 0) {
                 res.status(404).json("Peça não encontrada!!!");
             }else {
-                var_dump(dado);
-                res.status(200).json(dado);
+                var innerJoin = peca_atributos(id);
+                
+                innerJoin.then((atributos) => {
+                    var result = { peca, atributos }
+                    res.status(200).json(result);
+                }).catch(err => {
+                    console.log(err);
+                    res.status(500).send({message: `falha ao exibir peça`});
+                })
             }
         });
         /* conn.select('*').table('pecas').where('id', id).then(peca => {

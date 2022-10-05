@@ -1,5 +1,5 @@
-import var_dump from "var_dump";
 import conn from "../config/dbConnect.js";
+import var_dump from "var_dump";
 
 // function que faz a consulta de todos pecas
 const listarPecas = async(params) => {
@@ -12,9 +12,8 @@ const peca = async(id) => {
 
 const peca_atributos = async(id) => {
   return await conn.select().table('pecas_atributos')
-    .innerJoin('pecas', 'pecas.id', 'pecas_atributos.id_pecas')
     .innerJoin( 'atributos', 'atributos.id', 'pecas_atributos.id_atributos')
-    .where('pecas.id', 9);
+    .where('pecas_atributos.id_pecas', id);
 }
 
 const cadastrarPeca = async(dados) => {
