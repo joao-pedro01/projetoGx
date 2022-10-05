@@ -1,7 +1,15 @@
-
-.d-flex button{
-    color: white;
+.imgNav { 
+    width:50px;
 }
-.teste button {
-    background-color: gold;
+
+.logoNav { 
+    padding-left: 7px;
+    
+}
+Form.d-flex button{ 
+    background-color: green;
+    color:white;
+}
+Form.d-flex button:hover {
+    color: black;
 }

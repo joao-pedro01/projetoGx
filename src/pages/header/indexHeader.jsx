@@ -6,31 +6,53 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import '../header/styleHeader.css'
+import Logo from './assets/logo_pms.png'
+
+import { 
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+  Link,
+} from "react-router-dom";
+
 
 function Header() {
   return (
     <>
       {[false].map((expand) => (
-        <Navbar key={expand} bg="light" expand={expand} className="mb-3">
+        <Navbar key={expand} bg="dark" expand={expand} className="mb-3" variant="dark">
           <Container fluid>
-            <Navbar.Brand href="#">SIGOMES GOLMES</Navbar.Brand>
+            <Navbar.Brand><img className='imgNav' src={Logo}></img>
+            <span className='logoNav'><strong>ESTOQUE</strong></span></Navbar.Brand>
+
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Busca rápida"
+                className="me-2"
+                aria-label="search"
+              />
+              <Button className='search-button' variant="outline-success">Buscar</Button>
+            </Form>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="end"
             >
+              
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  Offcanvas
+                  Cadastro
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="login">Home</Nav.Link>
-                  <Nav.Link href="#action2">Link</Nav.Link>
-                  <NavDropdown
-                    title="Dropdown"
+                  <Nav.Link href="login">Adicionar Peça</Nav.Link>
+                  <Nav.Link href="#action2">Remover Peça</Nav.Link>
+                  <NavDropdown /* */
+                    title="nao sei mais q opcao tem"
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                   >
                     <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
@@ -41,17 +63,8 @@ function Header() {
                     <NavDropdown.Item href="#action5">
                       Something else here
                     </NavDropdown.Item>
-                  </NavDropdown>
+                  </NavDropdown> 
                 </Nav>
-                <Form className="d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="Busca rápida"
-                    className="me-2"
-                    aria-label="search"
-                  />
-                  <Button variant="outline-success">Buscar</Button>
-                </Form>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
