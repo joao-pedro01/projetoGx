@@ -1,5 +1,6 @@
 import { cadastrarPeca, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
 import var_dump from "var_dump";
+import { dd } from './functions.js';
 
 // class responsavel por todas acoes das pecas
 class PecasController {
@@ -25,16 +26,13 @@ class PecasController {
             var select = listarPecas(query);
 
             select.then((pecas) => {
-                
-                res.setHeader('application/json').status(200).json(pecas);
+                res.status(200).json(pecas);
             });
         }else {
             var select = listarPecas();
 
             select.then((pecas) => {
                 res.setHeader('Access-Control-Allow-Origin', '*')
-                .setHeader('Access-Control-Allow-Methods', 'GET')
-                .setHeader('Content-Type', 'application/json')
                 .status(200).json(pecas);
             });
         }
