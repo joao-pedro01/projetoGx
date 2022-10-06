@@ -3,7 +3,11 @@ import var_dump from "var_dump";
 
 // function que faz a consulta de todos pecas
 const listarPecas = async(params) => {
-  return await conn.select('*').table('pecas').where(params);
+  if(params == undefined){
+    return await conn.select('*').table('pecas');
+  }else {
+    return await conn.select('*').table('pecas').where(params);
+  }
 }
 
 const peca = async(id) => {

@@ -17,10 +17,11 @@ class PecasController {
                 break;
         }
 
+        var query = {
+            is_active: is_active
+        };
+
         if(is_active !== null) {
-            var query = {
-                is_active: is_active
-            };
             var select = listarPecas(query);
 
             select.then((pecas) => {
