@@ -25,12 +25,15 @@ class PecasController {
             var select = listarPecas(query);
 
             select.then((pecas) => {
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                res.setHeader('Content-Type', 'application/json');
                 res.status(200).json(pecas);
             });
         }else {
             var select = listarPecas();
 
             select.then((pecas) => {
+                res.setHeader('Access-Control-Allow-Origin', '*', 'Content-Type', 'application/json');
                 res.status(200).json(pecas);
             });
         }
@@ -84,15 +87,6 @@ class PecasController {
                 })
             }
         });
-        /* conn.select('*').table('pecas').where('id', id).then(peca => {
-            if(peca.length == 0) {
-                res.status(404).json("Peça não encontrada!!!");
-            }else {
-                res.status(200).json(peca);
-            }
-        }).catch(err => {
-            res.status.send({message: `${err} - falha ao exibir peça`});
-        }) */
     };
 };
 
