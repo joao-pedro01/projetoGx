@@ -6,9 +6,9 @@ import { dd } from './functions.js';
 class PecasController {
     // function que retorna todas as pecas
     static listarPecas = (req, res) => {
-        var status = req.query.status, is_active = null;
+        var status = req.query.status, query;
 
-        switch (status) {
+ /*        switch (status) {
             case 'ativo':
                     is_active = true;
                 break;
@@ -16,13 +16,17 @@ class PecasController {
             case 'inativa':
                     is_active = false;
                 break;
+        } */
+
+        if(status === 'true' || status === 'false' || status === 'null'){
+            status = Boolean(status);
+
+            var query = {
+                is_active: status
+            };
         }
 
-        var query = {
-            is_active: is_active
-        };
-
-        if(is_active !== null) {
+        if(status !== null) {
             var select = listarPecas(query);
 
             select.then((pecas) => {
