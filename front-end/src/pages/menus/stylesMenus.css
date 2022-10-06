@@ -1,0 +1,61 @@
+.buttonhall{
+    margin: 0%;
+}
+.buttonOne{
+    background-color: rgb(243, 234, 234);
+    text-align: center;
+    padding: 11%;
+    height: 60%;
+    width: 50%;
+    display: inline-block;
+    border-right: solid 2px black;
+    margin: 0;
+}
+.buttonTwo{
+    background-color: rgb(243, 234, 234);
+    text-align: center;
+    padding: 11%;
+    width: 50%;
+    display: inline-block;
+    border-left: solid 2px black;
+    margin: 0;
+}
+.buttonThree{
+    background-color: rgb(243, 234, 234);
+    text-align: center;
+    padding: 11%;
+    width: 50%;
+    display: inline-block;
+    border-top: solid 4px black;
+    border-right: solid 2px black;
+    margin: 0;
+}
+.buttonFour{
+    background-color: rgb(243, 234, 234);
+    text-align: center;
+    padding: 11%;
+    width: 50%;
+    display: inline-block;
+    border-left: solid 2px black;
+    border-top: solid 4px black;
+    margin: 0;
+}
+.buttonOne:active{
+    background-color: rgb(15, 228, 210);
+}
+.buttonTwo:active{
+    background-color: rgb(15, 228, 210);
+}
+.buttonThree:active{
+    background-color: rgb(15, 228, 210);
+}
+.buttonFour:active{
+    background-color: rgb(15, 228, 210);
+}
+.teste a {
+    text-decoration: none !important;
+}
+/*
+background-color: rgb(243, 234, 234);
+background-color: rgb(228, 216, 216);
+*/
