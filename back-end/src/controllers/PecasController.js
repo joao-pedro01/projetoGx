@@ -27,6 +27,9 @@ class PecasController {
 
             select.then((pecas) => {
                 res.status(200).json(pecas);
+            }).catch(err => {
+                dd(err);
+                res.status(500).send({message: `falha ao listar peças peça`});
             });
         }else {
             var select = listarPecas();
@@ -34,6 +37,9 @@ class PecasController {
             select.then((pecas) => {
                 res.setHeader('Access-Control-Allow-Origin', '*')
                 .status(200).json(pecas);
+            }).catch(err => {
+                dd(err);
+                res.status(500).send({message: `falha ao listar peças com query`});
             });
         }
     };
@@ -42,8 +48,11 @@ class PecasController {
         let peca = req.body;
         var insert = cadastrarPeca(peca);
 
-        insert.then(peca => {
+        insert.then(() => {
             res.status(200).send({message:  `Peça foi cadastrada`});
+        }).catch(err => {
+            dd(err);
+            res.status(500).send({message: `falha ao cadastrar peça`});
         });
     };
 
@@ -62,6 +71,9 @@ class PecasController {
                 // caso passar por todos os if ira desativar a peca
                 update.then(() => {
                     res.status(200).json(`${peca[0].nome} desativada com sucesso`);
+                }).catch(err => {
+                    dd(err);
+                    res.status(500).send({message: `falha ao desativar peça`});
                 });
             }
         });
@@ -81,7 +93,7 @@ class PecasController {
                     var result = { peca, atributos }
                     res.status(200).json(result);
                 }).catch(err => {
-                    console.log(err);
+                    dd(err);
                     res.status(500).send({message: `falha ao exibir peça`});
                 })
             }
