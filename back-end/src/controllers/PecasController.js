@@ -25,16 +25,17 @@ class PecasController {
             var select = listarPecas(query);
 
             select.then((pecas) => {
-                res.setHeader('Access-Control-Allow-Origin', '*');
-                res.setHeader('Content-Type', 'application/json');
-                res.status(200).json(pecas);
+                
+                res.setHeader('application/json').status(200).json(pecas);
             });
         }else {
             var select = listarPecas();
 
             select.then((pecas) => {
-                res.setHeader('Access-Control-Allow-Origin', '*', 'Content-Type', 'application/json');
-                res.status(200).json(pecas);
+                res.setHeader('Access-Control-Allow-Origin', '*')
+                .setHeader('Access-Control-Allow-Methods', 'GET')
+                .setHeader('Content-Type', 'application/json')
+                .status(200).json(pecas);
             });
         }
     };
