@@ -1,6 +1,6 @@
 import { cadastrarPeca, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
 import var_dump from "var_dump";
-import { dd } from './functions.js';
+import { dd, setheader } from './functions.js';
 
 // class responsavel por todas acoes das pecas
 class PecasController {
@@ -8,15 +8,15 @@ class PecasController {
     static listarPecas = (req, res) => {
         var status = req.query.status, query;
 
-        if(status === 'true' || status === 'false' || status === 'null'){
-            status = Boolean(status);
+        if(status === 'true' || status === 'false' || status === undefined) {
+            status = status === undefined ? null : status === 'true' ? true : false;
 
             var query = {
                 is_active: status
             };
-        }
+        };
 
-        if(status !== null) {
+        if(status === true || status === false) {
             var select = listarPecas(query);
 
             select.then((pecas) => {
@@ -29,8 +29,10 @@ class PecasController {
             var select = listarPecas();
 
             select.then((pecas) => {
-                res.setHeader('Access-Control-Allow-Origin', '*')
-                .status(200).json(pecas);
+                var test = setheader();
+                dd(test);
+
+                res.setHeader(test).status(200).json(pecas);
             }).catch(err => {
                 dd(err);
                 res.status(500).send({message: `falha ao listar peças com query`});
@@ -90,8 +92,9 @@ class PecasController {
                 var innerJoin = peca_atributos(id);
                 
                 innerJoin.then((atributos) => {
-                    if(atributos[0] == undefined) {
-                        dd("test")
+                    if(atributos.length === 0) {
+                        res.status(200).json(peca);
+                        console.log("Não tem atributos");
                     }else {
                         var result = { peca, atributos }
                         res.status(200).json(result);
