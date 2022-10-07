@@ -29,10 +29,10 @@ class PecasController {
             var select = listarPecas();
 
             select.then((pecas) => {
-                var test = setheader();
-                dd(test);
+                /* var test = setheader();
+                dd(test); */
 
-                res.setHeader(test).status(200).json(pecas);
+                res/* .setHeader(test) */.status(200).json(pecas);
             }).catch(err => {
                 dd(err);
                 res.status(500).send({message: `falha ao listar peças com query`});
