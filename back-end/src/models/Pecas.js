@@ -16,12 +16,12 @@ const peca = async(id) => {
 
 const peca_atributos = async(id) => {
   return await conn.select().table('pecas_atributos')
-    .innerJoin( 'atributos', 'atributos.id', 'pecas_atributos.id_atributos')
-    .where('pecas_atributos.id_pecas', id);
+    .innerJoin( 'atributos', 'atributos.id', 'pecas_atributos.id_atributo')
+    .where('pecas_atributos.id_peca', id);
 }
 
 const cadastrarPeca = async(dados) => {
-  conn.insert(peca).into("pecas");
+  conn.insert(dados).into("pecas");
 }
 
 const desativarPeca = async(id) => {

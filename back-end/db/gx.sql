@@ -42,10 +42,10 @@ CREATE TABLE IF NOT EXISTS `equipamentos_atributos` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `id_equipamento` int(11) NOT NULL,
   `id_atributo` int(11) NOT NULL,
-  KEY `FK__equipamentos` (`id_equipamentos`),
-  KEY `FK__atributos` (`id_atributos`),
-  CONSTRAINT `FK__atributos` FOREIGN KEY (`id_atributos`) REFERENCES `atributos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK__equipamentos` FOREIGN KEY (`id_equipamentos`) REFERENCES `equipamentos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `FK__equipamentos` (`id_equipamento`),
+  KEY `FK__atributos` (`id_atributo`),
+  CONSTRAINT `FK__atributos` FOREIGN KEY (`id_atributo`) REFERENCES `atributos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK__equipamentos` FOREIGN KEY (`id_equipamento`) REFERENCES `equipamentos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- tabela fk pecas_atributos
@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS `pecas_atributos` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `id_peca` int(11) NOT NULL,
   `id_atributo` int(11) NOT NULL,
-  KEY `FK__pecas` (`id_pecas`),
-  KEY `FK__atributos` (`id_atributos`),
-  FOREIGN KEY (`id_atributos`) REFERENCES `atributos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (`id_pecas`) REFERENCES `pecas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `FK__pecas` (`id_peca`),
+  KEY `FK__atributos` (`id_atributo`),
+  FOREIGN KEY (`id_atributo`) REFERENCES `atributos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (`id_peca`) REFERENCES `pecas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
