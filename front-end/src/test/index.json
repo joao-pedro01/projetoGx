@@ -1,0 +1,15 @@
+{
+    "peca": [{
+        "nome": "memoria ram",
+        "sku": "001",
+        "is_active": 0
+    }],
+    "atributos": [{
+        "id": 1,
+        "id_pecas": 1,
+        "id_atributos": 1,
+        "valor": "1333 MHz",
+        "nome": "Frequência",
+        "is_active": 1
+    }]
+}
