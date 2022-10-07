@@ -56,13 +56,13 @@ function Header() {
                     title="Relatórios"
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                   >
-                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                    <NavDropdown.Item href="#action3">opcao1</NavDropdown.Item>
                     <NavDropdown.Item href="#action4">
-                      Another action
+                      opcao2
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action5">
-                      Something else here
+                      opcao3
                     </NavDropdown.Item>
                   </NavDropdown>
                   <span className="exitSpan"><Button className="exitButton"variant="danger" size="sm" >Sair</Button></span>

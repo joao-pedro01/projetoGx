@@ -7,7 +7,12 @@
     
 }
 Form.d-flex button{
-    background-color: rgb(80, 62, 238); 
+    background-color: royalblue;
+    color: white;
+    border-color: royalblue
+}
+Form.d-flex button:hover{
+    background-color: rgb(30, 90, 225);
     color: white;
     border-color: rgb(80, 62, 238); 
 }
