@@ -84,6 +84,12 @@ class PecasController {
         };
     };
 
+
+    static alterarQuantidade = (req, res) => {
+        let qnt = req.body.qnt;
+        
+        dd(qnt)
+    };
     static desativarPeca = (req, res) => {
         var id = req.params.id;
         var select = peca(id);
