@@ -5,6 +5,32 @@ import { dd, setheader } from './functions.js';
 // class responsavel por todas acoes das pecas
 class PecasController {
     // function que retorna todas as pecas
+    static peca = (req, res) => {
+        var id = req.params.id;
+        var select = peca(id);
+
+        select.then((peca) => {
+            if(peca.length === 0) {
+                res.status(404).json("Peça não encontrada!!!");
+            }else {
+                var innerJoin = peca_atributos(id);
+                
+                innerJoin.then((atributos) => {
+                    if(atributos.length === 0) {
+                        res.status(200).json(peca);
+                        console.log("Não tem atributos");
+                    }else {
+                        var result = { peca, atributos }
+                        res.status(200).json(result);
+                    }
+                }).catch(err => {
+                    dd(err);
+                    res.status(500).send({message: `falha ao exibir peça`});
+                })
+            };
+        });
+    };
+
     static listarPecas = (req, res) => {
         var status = req.query.status, query;
 
@@ -37,7 +63,7 @@ class PecasController {
                 dd(err);
                 res.status(500).send({message: `falha ao listar peças com query`});
             });
-        }
+        };
     };
 
     static cadastrarPeca = (req, res) => {
@@ -55,7 +81,7 @@ class PecasController {
                 dd(err);
                 res.status(500).send({message: `falha ao cadastrar peça`});
             });
-        }
+        };
     };
 
     static desativarPeca = (req, res) => {
@@ -77,33 +103,7 @@ class PecasController {
                     dd(err);
                     res.status(500).send({message: `falha ao desativar peça`});
                 });
-            }
-        });
-    };
-
-    static peca = (req, res) => {
-        var id = req.params.id;
-        var select = peca(id);
-
-        select.then((peca) => {
-            if(peca.length === 0) {
-                res.status(404).json("Peça não encontrada!!!");
-            }else {
-                var innerJoin = peca_atributos(id);
-                
-                innerJoin.then((atributos) => {
-                    if(atributos.length === 0) {
-                        res.status(200).json(peca);
-                        console.log("Não tem atributos");
-                    }else {
-                        var result = { peca, atributos }
-                        res.status(200).json(result);
-                    }
-                }).catch(err => {
-                    dd(err);
-                    res.status(500).send({message: `falha ao exibir peça`});
-                })
-            }
+            };
         });
     };
 };
