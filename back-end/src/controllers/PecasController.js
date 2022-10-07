@@ -8,16 +8,6 @@ class PecasController {
     static listarPecas = (req, res) => {
         var status = req.query.status, query;
 
- /*        switch (status) {
-            case 'ativo':
-                    is_active = true;
-                break;
-            
-            case 'inativa':
-                    is_active = false;
-                break;
-        } */
-
         if(status === 'true' || status === 'false' || status === 'null'){
             status = Boolean(status);
 
@@ -50,14 +40,20 @@ class PecasController {
 
     static cadastrarPeca = (req, res) => {
         let peca = req.body;
-        var insert = cadastrarPeca(peca);
+        
+        
+        if(peca.nome == undefined || peca.sku == undefined){
+            res.status(422).send({message: 'input indefinido'});
+        }else {
+            var insert = cadastrarPeca(peca);
 
-        insert.then(() => {
-            res.status(200).send({message:  `Peça foi cadastrada`});
-        }).catch(err => {
-            dd(err);
-            res.status(500).send({message: `falha ao cadastrar peça`});
-        });
+            insert.then(() => {
+                res.status(200).send({message:  `Peça foi cadastrada`});
+            }).catch(err => {
+                dd(err);
+                res.status(500).send({message: `falha ao cadastrar peça`});
+            });
+        }
     };
 
     static desativarPeca = (req, res) => {
@@ -94,8 +90,12 @@ class PecasController {
                 var innerJoin = peca_atributos(id);
                 
                 innerJoin.then((atributos) => {
-                    var result = { peca, atributos }
-                    res.status(200).json(result);
+                    if(atributos[0] == undefined) {
+                        dd("test")
+                    }else {
+                        var result = { peca, atributos }
+                        res.status(200).json(result);
+                    }
                 }).catch(err => {
                     dd(err);
                     res.status(500).send({message: `falha ao exibir peça`});
