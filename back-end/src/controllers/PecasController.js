@@ -1,4 +1,4 @@
-import { cadastrarPeca, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
+import { alterarQuantidade, cadastrarPeca, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
 import var_dump from "var_dump";
 import { dd, setheader } from './functions.js';
 
@@ -85,10 +85,21 @@ class PecasController {
     };
 
 
-    static alterarQuantidade = (req, res) => {
-        let qnt = req.body.qnt;
-        
-        dd(qnt)
+    static alterarQuantidade = (req, res) => {        
+        var id = req.params.id;
+        var qnt = req.body.qnt;
+        var test = {
+            qnt: qnt
+        }
+        var update = alterarQuantidade(id, test);
+
+        update.then(() => {
+            
+        }).catch(err => {
+            console.log(err);
+            res.status(500).send({message: `falha ao desativar peça`});
+        });;
+
     };
 
     static desativarPeca = (req, res) => {
