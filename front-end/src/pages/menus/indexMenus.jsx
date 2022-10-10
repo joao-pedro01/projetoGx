@@ -6,12 +6,9 @@ import './stylesMenus.css'  //import estilizacao css
 const Menus = () => { 
     return (
         <div className='MenuContainer'>
-            <div>
                 <HeaderPMS/>
-            </div>
-
             <div className='top'>
-                <a className='buttonOne' href='/cadastro'><div className='text-button'>Cadastrar Peças</div></a>
+                <span className="top"><a className='buttonOne' href='/cadastro'><div className='text-button'>Cadastrar Peças</div></a></span>
                 <a className='buttonTwo' href='/remover'><div className='text-button'>Retirar Peças</div></a>
             </div>
             <div className='down'>

@@ -4,3 +4,16 @@ tr:hover {
 th {
     background-color: white !important;
 }
+
+.buttonArea {
+    background-color: whitesmoke;
+    height: 80px;
+    width: auto;
+}
+
+.botaoCadastro { 
+    right: auto;
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
