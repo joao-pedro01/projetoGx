@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `pecas_atributos` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `id_peca` int(11) NOT NULL,
   `id_atributo` int(11) NOT NULL,
+  `valor` varchar(50) NOT NULL,
   KEY `FK__pecas` (`id_peca`),
   KEY `FK__atributos` (`id_atributo`),
   FOREIGN KEY (`id_atributo`) REFERENCES `atributos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,

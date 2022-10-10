@@ -21,7 +21,7 @@ const peca_atributos = async(id) => {
 }
 
 const cadastrarPeca = async(dados) => {
-  conn.insert(dados).into("pecas");
+  return await conn.insert(dados).into("pecas");
 }
 
 const desativarPeca = async(id) => {
