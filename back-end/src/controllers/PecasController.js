@@ -17,11 +17,11 @@ class PecasController {
                 
                 innerJoin.then((atributos) => {
                     if(atributos.length === 0) {
-                        res.status(200).json(peca);
+                        res.set('Access-Control-Allow-Origin', '*').status(200).json(peca);
                         console.log("Não tem atributos");
                     }else {
                         var result = { peca, atributos }
-                        res.status(200).json(result);
+                        res.status(200).set('Access-Control-Allow-Origin', '*').json(result);
                     }
                 }).catch(err => {
                     dd(err);
@@ -46,7 +46,9 @@ class PecasController {
             var select = listarPecas(query);
 
             select.then((pecas) => {
-                res.status(200).json(pecas);
+                res.set('Access-Control-Allow-Origin', '*')
+                .status(200)
+                .json(pecas);
             }).catch(err => {
                 dd(err);
                 res.status(500).send({message: `falha ao listar peças peça`});
@@ -58,7 +60,10 @@ class PecasController {
                 /* var test = setheader();
                 dd(test); */
 
-                res/* .setHeader(test) */.status(200).json(pecas);
+                res.
+                    set('Access-Control-Allow-Origin', '*')
+                    .status(200)
+                    .json(pecas);
             }).catch(err => {
                 dd(err);
                 res.status(500).send({message: `falha ao listar peças com query`});

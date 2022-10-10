@@ -6,9 +6,9 @@ const router = express.Router();
 // rotas para acoes usuarios
 router
     .get("/api/pecas/", PecasController.listarPecas)
-    .get("/api/peca/:id", PecasController.peca)
-    .post("/api/peca", PecasController.cadastrarPeca)
-    .put("/api/peca/:id", PecasController.alterarQuantidade)
-    .put("/api/peca/:id", PecasController.desativarPeca)
+    .get("/api/pecas/:id", PecasController.peca)
+    .post("/api/pecas", PecasController.cadastrarPeca)
+    .put("/api/pecas/:id", PecasController.alterarQuantidade)
+    .delete("/api/pecas/:id", PecasController.desativarPeca)
 
 export default router;

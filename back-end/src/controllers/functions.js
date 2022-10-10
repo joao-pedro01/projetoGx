@@ -7,9 +7,7 @@ export function dd(params) {
     process.exit();
 }
 
-export async function setheader() {
-    teste = {
-        'Access-Control-Allow-Origin': '*'
-    }
-    return await {'Access-Control-Allow-Origin': '*'};
+export function setheader() {
+    teste = "'Access-Control-Allow-Origin, *'"
+    return teste;
 }

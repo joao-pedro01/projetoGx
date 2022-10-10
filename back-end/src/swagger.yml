@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: API projeto GX
+  description: API para gerenciar o laboratório de informatica da prefeitura de Sorocaba
+  version: 0.0.1
+  termsOfService: https://administracao.sorocaba.sp.gov.br/ti/
+externalDocs:
+  description: Repositório do projeto
+  url: http://pms-labarq02:3000/sstec/projetogx
+servers: 
+- url: http://localhost:3000/api
+  description: API de Teste
+paths:
+  /pecas:
+    get:
+      summary: Recupera todas as peça solicitada
+      parameters:
+      - name: status
+      in: query
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    nome:
+                      type: string
+                    sku:
+                      type: string
+                    is_active:
+                      type: boolean
+  /pecas/{id}:
+    get:
+      summary: Recupera uma peça pelo id
+      parameters: 
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        200:
+          description: Sucesso
+          content:
+            apllication/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    nome:
+                      type: string
+                    sku:
+                      type: string
+                    is_active:
+                      type: boolean
