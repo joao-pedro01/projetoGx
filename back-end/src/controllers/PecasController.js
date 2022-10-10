@@ -17,14 +17,14 @@ class PecasController {
                 
                 innerJoin.then((atributos) => {
                     if(atributos.length === 0) {
-                        res.set('Access-Control-Allow-Origin', '*').status(200).json(peca);
+                        res.status(200).json(peca);
                         console.log("Não tem atributos");
                     }else {
                         var result = { peca, atributos }
-                        res.status(200).set('Access-Control-Allow-Origin', '*').json(result);
+                        res.status(200).json(result);
                     }
                 }).catch(err => {
-                    dd(err);
+                    console.log(err);
                     res.status(500).send({message: `falha ao exibir peça`});
                 })
             };
@@ -46,11 +46,9 @@ class PecasController {
             var select = listarPecas(query);
 
             select.then((pecas) => {
-                res.set('Access-Control-Allow-Origin', '*')
-                .status(200)
-                .json(pecas);
+                res.status(200).json(pecas);
             }).catch(err => {
-                dd(err);
+                console.log(err);
                 res.status(500).send({message: `falha ao listar peças peça`});
             });
         }else {
@@ -60,12 +58,9 @@ class PecasController {
                 /* var test = setheader();
                 dd(test); */
 
-                res.
-                    set('Access-Control-Allow-Origin', '*')
-                    .status(200)
-                    .json(pecas);
+                res.status(200).json(pecas);
             }).catch(err => {
-                dd(err);
+                console.log(err);
                 res.status(500).send({message: `falha ao listar peças com query`});
             });
         };
@@ -83,7 +78,7 @@ class PecasController {
             insert.then(() => {
                 res.status(200).send({message:  `Peça foi cadastrada`});
             }).catch(err => {
-                dd(err);
+                console.log(err);
                 res.status(500).send({message: `falha ao cadastrar peça`});
             });
         };
@@ -95,6 +90,7 @@ class PecasController {
         
         dd(qnt)
     };
+
     static desativarPeca = (req, res) => {
         var id = req.params.id;
         var select = peca(id);
@@ -111,7 +107,7 @@ class PecasController {
                 update.then(() => {
                     res.status(200).json(`${peca[0].nome} desativada com sucesso`);
                 }).catch(err => {
-                    dd(err);
+                    console.log(err);
                     res.status(500).send({message: `falha ao desativar peça`});
                 });
             };

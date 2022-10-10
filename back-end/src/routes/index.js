@@ -11,6 +11,11 @@ const routes = (app) => {
         res.status(200).json({test: 1});
     });
     // rotas de arquivos externos
+    app.use((req, res, next) => {
+        res.append('Access-Control-Allow-Origin', '*');
+        res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        next();
+    });
     app.use(
         express.json(),
         usuarios,
