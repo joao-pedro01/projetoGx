@@ -12,7 +12,7 @@ const routes = (app) => {
     app.route('/api/test').get((req,res) => {
         res.status(200).json({test: 1});
     });
-    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+    app.use('/api/documentacao', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
     // rotas de arquivos externos
     app.use((req, res, next) => {
         res.append('Access-Control-Allow-Origin', '*');

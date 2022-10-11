@@ -100,9 +100,21 @@
                 }
               }
             }
-          },
-          "404": "des"
+          }
         }
+      },
+      "put": {
+        "summary": "Altera quantidade de peça",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ]
       },
       "delete": {
         "summary": "Delete uma peça pelo id",
@@ -116,7 +128,24 @@
             "required": true
           }
         ],
-        "responses": null
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "apllication/json": {
+                "example": "Deu certo"
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed",
+            "content": {
+              "apllication/json": {
+                "example": "Peça já esta desativada"
+              }
+            }
+          }
+        }
       }
     }
   }

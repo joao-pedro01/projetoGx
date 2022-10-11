@@ -1,6 +1,6 @@
 import { alterarQuantidade, cadastrarPeca, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
 import var_dump from "var_dump";
-import { dd, setheader } from './functions.js';
+import { dd } from './functions.js';
 
 // class responsavel por todas acoes das pecas
 class PecasController {
@@ -35,7 +35,7 @@ class PecasController {
         var status = req.query.status, query;
 
         if(status === 'true' || status === 'false' || status === undefined) {
-            status = status === undefined ? null : status === 'true' ? true : false;
+            status = status === undefined ? true : status === 'true' ? true : false;
 
             var query = {
                 is_active: status
@@ -55,9 +55,6 @@ class PecasController {
             var select = listarPecas();
 
             select.then((pecas) => {
-                /* var test = setheader();
-                dd(test); */
-
                 res.status(200).json(pecas);
             }).catch(err => {
                 console.log(err);
@@ -68,8 +65,7 @@ class PecasController {
 
     static cadastrarPeca = (req, res) => {
         let peca = req.body;
-        
-        
+
         if(peca.nome == undefined || peca.sku == undefined){
             res.status(422).send({message: 'input indefinido'});
         }else {
@@ -87,19 +83,29 @@ class PecasController {
 
     static alterarQuantidade = (req, res) => {        
         var id = req.params.id;
+        var select = peca(id);
         var qnt = req.body.qnt;
-        var test = {
-            qnt: qnt
-        }
-        var update = alterarQuantidade(id, test);
 
-        update.then(() => {
-            
-        }).catch(err => {
-            console.log(err);
-            res.status(500).send({message: `falha ao desativar peça`});
-        });;
-
+        select.then((peca) => {
+            //qnt = peca[0].qnt - qnt
+            //dd(qnt)
+            // se a peca nao existir vai entrar no if
+            if(peca.length == 0) {
+                res.status(404).json("Peça não existe!!!");
+            }else if(peca[0].is_active == false) {
+                res.status(405).json("Peça esta desativada não pode alterar");
+            }else if(peca[0].qnt - qnt < 0) {
+                    res.status(400).send({message: 'Não é possivel pois não tem a quantidade em estoque'});
+            }else {    
+                var update = alterarQuantidade(id, qnt);
+                update.then(() => {
+                    res.status(200).json(`${peca.nome}`)
+                }).catch(err => {
+                    console.log(err);
+                    res.status(500).send({message: `falha ao desativar peça`});
+                });
+            };
+        });
     };
 
     static desativarPeca = (req, res) => {

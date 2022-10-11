@@ -11,7 +11,7 @@ export const listarPecas = async(params) => {
 }
 
 export const peca = async(id) => {
-  return await conn.select('nome','sku', 'is_active').table('pecas').where('id', id);
+  return await conn.select('nome','sku', 'qnt', 'is_active').table('pecas').where('id', id);
 }
 
 export const peca_atributos = async(id) => {
@@ -28,6 +28,6 @@ export const desativarPeca = async(id) => {
   return await conn.where({id: id}).update({is_active: false}).table('pecas');
 }
 
-export const alterarQuantidade = async(id, value) => {
-  return await conn.update({ value }).where({id: id}).table('pecas');
+export const alterarQuantidade = async(id, qnt) => {
+  return await conn.update({ qnt }).where({id: id}).table('pecas');
 }
