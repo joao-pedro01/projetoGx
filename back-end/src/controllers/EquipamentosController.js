@@ -1,4 +1,4 @@
-import { equipamento, listarEquipamentos } from '../models/Equipamentos.js';
+import { listarEquipamentos } from '../models/Equipamentos.js';
 import { dd } from './functions.js';
 
 // class responsavel por todas acoes das pecas
