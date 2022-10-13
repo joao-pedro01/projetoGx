@@ -3,6 +3,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocs from "../../helpers/swagger.json" assert { type: "json" };
 import usuarios from "./UsuariosRoutes.js";
 import pecas from "./PecasRoutes.js";
+import equipamentos from "./EquipamentosRoutes.js";
 
 const routes = (app) => {
     // rotas principais
@@ -22,7 +23,8 @@ const routes = (app) => {
     app.use(
         express.json(),
         usuarios,
-        pecas
+        pecas,
+        equipamentos
     );
 };
 

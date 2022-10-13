@@ -19,6 +19,7 @@
   "paths": {
     "/pecas": {
       "get": {
+        "tags": ["pecas"],
         "summary": "Recupera todas as peça solicitada",
         "parameters": [
           {
@@ -62,6 +63,7 @@
     },
     "/pecas/{id}": {
       "get": {
+        "tags": ["pecas"],
         "summary": "Recupera uma peça especifica pelo id",
         "parameters": [
           {
@@ -103,7 +105,22 @@
           }
         }
       },
+      "post": {
+        "tags": ["pecas"],
+        "summary": "Adiociona peça ao banco de dados",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ]
+      },
       "put": {
+        "tags": ["pecas"],
         "summary": "Altera quantidade de peça",
         "parameters": [
           {
@@ -117,6 +134,7 @@
         ]
       },
       "delete": {
+        "tags": ["pecas"],
         "summary": "Delete uma peça pelo id",
         "parameters": [
           {
@@ -142,6 +160,50 @@
             "content": {
               "apllication/json": {
                 "example": "Peça já esta desativada"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/equipamentos": {
+      "get": {
+        "tags": ["equipamentos"],
+        "summary": "Recupera todos os equipamentos solicitado",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "nome": {
+                        "type": "string"
+                      },
+                      "patrimonio": {
+                        "type": "string"
+                      },
+                      "is_active": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
               }
             }
           }

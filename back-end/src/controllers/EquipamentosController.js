@@ -1,31 +1,27 @@
-import { alterarQuantidade, cadastrarPeca, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
+import { equipamento, listarEquipamentos } from '../models/Equipamentos.js';
 import { dd } from './functions.js';
 
 // class responsavel por todas acoes das pecas
-class PecasController {
-    // ira retornar a peca solicitada pelo
-    static peca = (req, res) => {
+class EquipamentosController {
+    // function que retorna todas as pecas
+    static equipamento = (req, res) => {
         var id = req.params.id;
-        var select = peca(id);
+        var select = equipamento(id);
 
         select.then((peca) => {
-            // entra no if caso não retornar nada do db 
             if(peca.length === 0) {
                 res.status(404).json("Peça não encontrada!!!");
             }else {
-                // variavel para consulta da peca solicitada (pelo id) 
                 var innerJoin = peca_atributos(id);
                 
                 innerJoin.then((atributos) => {
-                    // ira entrar no if caso não houver atributos relacionado a peca e retornar somente a peca
                     if(atributos.length === 0) {
                         res.status(200).json(peca);
                         console.log("Não tem atributos");
                     }else {
-                        // ira retornar as peças com os atributos
                         var result = { peca, atributos }
                         res.status(200).json(result);
-                    } 
+                    }
                 }).catch(err => {
                     console.log(err);
                     res.status(500).send({message: `falha ao exibir peça`});
@@ -33,37 +29,32 @@ class PecasController {
             };
         });
     };
-    // responsavel por listar todas as pecas
-    static listarPecas = (req, res) => {
+
+    static listarEquipamentos = (req, res) => {
         var status = req.query.status, query;
 
-        // caso exista query via url ira entrar para tratar o retorno para executar a busca no bd
         if(status === 'true' || status === 'false' || status === undefined) {
             status = status === undefined ? true : status === 'true' ? true : false;
 
-            // objeto que vai guardar os dados para a busca
             var query = {
                 is_active: status
             };
         };
 
-        // if para entrar caso buscar pecas ativas e inativas
         if(status === true || status === false) {
-            var select = listarPecas(query);
+            var select = listarEquipamentos(query);
 
-            // select para executar busca com query
-            select.then((pecas) => {
-                res.status(200).json(pecas);
+            select.then((equipamentos) => {
+                res.status(200).json(equipamentos);
             }).catch(err => {
                 console.log(err);
                 res.status(500).send({message: `falha ao listar peças peça`});
             });
         }else {
-            var select = listarPecas();
+            var select = listarEquipamentos();
 
-            // select que faz a busca sem query
-            select.then((pecas) => {
-                res.status(200).json(pecas);
+            select.then((equipamentos) => {
+                res.status(200).json(equipamentos);
             }).catch(err => {
                 console.log(err);
                 res.status(500).send({message: `falha ao listar peças com query`});
@@ -71,19 +62,16 @@ class PecasController {
         };
     };
 
-    // responsavel por cadastrar peca
     static cadastrarPeca = (req, res) => {
         let peca = req.body;
 
-        // tratamento caso nao recebe o que foi requisitado
         if(peca.nome == undefined || peca.sku == undefined){
             res.status(422).send({message: 'input indefinido'});
         }else {
-            // variavel responsavel por executar a query do insert  
             var insert = cadastrarPeca(peca);
 
             insert.then(() => {
-                res.status(200).send({message:  `Peça foi cadastra  da com sucesso`});
+                res.status(200).send({message:  `Peça foi cadastrada com sucesso`});
             }).catch(err => {
                 console.log(err);
                 res.status(500).send({message: `falha ao cadastrar peça`});
@@ -142,4 +130,4 @@ class PecasController {
     };
 };
 
-export default PecasController;
+export default EquipamentosController;

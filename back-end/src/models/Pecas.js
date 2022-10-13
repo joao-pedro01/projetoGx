@@ -28,6 +28,6 @@ export const desativarPeca = async(id) => {
   return await conn.where({id: id}).update({is_active: false}).table('pecas');
 }
 
-export const alterarQuantidade = async(id, qnt) => {
-  return await conn.update({ qnt }).where({id: id}).table('pecas');
+export const alterarQuantidade = async(id, value) => {
+  return await conn.update({ qnt: value }).where({id: id}).table('pecas');
 }
