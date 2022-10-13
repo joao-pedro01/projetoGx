@@ -4,7 +4,7 @@ import { dd } from './functions.js';
 // class responsavel por todas acoes das pecas
 class PecasController {
     // ira retornar a peca solicitada pelo
-    static peca = (req, res) => {
+    /* GET */static peca = (req, res) => {
         var id = req.params.id;
         var select = peca(id);
 
@@ -34,7 +34,7 @@ class PecasController {
         });
     };
     // responsavel por listar todas as pecas
-    static listarPecas = (req, res) => {
+    /* GET */static listarPecas = (req, res) => {
         var status = req.query.status, query;
 
         // caso exista query via url ira entrar para tratar o retorno para executar a busca no bd
@@ -72,27 +72,38 @@ class PecasController {
     };
 
     // responsavel por cadastrar peca
-    static cadastrarPeca = (req, res) => {
+    /* POST */static cadastrarPeca = (req, res) => {
         let peca = req.body;
 
         // tratamento caso nao recebe o que foi requisitado
         if(peca.nome == undefined || peca.sku == undefined){
-            res.status(422).send({message: 'input indefinido'});
+            res.status(405).send({message: 'input indefinido'});
         }else {
-            // variavel responsavel por executar a query do insert  
-            var insert = cadastrarPeca(peca);
+            let query = {
+                sku: peca.sku
+            }
+            var select = listarPecas(query)
 
-            insert.then(() => {
-                res.status(200).send({message:  `Peça foi cadastra  da com sucesso`});
-            }).catch(err => {
-                console.log(err);
-                res.status(500).send({message: `falha ao cadastrar peça`});
-            });
+            select.then((content) => {
+                if(content.length !== 0) {
+                    res.status(404).send({Message: `SKU: ${peca.sku} já existe na base de dados`});
+                } else {
+                    // variavel responsavel por executar a query do insert
+                    var insert = cadastrarPeca(peca);
+        
+                    insert.then(() => {
+                        res.status(200).send({message:  `Peça foi cadastra  da com sucesso`});
+                    }).catch(err => {
+                        console.log(err);
+                        res.status(500).send({message: `falha ao cadastrar peça`});
+                    });
+                }
+            })
         };
     };
 
 
-    static alterarQuantidade = (req, res) => {        
+    /* PUT */static alterarQuantidade = (req, res) => {        
         var id = req.params.id;
         var select = peca(id);
         
@@ -118,7 +129,7 @@ class PecasController {
         });
     };
 
-    static desativarPeca = (req, res) => {
+    /* DELETE */static desativarPeca = (req, res) => {
         var id = req.params.id;
         var select = peca(id);
 
