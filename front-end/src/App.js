@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled, { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme, GlobalStyle } from './theme.js';
 import Login from './pages/login/indexLogin'
 import MainPage from './pages/listaPecas/indexLista'
 import Header from './pages/header/indexHeader'
@@ -13,9 +15,17 @@ import {
   Link,
 } from "react-router-dom";
 
+const StyledApp = styled.div``;
 
 const App = () => {
-  return ( 
+  const [theme, setTheme] = useState("dark");
+
+  const themeToggler = () => {
+    theme === "light" ? setTheme('dark') : setTheme('light')
+  };
+  return (
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+    <GlobalStyle />
     <div className="app">
         <Router> {/* Sistema de rotas da pagina */}
           <Routes>
@@ -27,6 +37,7 @@ const App = () => {
           </Routes>
         </Router>
     </div>
+    </ThemeProvider>
   );
   }
   
