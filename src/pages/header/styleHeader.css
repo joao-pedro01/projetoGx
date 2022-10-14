@@ -1,0 +1,15 @@
+.imgNav { 
+    width:50px;
+}
+
+.logoNav { 
+    padding-left: 7px;
+    
+}
+Form.d-flex button{ 
+    background-color: green;
+    color:white;
+}
+Form.d-flex button:hover {
+    color: black;
+}
