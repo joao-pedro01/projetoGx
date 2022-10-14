@@ -5,7 +5,7 @@ import Login from './pages/login/indexLogin'
 import MainPage from './pages/listaPecas/indexLista'
 import Header from './pages/header/indexHeader'
 import Menus from './pages/menus/indexMenus'
-import Cadastro from './pages/cadastro/indexCadastro'
+import CadastroP from './pages/cadastro/indexCadastroP'
 
 import { 
   BrowserRouter as Router,
@@ -33,7 +33,7 @@ const App = () => {
             <Route exact path="/pecas" element={<MainPage />} />
             <Route exact path="/testeHeader" element={<Header/>}/>
             <Route exact path="/menu" element={<Menus/>}/>
-            <Route exact path="/cadastro" element={<Cadastro/>}/>
+            <Route exact path="/cadastro/pecas" element={<CadastroP/>}/>
           </Routes>
         </Router>
         <button on onClick={() => themeToggler()}>Trocar tema</button>
