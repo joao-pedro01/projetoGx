@@ -18,7 +18,7 @@ import {
 const StyledApp = styled.div``;
 
 const App = () => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
 
   const themeToggler = () => {
     theme === "light" ? setTheme('dark') : setTheme('light')
@@ -36,6 +36,7 @@ const App = () => {
             <Route exact path="/cadastro" element={<Cadastro/>}/>
           </Routes>
         </Router>
+        <button on onClick={() => themeToggler()}>Trocar tema</button>
     </div>
     </ThemeProvider>
   );

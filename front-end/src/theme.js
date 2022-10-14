@@ -7,7 +7,7 @@ export const lightTheme = {
 export const darkTheme = {
     body: "#1E1E1E",
     color: "#F7FFF7",
-    border: "#55A4F2 2px solid",
+    border: "#F7FFF7 2px solid",
     buttoncolor: "#303030",
     buttoncolorhover: "#404040",
     buttoncoloractive: "#515151",
@@ -16,6 +16,9 @@ export const darkTheme = {
 };
 
 export const GlobalStyle = createGlobalStyle`
+    .buttonArea{
+        background-color: ${props => props.theme.body};
+    }
     body {
         background-color: ${props => props.theme.body};
     }
