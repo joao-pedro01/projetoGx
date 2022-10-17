@@ -2,6 +2,7 @@ import {createGlobalStyle, withTheme} from 'styled-components';
 
 export const lightTheme = {
     body: "#F7FFF7",
+    inputthemecheck: "#1E1E1E",
 };
 
 export const darkTheme = {
@@ -13,9 +14,17 @@ export const darkTheme = {
     buttoncoloractive: "#515151",
     buttonborder: "solid 2px #1E1E1E",
     buttonbordertop: "solid 4px #1E1E1E",
+    inputthemecheck: "#F7FFF7",
+    labelinputball: "#1E1E1E",
 };
 
 export const GlobalStyle = createGlobalStyle`
+    .labelinput .ball{
+        background-color: ${props => props.theme.labelinputball};
+    }
+    .labelinput{
+        background-color: ${props => props.theme.inputthemecheck};
+    }
     .buttonArea{
         background-color: ${props => props.theme.body};
     }
