@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button'
 import HeaderPMS from '../header/indexHeader'
 import './stylesCadastroP.css'  //import estilizacao css
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios';
+import Axios from 'axios';
 
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -51,20 +51,29 @@ const CustomMenu = React.forwardRef(
   },
 );
 
+const CadastroP = () => {
 
+  const [nome, setNome] = useState ("")
+  const [sku, setSKU] = useState ("")
 
-function CadastroP () {
-  const [nome, setNome] = useState ('');
-  const [sku, setSKU] = useState ('');
-
-  const handleSubmit = async(e) => { 
-    e.prevenDefault();
-    try { 
-      const resp = await axios.post('https://course-api.com/axios-tutorial-post', {nome: nome, sku: sku})
-      console.log(resp.data);
-    } catch (error) { 
-        console.log(error.response);
-    }
+  const handleSubmit = (e) => { 
+    e.preventDefault()
+    Axios({
+      method: 'post',
+      url: 'http://172.16.9.95:8080/api/pecas',
+      data: {
+          nome: '',
+          sku: '',
+      },
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+      }})
+    .then(function (response){
+      console.log(response)
+    })
+    .catch(function(error){
+      console.log(error)
+    })
   }
 
     return (
@@ -121,8 +130,8 @@ function CadastroP () {
                   <div className='formCPecas'>
                     <span>cadastro teste</span>
                     <form className='formCPecas' onSubmit={handleSubmit}> 
-                      <Form.Control type="text" placeholder="Nome da Peça" required/> 
-                      <Form.Control type="text" placeholder="SKU" required/>
+                      <Form.Control type="text" placeholder="Nome da Peça" required onChange={(event) => setNome(e.target.value)}/> 
+                      <Form.Control type="text" placeholder="SKU" required onChange={(event) => setSKU(e.target.value)}/>
                     <div className='containerLoginBotao'>
                       <button type="submit" class="btn btn-primary btn-block" >Entrar</button>
                     </div>

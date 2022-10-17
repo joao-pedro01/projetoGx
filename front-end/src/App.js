@@ -5,7 +5,7 @@ import Login from './pages/login/indexLogin'
 import MainPage from './pages/listaPecas/indexLista'
 import Header from './pages/header/indexHeader'
 import Menus from './pages/menus/indexMenus'
-import CadastroP from './pages/cadastro/indexCadastroP'
+import CadastroP from './pages/cadastroPecas/indexCadastroP'
 
 import { 
   BrowserRouter as Router,
