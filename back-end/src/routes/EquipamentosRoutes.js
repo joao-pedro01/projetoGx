@@ -6,7 +6,7 @@ const router = express.Router();
 // rotas para acoes usuarios
 router
     .get("/api/equipamentos/", EquipamentosController.listarEquipamentos)
-    // .get("/api/equipamentos/:id", EquipamentosController.peca)
+    .get("/api/equipamentos/:id", EquipamentosController.equipamento)
     // .post("/api/equipamentos", EquipamentosController.cadastrarPeca)
     // .put("/api/equipamentos/:id", EquipamentosController.alterarQuantidade)
     // .delete("/api/equipamentos/:id", EquipamentosController.desativarPeca)

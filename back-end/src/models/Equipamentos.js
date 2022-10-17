@@ -1,5 +1,4 @@
 import conn from "../config/dbConnect.js";
-import var_dump from "var_dump";
 
 // function que faz a consulta de todos pecas
 export const listarEquipamentos = async(params) => {
@@ -8,4 +7,14 @@ export const listarEquipamentos = async(params) => {
   }else {
     return await conn.select('*').table('equipamentos').where(params);
   }
+}
+
+export const equipamento = async(id) => {
+  return await conn.select('nome', 'patrimonio', 'is_active').table('equipamentos').where('id', id);
+}
+
+export const equipamento_atributos = async(id) => {
+  return await conn.select().table('equipamentos_atributos')
+    .innerJoin( 'atributos', 'atributos.id', 'equipamentos_atributos.id_atributo')
+    .where('equipamentos_atributos.id_equipamento', id);
 }
