@@ -21,13 +21,20 @@ export const peca_atributos = async(id) => {
 }
 
 export const cadastrarPeca = async(dados) => {
-  return await conn.insert(dados).into("pecas");
+  return await conn.insert(dados).into('pecas');
 }
 
-export const desativarPeca = async(id) => {
-  return await conn.where({id: id}).update({is_active: false}).table('pecas');
+export const cadastrarAtributo = async(id_peca, id_atributo, valor) => {
+  return await conn.insert({id_peca, id_atributo, valor}).into('pecas_atributos')
 }
 
+export const desativarPeca = async(id, status) => {
+  return await conn.where({id: id}).update({is_active: status}).table('pecas');
+}
+
+export const desativarAtributo = async(id) => {
+  return await conn.where({ id_peca: id }).update({ is_active: false }).table('pecas_atributos');
+}
 export const alterarQuantidade = async(id, value) => {
   return await conn.update({ qnt: value }).where({id: id}).table('pecas');
 }

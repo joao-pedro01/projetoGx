@@ -1,17 +1,17 @@
-import { alterarQuantidade, cadastrarPeca, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
+import { alterarQuantidade, cadastrarAtributo, cadastrarPeca, desativarAtributo, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
 import { dd } from './functions.js';
 
 // class responsavel por todas acoes das pecas
 class PecasController {
     // ira retornar a peca solicitada pelo
-    /* GET */static peca = (req, res) => {
+    static peca = (req, res) => {/* GET */
         var id = req.params.id;
         var select = peca(id);
 
         select.then((peca) => {
             // entra no if caso não retornar nada do db 
             if(peca.length === 0) {
-                res.status(404).json("Peça não encontrada!!!");
+                res.status(404).send({message: "Peça não encontrada"});
             }else {
                 // variavel para consulta da peca solicitada (pelo id) 
                 var innerJoin = peca_atributos(id);
@@ -29,12 +29,12 @@ class PecasController {
                 }).catch(err => {
                     console.log(err);
                     res.status(500).send({message: `falha ao exibir peça`});
-                })
-            };
+                });
+            }
         });
-    };
+    }
     // responsavel por listar todas as pecas
-    /* GET */static listarPecas = (req, res) => {
+    static listarPecas = (req, res) => {/* GET */
         var status = req.query.status, query;
 
         // caso exista query via url ira entrar para tratar o retorno para executar a busca no bd
@@ -45,7 +45,7 @@ class PecasController {
             var query = {
                 is_active: status
             };
-        };
+        }
 
         // if para entrar caso buscar pecas ativas e inativas
         if(status === true || status === false) {
@@ -68,11 +68,11 @@ class PecasController {
                 console.log(err);
                 res.status(500).send({message: `falha ao listar peças com query`});
             });
-        };
-    };
+        }
+    }
 
     // responsavel por cadastrar peca
-    /* POST */static cadastrarPeca = (req, res) => {
+    static cadastrarPeca = (req, res) => {/* POST */
         let peca = req.body;
 
         // tratamento caso nao recebe o que foi requisitado
@@ -82,7 +82,7 @@ class PecasController {
             let query = {
                 sku: peca.sku
             }
-            var select = listarPecas(query)
+            var select = listarPecas(query);
 
             select.then((content) => {
                 if(content.length !== 0) {
@@ -92,18 +92,43 @@ class PecasController {
                     var insert = cadastrarPeca(peca);
         
                     insert.then(() => {
-                        res.status(200).send({message:  `Peça foi cadastra  da com sucesso`});
+                        res.status(200).send({message:  `Peça foi cadastrada com sucesso`});
                     }).catch(err => {
                         console.log(err);
                         res.status(500).send({message: `falha ao cadastrar peça`});
                     });
                 }
-            })
-        };
-    };
+            });
+        }
+    }
 
 
-    /* PUT */static alterarQuantidade = (req, res) => {        
+    static cadastrarAtributo = (req, res) => {/* POST */
+        const id = req.params.id, id_atributo = req.body.id_atributo;
+        var valor = req.body.valor;
+        let select = peca(id);
+
+        select.then((peca) => {
+            // entra no if caso não retornar nada do db 
+            if(peca.length === 0) {
+                res.status(404).send({message: "Peça não existe"});
+            }else if(peca[0].is_active === false){
+                res.status(405).send({message: "Peça esta desativada não é possivel inserir atributo"});
+            }else {
+                // variavel para consulta da peca solicitada (pelo id)
+                let insert = cadastrarAtributo(id, id_atributo, valor);
+
+                insert.then(() => {
+                    res.status(200).send({message:  `Atributo foi cadastrado com sucesso`});
+                }).catch(err => {
+                    console.log(err);
+                    res.status(500).send({message: `falha ao cadastrar atributo`});
+                });
+            }
+        });
+    }
+
+    static alterarQuantidade = (req, res) => {/* PUT */
         var id = req.params.id;
         var select = peca(id);
         
@@ -113,23 +138,25 @@ class PecasController {
             if(peca.length == 0) {
                 res.status(404).send({message: "peça não encontrada"});
             }else if(peca[0].is_active == false) {
-                res.status(405).json("Peça esta desativada não pode alterar");
+                res.status(405).send({message: "Peça esta desativada não pode alterar"});
             }else if(peca[0].qnt + qnt < 0) {
                 res.status(400).send({message: 'Não é possivel pois não tem a quantidade em estoque'});
             }else {
                 var qnt = peca[0].qnt + qnt;
-                var update = alterarQuantidade(id, qnt);
+                /*  variavel responsavel por executar alterarQuantidade, passando o id da peca e a quantidade a ser alterada, podendo ser positiva(somando) e negativa(subtraindo) com o valor do banco de dados */
+                let update = alterarQuantidade(id, qnt);
+                // da a resposta se foi sucess ou erro 
                 update.then(() => {
                     res.status(200).json(`${peca[0].nome} foi alterado no estoque para: ${qnt}`);
                 }).catch(err => {
                     console.log(err);
                     res.status(500).send({message: `falha ao atualizar a quantidade da peça`});
                 });
-            };
+            }
         });
-    };
+    }
 
-    /* DELETE */static desativarPeca = (req, res) => {
+    static desativarPeca = (req, res) => {/* DELETE */
         var id = req.params.id;
         var select = peca(id);
 
@@ -140,17 +167,23 @@ class PecasController {
             }else if(peca[0].is_active == false) {
                 res.status(405).json("Peça já esta desativada");
             }else {
-                var update = desativarPeca(id);
+                var update = desativarPeca(id, false);
                 // caso passar por todos os if ira desativar a peca
                 update.then(() => {
-                    res.status(200).json(`${peca[0].nome} desativada com sucesso`);
+                    desativarAtributo(id).then(() => {
+                        res.status(200).json(`${peca[0].nome} desativada com sucesso`);
+                    }).catch(err => {
+                        desativarPeca(id, true);
+                        console.log(err);
+                        res.status(500).send({message: `falha ao desativar atributos`});
+                    });
                 }).catch(err => {
                     console.log(err);
                     res.status(500).send({message: `falha ao desativar peça`});
                 });
-            };
+            }
         });
-    };
-};
+    }
+}
 
 export default PecasController;
