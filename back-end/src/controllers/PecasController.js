@@ -1,10 +1,18 @@
 import { alterarQuantidade, cadastrarAtributo, cadastrarPeca, desativarAtributo, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
-import { dd } from './functions.js';
+import { dd, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das pecas
 class PecasController {
-    // ira retornar a peca solicitada pelo
-    static peca = (req, res) => {/* GET */
+    /**
+    * Lista equipamento e atributos detalhados
+    *
+    * @method GET
+    * @params id
+    * @return objeto {peca, atributos}(200)
+    * @return Peca não existe(404)
+    * @return erro interno servidor(500)
+    */
+    static peca = (req, res) => {
         var id = req.params.id;
         var select = peca(id);
 
@@ -33,19 +41,34 @@ class PecasController {
             }
         });
     }
-    // responsavel por listar todas as pecas
-    static listarPecas = (req, res) => {/* GET */
-        var status = req.query.status, query;
 
-        // caso exista query via url ira entrar para tratar o retorno para executar a busca no bd
+    /**
+    * Lista todos equipamentos.
+    *
+    * @method GET
+    * @query status (true, false, null)
+    * @return objeto equipamentos(200)
+    * @return erro interno servidor(500)
+    * 
+    * caso o query exista e esteja correto irá retornar um objeto query ["is_active"] => boolean().
+    * caso o status seja true || false, vai fazer select com where, se for bem sucedido irá retornar status 200, caso der erro status 500
+    * caso contrário irá executar select, mas sem query, as respostas são as mesmas, o que muda é o filtro do status.
+    */
+    static listarPecas = (req, res) => {
+        var query = {
+            is_active: req.query.status,
+            nome: req.query.nome,
+            sku: req.query.sku
+        };
+        removeUndefined(query);
+        
+        var status = query.is_active;
+
         if(status === 'true' || status === 'false' || status === undefined) {
             status = status === undefined ? true : status === 'true' ? true : false;
 
-            // objeto que vai guardar os dados para a busca
-            var query = {
-                is_active: status
-            };
-        }
+            query.is_active = status;
+        };
 
         // if para entrar caso buscar pecas ativas e inativas
         if(status === true || status === false) {
@@ -71,7 +94,18 @@ class PecasController {
         }
     }
 
-    // responsavel por cadastrar peca
+    /**
+    * Lista todos equipamentos.
+    *
+    * @method POST
+    * @query status (true, false, null)
+    * @return objeto equipamentos(200)
+    * @return erro interno servidor(500)
+    * 
+    * caso o query exista e esteja correto irá retornar um objeto query ["is_active"] => boolean().
+    * caso o status seja true || false, vai fazer select com where, se for bem sucedido irá retornar status 200, caso der erro status 500
+    * caso contrário irá executar select, mas sem query, as respostas são as mesmas, o que muda é o filtro do status.
+    */
     static cadastrarPeca = (req, res) => {/* POST */
         let peca = req.body;
 
@@ -86,7 +120,7 @@ class PecasController {
 
             select.then((content) => {
                 if(content.length !== 0) {
-                    res.status(404).send({Message: `SKU: ${peca.sku} já existe na base de dados`});
+                    res.status(422).send({Message: `SKU: ${peca.sku} já existe na base de dados`});
                 } else {
                     // variavel responsavel por executar a query do insert
                     var insert = cadastrarPeca(peca);
