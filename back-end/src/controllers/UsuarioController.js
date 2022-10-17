@@ -6,7 +6,7 @@ class UsuarioController {
     // function que retorna os usuarios
     static listarUsuarios = (req, res) => {
         res.status(200).json(usuarios);
-    };
+    }
 
     static cadastrarUsuario = (req, res) => {
         var nome = req.body.nome;
@@ -22,12 +22,12 @@ class UsuarioController {
             criado: dataFormatada
         };
         cadastrarUsuario(query).then((usuario) => {
-            res.status(200).send({Message: 'Usuario cadastrado com sucesso'});
+            res.status(200).send({message: 'Usuario cadastrado com sucesso'});
         }).catch(err => {
             console.log(err);
             res.status(500).send({message: `falha ao cadastrar usuario`});
         });
-    };
-};
+    }
+}
 
 export default UsuarioController;
