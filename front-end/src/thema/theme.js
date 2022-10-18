@@ -19,10 +19,10 @@ export const darkTheme = {
 };
 
 export const GlobalStyle = createGlobalStyle`
-    .labelinput .ball{
+    .react-switch-label .react-switch-button{
         background-color: ${props => props.theme.labelinputball};
     }
-    .labelinput{
+    .react-switch-label{
         background-color: ${props => props.theme.inputthemecheck};
     }
     .buttonArea{

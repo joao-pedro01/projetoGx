@@ -36,13 +36,6 @@ const App = () => {
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
     <GlobalStyle />
-      <div className='inputtheme'>
-        <input type="checkbox" className='themeinput' onChange={() => setTheme((cur) => (cur === "light" ? "dark" : "light"))}/>
-        <label className='labelinput'>
-          <i></i>
-          <div className='ball'></div>
-        </label>
-      </div>
       <div className="app">
           <Router> {/* Sistema de rotas da pagina */}
             <Routes>
@@ -53,6 +46,12 @@ const App = () => {
               <Route exact path="/cadastro/pecas" element={<CadastroP/>}/>
             </Routes>
           </Router>
+      </div>
+      <div className='ee'>
+        <input className="react-switch-checkbox" id={`react-switch-new`} type="checkbox" onChange={() => setTheme((cur) => (cur === "light" ? "dark" : "light"))}/>
+        <label className="react-switch-label" htmlFor={`react-switch-new`}>
+          <span className={`react-switch-button`} />
+        </label>
       </div>
     </ThemeProvider>
   );
