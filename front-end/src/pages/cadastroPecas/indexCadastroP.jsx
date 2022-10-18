@@ -53,23 +53,17 @@ const CustomMenu = React.forwardRef(
 
 const CadastroP = () => {
 
-  const [nome, setNome] = useState ("")
-  const [sku, setSKU] = useState ("")
-
+  const [nome, setNome] = useState ('')
+  const [sku, setSKU] = useState ('')
+  const [qnt, setQnt] = useState('')
+  const [is_active, setIs_active] = useState('')
+   
   const handleSubmit = (e) => { 
     e.preventDefault()
-    Axios({
-      method: 'post',
-      url: 'http://172.16.9.95:8080/api/pecas',
-      data: {
-          nome: '',
-          sku: '',
-      },
-      headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-      }})
+    Axios.post('http://172.16.9.95:8080/api/pecas',{nome, sku, qnt, is_active})
     .then(function (response){
       console.log(response)
+      console.log("submit:",{nome, sku, qnt, is_active})
     })
     .catch(function(error){
       console.log(error)
@@ -81,7 +75,6 @@ const CadastroP = () => {
             <HeaderPMS/> 
             <div className='container'>
                 <div className='box'>
-                    
                     <div className='atributos'>
                         <Dropdown>
                             <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
@@ -130,8 +123,10 @@ const CadastroP = () => {
                   <div className='formCPecas'>
                     <span>cadastro teste</span>
                     <form className='formCPecas' onSubmit={handleSubmit}> 
-                      <Form.Control type="text" placeholder="Nome da Peça" required onChange={(event) => setNome(e.target.value)}/> 
-                      <Form.Control type="text" placeholder="SKU" required onChange={(event) => setSKU(e.target.value)}/>
+                      <Form.Control type="text" placeholder="Nome da Peça" required value={nome} onChange={(e) => setNome(e.target.value)}/> 
+                      <Form.Control type="text" placeholder="SKU" required value={sku} onChange={(e) => setSKU(e.target.value)}/>
+                      <Form.Control type="text" placeholder="Quantidade" required value={qnt} onChange={(e) => setQnt(e.target.value)}/> 
+                      <Form.Control type="text" placeholder="Peça está ativa?" required value={is_active} onChange={(e) => setIs_active(e.target.value)}/>
                     <div className='containerLoginBotao'>
                       <button type="submit" class="btn btn-primary btn-block" >Entrar</button>
                     </div>
@@ -151,3 +146,4 @@ export default CadastroP;
 // "+ botao" para o dropdown de atributos no cadastro de peça
 // const Cadastro = () => { 
 // }  export default Cadastro;
+//nested stringfy 
