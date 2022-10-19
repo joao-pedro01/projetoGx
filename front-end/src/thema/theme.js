@@ -1,10 +1,12 @@
 import {createGlobalStyle, withTheme} from 'styled-components';
 
+/*Variavei LightMode*/
 export const lightTheme = {
     body: "#F7FFF7",
     inputthemecheck: "#1E1E1E",
 };
 
+/*Variavei DarkMode*/
 export const darkTheme = {
     body: "#1E1E1E",
     color: "#F7FFF7",
@@ -16,8 +18,10 @@ export const darkTheme = {
     buttonbordertop: "solid 4px #1E1E1E",
     inputthemecheck: "#F7FFF7",
     labelinputball: "#1E1E1E",
+    test: "#0E131F",
 };
 
+/*Style Global*/
 export const GlobalStyle = createGlobalStyle`
     .react-switch-label .react-switch-button{
         background-color: ${props => props.theme.labelinputball};
@@ -25,12 +29,21 @@ export const GlobalStyle = createGlobalStyle`
     .react-switch-label{
         background-color: ${props => props.theme.inputthemecheck};
     }
+
+
+    .tabletest{
+        background-color: ${props => props.theme.test};
+    }
     .buttonArea{
         background-color: ${props => props.theme.body};
     }
+
+
     body {
         background-color: ${props => props.theme.body};
     }
+
+
     .container{
         background-color: ${props => props.theme.body};
     }
@@ -43,6 +56,8 @@ export const GlobalStyle = createGlobalStyle`
     .login{
         border: ${props => props.theme.border};
     }
+
+
     .buttonOne{
         border-right: ${props => props.theme.buttonborder};
         background-color: ${props => props.theme.buttoncolor};
@@ -71,4 +86,5 @@ export const GlobalStyle = createGlobalStyle`
         background-color: ${props => props.theme.buttoncoloractive};
     }
     
+
 `

@@ -7,6 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import '../header/stylesHeader.css';
 import Logo from './assets/logo_pms.png';
+import { FaPowerOff, FaSearch, FaSignOutAlt  } from 'react-icons/fa';
 
 import { 
   BrowserRouter as Router,
@@ -33,9 +34,9 @@ function Header() {
                   className="me-2"
                   aria-label="search"
                 />
-                <Button className='search-button me-2' variant="primary">Buscar</Button>
+                <Button className='search-button me-2' variant="primary"><FaSearch /></Button>
             </Form>
-            <Button className='search-button me-1' variant="danger">Desconectar</Button>
+            <Button className='search-button me-1' variant="danger"><FaSignOutAlt /></Button>
           </Container>
         </Navbar>
     </>
