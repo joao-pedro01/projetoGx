@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button'
 import HeaderPMS from '../header/indexHeader'
-import './stylesCadastroP.css'  //import estilizacao css
+import './stylesCadastroC.css'  //import estilizacao css
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import Axios from 'axios';

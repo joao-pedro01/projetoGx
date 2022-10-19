@@ -3,16 +3,24 @@ import pms from './assets/logo_pms.png' // import logo prefeitura
 import './stylesLogin.css'  //import estilizacao css
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Axios from 'axios';
 
-const Login = () => { 
-    const[user, setUser] = useState(""); {/* definicao da variavel user e password (como npadrao vazio) para autenticacao */}
-    const[password, setPassword] = useState("");
+const Login = () => {
 
-    const handleSubmit = (event) => { {/* cria o evento para fazer o submit dos dados user e password*/}
-         event.preventDefault();
-        console.log("submit", {user, password});
+    const [user, setUser] = useState ('')
+    const [password, setPassword] = useState('')
+     
+    const handleSubmit = (e) => { 
+      e.preventDefault()
+      Axios.post('http://172.16.9.95:8080/api/login',{user, password})
+      .then(function (response){
+        console.log(response)
+        console.log("submit:",{user, password})
+      })
+      .catch(function(error){
+        console.log(error)
+      })
     }
-
     return (
         <div className="container">
             <div className="boxLogin">
