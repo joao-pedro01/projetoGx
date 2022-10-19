@@ -7,10 +7,10 @@ class PecasController {
     * Lista equipamento e atributos detalhados
     *
     * @method GET
-    * @params id
-    * @return objeto {peca, atributos}(200)
-    * @return Peca não existe(404)
-    * @return erro interno servidor(500)
+    * @param id
+    * @return (200) - json {peca, atributos}
+    * @return (404) - Peca não existe
+    * @return (500) - erro interno servidor
     */
     static peca = (req, res) => {
         var id = req.params.id;
@@ -47,8 +47,8 @@ class PecasController {
     *
     * @method GET
     * @query status (true, false, null)
-    * @return objeto equipamentos(200)
-    * @return erro interno servidor(500)
+    * @return (200) - json{equipamentos}
+    * @return (500) - erro interno servidor
     * 
     * caso o query exista e esteja correto irá retornar um objeto query ["is_active"] => boolean().
     * caso o status seja true || false, vai fazer select com where, se for bem sucedido irá retornar status 200, caso der erro status 500
@@ -98,15 +98,18 @@ class PecasController {
     * Lista todos equipamentos.
     *
     * @method POST
-    * @query status (true, false, null)
-    * @return objeto equipamentos(200)
-    * @return erro interno servidor(500)
+    * @param nome
+    * @param sku
+    * @return (200) - message
+    * @return (405) - dados solicitados não recebido da forma correta
+    * @return (422) - já existe no banco de dados e não pode repetir
+    * @return (500) - erro interno servidor
     * 
-    * caso o query exista e esteja correto irá retornar um objeto query ["is_active"] => boolean().
-    * caso o status seja true || false, vai fazer select com where, se for bem sucedido irá retornar status 200, caso der erro status 500
-    * caso contrário irá executar select, mas sem query, as respostas são as mesmas, o que muda é o filtro do status.
+    * caso não receber os dados solicitador irá retornar 405
+    * caso contrário irá criar var para o select e executar, se o numero do equipamento já se encontrar na base de dados irá retornar 422
+    * caso contrário irá executar o insert e retornar 200, caso der erro irá retornar 500
     */
-    static cadastrarPeca = (req, res) => {/* POST */
+    static cadastrarPeca = (req, res) => {
         let peca = req.body;
 
         // tratamento caso nao recebe o que foi requisitado
@@ -137,6 +140,21 @@ class PecasController {
     }
 
 
+    /**
+    * Lista todos equipamentos.
+    *
+    * @method POST
+    * @param id
+    * @param id_atributo
+    * @param valor
+    * @return (200) - json objeto equipamentos
+    * @return (404) - NOT FOUND / Valor solicitado não encotrado
+    * @return (500) - erro interno servidor
+    * 
+    * irá fazer o select para verificar se a peça informada via GET existe
+    * caso não existir ira retornar 404 caso contrário irá verificar se a peça está ativa
+    * caso passar por todas etapas irá criar variavel de insert caso ok retorna 200 caso contrário 500
+    */
     static cadastrarAtributo = (req, res) => {/* POST */
         const id = req.params.id, id_atributo = req.body.id_atributo;
         var valor = req.body.valor;
@@ -162,7 +180,23 @@ class PecasController {
         });
     }
 
-    static alterarQuantidade = (req, res) => {/* PUT */
+    /**
+    * Lista todos equipamentos.
+    *
+    * @method PUT
+    * @param id
+    * @param qnt
+    * @return (200) - json objeto equipamentos
+    * @return (400) - O dado enviado é inválido
+    * @return (404) - NOT FOUND / Valor solicitado não encotrado
+    * @return (405) - Peça encontra-se desativada e não é possivel alterar
+    * @return (500) - erro interno servidor
+    * 
+    * irá fazer o select para verificar se a peça informada via GET existe
+    * caso não existir ira retornar 404 caso contrário irá verificar se a peça está ativa caso a peça estar inativa irá retornar 405
+    * caso passar por todas etapas irá criar variavel de update enviando o valor caso ok retorna 200 caso contrário 500
+    */
+    static alterarQuantidade = (req, res) => {
         var id = req.params.id;
         var select = peca(id);
         
@@ -190,7 +224,21 @@ class PecasController {
         });
     }
 
-    static desativarPeca = (req, res) => {/* DELETE */
+    /**
+    * Lista todos equipamentos.
+    *
+    * @method DELETE
+    * @param id
+    * @return (200) - message
+    * @return (404) - NOT FOUND / Valor solicitado não encotrado
+    * @return (405) - Peça encontra-se desativada
+    * @return (500) - erro interno servidor
+    * 
+    * irá fazer o select para verificar se a peça informada via GET existe
+    * caso não existir ira retornar 404 caso contrário irá verificar se a peça já se encontra desativada caso a peça estar inativa irá retornar 405
+    * caso passar por todas etapas irá criar variavel de update enviando o valor caso ok retorna 200 caso contrário 500
+    */
+    static desativarPeca = (req, res) => {
         var id = req.params.id;
         var select = peca(id);
 
