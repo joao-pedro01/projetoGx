@@ -8,6 +8,7 @@ import Axios from 'axios';
 
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+  
   <a
     href=""
     ref={ref}
@@ -20,7 +21,6 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     &#x25bc;
   </a>
 ));
-
 
 const CustomMenu = React.forwardRef(
   ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
@@ -75,7 +75,7 @@ const CadastroP = () => {
             <div className='container'>
                 <div className='box'>
                     <div className='atributos'>
-                        <Dropdown>
+{/*                       <Dropdown>
                             <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
                             Atributo #1
                         </Dropdown.Toggle>
@@ -86,17 +86,23 @@ const CadastroP = () => {
                             <Dropdown.Item href="#/action-3">3</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-                    <Dropdown>
-                            <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
-                            Atributo #2
-                        </Dropdown.Toggle>
+    */}
+                    <script>
+                    var_dump(arr);
+                    </script>
 
+
+                    <Dropdown>
+                      <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
+                      Atributo #2
+                      </Dropdown.Toggle>
                         <Dropdown.Menu as={CustomMenu}>
-                            <Dropdown.Item href="#/action-1">1 </Dropdown.Item>
+                          <Dropdown.Item href="#/action-1">1 </Dropdown.Item>
                             <Dropdown.Item href="#/action-2">2</Dropdown.Item>
                             <Dropdown.Item href="#/action-3">3</Dropdown.Item>
                         </Dropdown.Menu>
-                    </Dropdown>                    
+                      </Dropdown>  
+
                     <Dropdown>
                         <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
                             Atributo #3
@@ -139,9 +145,9 @@ const CadastroP = () => {
 export default CadastroP;
 
 
-//  ---- todo ----
-// tela de cadastro e transformar em para -> peça/categoria/atributo/equipamento
-// "+ botao" para o dropdown de atributos no cadastro de peça
-// const Cadastro = () => { 
-// }  export default Cadastro;
-//nested stringfy 
+/*   ---- todo ----
+ tela de cadastro e transformar em para -> peça/categoria/atributo/equipamento
+ "+ botao" para o dropdown de atributos no cadastro de peça
+ const Cadastro = () => { 
+ }  export default Cadastro;
+nested stringfy  */

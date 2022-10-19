@@ -33,9 +33,9 @@ function Header() {
                   className="me-2"
                   aria-label="search"
                 />
-                <Button className='search-button me-2' variant="primary">Buscar</Button>
+                <Button className='search-button me-2 disabled' variant="primary">Buscar</Button>
             </Form>
-            <Button className='search-button me-1' variant="danger">Desconectar</Button>
+            <Button className='search-button me-1 disabled' variant="danger">Desconectar</Button>
           </Container>
         </Navbar>
     </>
