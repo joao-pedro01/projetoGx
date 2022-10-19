@@ -18,3 +18,7 @@ export const equipamento_atributos = async(id) => {
     .innerJoin( 'atributos', 'atributos.id', 'equipamentos_atributos.id_atributo')
     .where('equipamentos_atributos.id_equipamento', id);
 }
+
+export const cadastrarEquipamento = async(dados) => {
+  return await conn.insert(dados).into('equipamentos');
+}
