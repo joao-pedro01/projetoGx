@@ -41,7 +41,7 @@ const Pecas = () => {
       <div className="listaPecas">
         <Header/>
         <div className="buttonArea">
-          <Button className= "botaoCadastro" variant="primary" href="/cadastro">Nova Peça</Button>{''}
+          <Button className= "botaoCadastro" variant="primary" href="/cadastro/pecas">Nova Peça</Button>{''}
         </div>
         <Table className="tabletest" striped borderless responsive>
           <thead>

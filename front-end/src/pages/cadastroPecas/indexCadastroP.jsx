@@ -5,6 +5,7 @@ import './stylesCadastroP.css'  //import estilizacao css
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import Axios from 'axios';
+import {BiPlus} from 'react-icons/bi'
 
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -52,7 +53,7 @@ const CustomMenu = React.forwardRef(
 );
 
 const CadastroP = () => {
-
+  
   const [nome, setNome] = useState ('')
   const [sku, setSKU] = useState ('')
   const [qnt, setQnt] = useState('')
@@ -68,6 +69,19 @@ const CadastroP = () => {
       console.log(error)
     })
   }
+  
+  var cont = 4;
+  const onClickMais = () => { 
+    console.log('botão clicado')
+   do {
+      if(cont>7)   {
+        return
+      }
+      document.getElementById("dropdownButton").innerHTML += `<Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">Atributo #${cont+1}</Dropdown.Toggle><br>`;
+      console.log(cont)
+      cont++;
+  } while (cont>7)
+}
 
     return (
         <div className='header'>
@@ -75,40 +89,32 @@ const CadastroP = () => {
             <div className='container'>
                 <div className='box'>
                     <div className='atributos'>
-{/*                       <Dropdown>
-                            <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
+                      <Dropdown>
+                        <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
                             Atributo #1
                         </Dropdown.Toggle>
-
                         <Dropdown.Menu as={CustomMenu}>
                             <Dropdown.Item href="#/action-1">1</Dropdown.Item>
                             <Dropdown.Item href="#/action-2">2</Dropdown.Item>
                             <Dropdown.Item href="#/action-3">3</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-    */}
-                    <script>
-                    var_dump(arr);
-                    </script>
-
-
                     <Dropdown>
-                      <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
-                      Atributo #2
-                      </Dropdown.Toggle>
-                        <Dropdown.Menu as={CustomMenu}>
-                          <Dropdown.Item href="#/action-1">1 </Dropdown.Item>
+                            <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
+                            Atributo #2
+                        </Dropdown.Toggle>
+                          <Dropdown.Menu as={CustomMenu}>
+                            <Dropdown.Item href="#/action-1">1</Dropdown.Item>
                             <Dropdown.Item href="#/action-2">2</Dropdown.Item>
                             <Dropdown.Item href="#/action-3">3</Dropdown.Item>
                         </Dropdown.Menu>
-                      </Dropdown>  
+                    </Dropdown>
 
                     <Dropdown>
-                        <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
+                            <Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">
                             Atributo #3
                         </Dropdown.Toggle>
-
-                        <Dropdown.Menu as={CustomMenu}>
+                          <Dropdown.Menu as={CustomMenu}>
                             <Dropdown.Item href="#/action-1">1</Dropdown.Item>
                             <Dropdown.Item href="#/action-2">2</Dropdown.Item>
                             <Dropdown.Item href="#/action-3">3</Dropdown.Item>
@@ -123,8 +129,18 @@ const CadastroP = () => {
                             <Dropdown.Item href="#/action-2">2</Dropdown.Item>
                             <Dropdown.Item href="#/action-3">3</Dropdown.Item>
                         </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                        <div id="dropdownButton">
+                        </div>
+                        <Dropdown.Menu as={CustomMenu}>
+                            <Dropdown.Item href="#/action-1">1</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">2</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">3</Dropdown.Item>
+                        </Dropdown.Menu>
                     </Dropdown>                    
                 </div>
+                <span className='maisButton' onClick={onClickMais}><button className='botaoMais'><BiPlus /></button></span>
                   <div className='formCPecas'>
                     <span>cadastro teste</span>
                     <form className='formCPecas' onSubmit={handleSubmit}> 
