@@ -4,8 +4,16 @@ USE `gx`;
 -- tabela atributos
 CREATE TABLE IF NOT EXISTS `atributos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `atributo` varchar(150) NOT NULL,
+  `nome` varchar(150) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `categorias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) DEFAULT NULL,
+  `tipo` varchar(50) DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -13,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `atributos` (
 CREATE TABLE IF NOT EXISTS `equipamentos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
+  `numero` varchar(50) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -22,7 +31,8 @@ CREATE TABLE IF NOT EXISTS `pecas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) NOT NULL,
   `sku` varchar(20) NOT NULL,
-  `is_active` tinyint(1) NOT NULL,
+  `qnt` int(5) DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -42,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `equipamentos_atributos` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `id_equipamento` int(11) NOT NULL,
   `id_atributo` int(11) NOT NULL,
+  `valor` varchar(50) NOT NULL,
   KEY `FK__equipamentos` (`id_equipamento`),
   KEY `FK__atributos` (`id_atributo`),
   CONSTRAINT `FK__atributos` FOREIGN KEY (`id_atributo`) REFERENCES `atributos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -54,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `pecas_atributos` (
   `id_peca` int(11) NOT NULL,
   `id_atributo` int(11) NOT NULL,
   `valor` varchar(50) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
   KEY `FK__pecas` (`id_peca`),
   KEY `FK__atributos` (`id_atributo`),
   FOREIGN KEY (`id_atributo`) REFERENCES `atributos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
