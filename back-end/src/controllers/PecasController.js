@@ -95,7 +95,7 @@ class PecasController {
     }
 
     /**
-    * Lista todos equipamentos.
+    * Cadastra peça.
     *
     * @method POST
     * @param nome
@@ -141,7 +141,7 @@ class PecasController {
 
 
     /**
-    * Lista todos equipamentos.
+    * Cadastra atributo.
     *
     * @method POST
     * @param id
@@ -181,7 +181,7 @@ class PecasController {
     }
 
     /**
-    * Lista todos equipamentos.
+    * Altera a quantidade da peça.
     *
     * @method PUT
     * @param id
@@ -225,7 +225,7 @@ class PecasController {
     }
 
     /**
-    * Lista todos equipamentos.
+    * Desativa peça.
     *
     * @method DELETE
     * @param id

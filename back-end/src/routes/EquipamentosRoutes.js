@@ -8,7 +8,6 @@ router
     .get("/api/equipamentos/", EquipamentosController.listarEquipamentos)
     .get("/api/equipamentos/:id", EquipamentosController.equipamento)
     .post("/api/equipamentos", EquipamentosController.cadastrarEquipamento)
-    // .put("/api/equipamentos/:id", EquipamentosController.alterarQuantidade)
-    // .delete("/api/equipamentos/:id", EquipamentosController.desativarPeca)
+    .delete("/api/equipamentos/:id", EquipamentosController.desativarEquipamento)
 
 export default router;
