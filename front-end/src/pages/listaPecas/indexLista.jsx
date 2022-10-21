@@ -5,11 +5,20 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import './stylesLista.css';
 
+import { 
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+  Link,
+} from "react-router-dom";
+
+
 const Pecas = () => {
     const [data, setDate] = useState();
 
     useEffect(() => {
-        Axios.get('http://172.22.1.11:8080/api/pecas')
+        Axios.get('http://172.16.9.95:8080/api/pecas')
         .then(res => {
           console.log("Getting from ::::", res.data)
           setDate(res.data)
@@ -23,7 +32,7 @@ const Pecas = () => {
         <td>{data.sku}</td>
         <td>{data.nome}</td>
         <td>{data.is_active}</td>
-        <td>#</td>
+        <td>{data.qnt}</td>
       </tr>
       )
     })
@@ -32,7 +41,7 @@ const Pecas = () => {
       <div className="listaPecas">
         <Header/>
         <div className="buttonArea">
-          <Button className= "botaoCadastro" variant="primary" href="/cadastro">Cadastrar</Button>{''}
+          <Button className= "botaoCadastro" variant="primary" href="/cadastro/pecas">Nova Peça</Button>{''}
         </div>
         <Table className="tabletest" striped borderless responsive>
           <thead>
@@ -40,7 +49,7 @@ const Pecas = () => {
               <th><strong>#</strong></th>
               <th>SKU</th>
               <th>Nome</th>
-              <th>Status da peça</th>
+              <th>Status</th>
               <th>Quantidade</th>
             </tr>
           </thead>
