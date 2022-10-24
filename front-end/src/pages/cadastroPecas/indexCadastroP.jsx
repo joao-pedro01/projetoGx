@@ -77,7 +77,7 @@ const CadastroP = () => {
       if(cont>7)   {
         return
       }
-      document.getElementById("dropdownButton").innerHTML += `<Dropdown.Toggle  variant="success" id="dropdown-basic-button" className="mb-1">Atributo #${cont+1}</Dropdown.Toggle><br>`;
+      document.getElementById("dropdownAdicional").innerHTML += `<button type="button" id="dropdown-basic-button" aria-expanded="false" class="mb-1 dropdown-toggle btn btn-success">Atributo #${cont+1}</button><div class="dropdown-menu" aria-labelledby="dropdown-basic-button" style="position: absolute; inset: 0px auto auto 0px; transform: translate(0px, 40px);"><input placeholder="Type to filter..." class="mx-3 my-2 w-auto form-control" value=""><ul class="list-unstyled"><a href="#/action-1" data-rr-ui-dropdown-item="" class="dropdown-item">1</a><a href="#/action-2" data-rr-ui-dropdown-item="" class="dropdown-item">2</a><a href="#/action-3" data-rr-ui-dropdown-item="" class="dropdown-item">3</a></ul></div><br>`;
       console.log(cont)
       cont++;
   } while (cont>7)
@@ -131,16 +131,17 @@ const CadastroP = () => {
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown>
-                        <div id="dropdownButton">
+                        <div id="dropdownAdicional">
                         </div>
                         <Dropdown.Menu as={CustomMenu}>
                             <Dropdown.Item href="#/action-1">1</Dropdown.Item>
                             <Dropdown.Item href="#/action-2">2</Dropdown.Item>
                             <Dropdown.Item href="#/action-3">3</Dropdown.Item>
                         </Dropdown.Menu>
-                    </Dropdown>                    
+                    </Dropdown>  
+                    <span className='maisButton' onClick={onClickMais}><button className='botaoMais'><BiPlus /></button></span>                  
                 </div>
-                <span className='maisButton' onClick={onClickMais}><button className='botaoMais'><BiPlus /></button></span>
+                
                   <div className='formCPecas'>
                     <span>cadastro teste</span>
                     <form className='formCPecas' onSubmit={handleSubmit}> 

@@ -1,4 +1,13 @@
-import { alterarQuantidade, cadastrarAtributo, cadastrarPeca, desativarAtributo, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
+import {
+    alterarQuantidade,
+    cadastrarAtributo,
+    cadastrarPeca,
+    desativarAtributo,
+    desativarPeca,
+    listarPecas,
+    peca,
+    peca_atributos
+} from '../models/Pecas.js';
 import { dd, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das pecas
@@ -46,7 +55,7 @@ class PecasController {
     * Lista todos equipamentos.
     *
     * @method GET
-    * @query status (true, false, null)
+    * @param status (true || false || null)
     * @return (200) - json{equipamentos}
     * @return (500) - erro interno servidor
     * 
@@ -56,22 +65,19 @@ class PecasController {
     */
     static listarPecas = (req, res) => {
         var query = {
-            is_active: req.query.status,
             nome: req.query.nome,
             sku: req.query.sku
         };
         removeUndefined(query);
-        
-        var status = query.is_active;
+        var status = req.query.status;
+        status = status === 'true' ? '*' : status === 'false' ? false : true;
 
-        if(status === 'true' || status === 'false' || status === undefined) {
-            status = status === undefined ? true : status === 'true' ? true : false;
-
+        if(status === true || status === false) {
             query.is_active = status;
-        };
+        }
 
         // if para entrar caso buscar pecas ativas e inativas
-        if(status === true || status === false) {
+        if(query) {
             var select = listarPecas(query);
 
             // select para executar busca com query
