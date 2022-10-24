@@ -4,6 +4,7 @@ import swaggerDocs from "../../helpers/swagger.json" assert { type: "json" };
 import usuarios from "./UsuariosRoutes.js";
 import pecas from "./PecasRoutes.js";
 import equipamentos from "./EquipamentosRoutes.js";
+import categoria from "./CategoriaRoutes.js";
 
 const routes = (app) => {
     // rotas principais
@@ -25,7 +26,8 @@ const routes = (app) => {
         express.json(),
         usuarios,
         pecas,
-        equipamentos
+        equipamentos,
+        categoria
     );
 };
 
