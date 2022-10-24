@@ -1,10 +1,27 @@
-import { alterarQuantidade, cadastrarAtributo, cadastrarPeca, desativarAtributo, desativarPeca, listarPecas, peca, peca_atributos } from '../models/Pecas.js';
-import { dd } from './functions.js';
+import {
+    alterarQuantidade,
+    cadastrarAtributo,
+    cadastrarPeca,
+    desativarAtributo,
+    desativarPeca,
+    listarPecas,
+    peca,
+    peca_atributos
+} from '../models/Pecas.js';
+import { dd, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das pecas
 class PecasController {
-    // ira retornar a peca solicitada pelo
-    static peca = (req, res) => {/* GET */
+    /**
+    * Lista equipamento e atributos detalhados
+    *
+    * @method GET
+    * @param id
+    * @return (200) - json {peca, atributos}
+    * @return (404) - Peca não existe
+    * @return (500) - erro interno servidor
+    */
+    static peca = (req, res) => {
         var id = req.params.id;
         var select = peca(id);
 
@@ -33,22 +50,34 @@ class PecasController {
             }
         });
     }
-    // responsavel por listar todas as pecas
-    static listarPecas = (req, res) => {/* GET */
-        var status = req.query.status, query;
 
-        // caso exista query via url ira entrar para tratar o retorno para executar a busca no bd
-        if(status === 'true' || status === 'false' || status === undefined) {
-            status = status === undefined ? true : status === 'true' ? true : false;
+    /**
+    * Lista todos equipamentos.
+    *
+    * @method GET
+    * @param status (true || false || null)
+    * @return (200) - json{equipamentos}
+    * @return (500) - erro interno servidor
+    * 
+    * caso o query exista e esteja correto irá retornar um objeto query ["is_active"] => boolean().
+    * caso o status seja true || false, vai fazer select com where, se for bem sucedido irá retornar status 200, caso der erro status 500
+    * caso contrário irá executar select, mas sem query, as respostas são as mesmas, o que muda é o filtro do status.
+    */
+    static listarPecas = (req, res) => {
+        var query = {
+            nome: req.query.nome,
+            sku: req.query.sku
+        };
+        removeUndefined(query);
+        var status = req.query.status;
+        status = status === 'true' ? '*' : status === 'false' ? false : true;
 
-            // objeto que vai guardar os dados para a busca
-            var query = {
-                is_active: status
-            };
+        if(status === true || status === false) {
+            query.is_active = status;
         }
 
         // if para entrar caso buscar pecas ativas e inativas
-        if(status === true || status === false) {
+        if(query) {
             var select = listarPecas(query);
 
             // select para executar busca com query
@@ -71,8 +100,22 @@ class PecasController {
         }
     }
 
-    // responsavel por cadastrar peca
-    static cadastrarPeca = (req, res) => {/* POST */
+    /**
+    * Cadastra peça.
+    *
+    * @method POST
+    * @param nome
+    * @param sku
+    * @return (200) - message
+    * @return (405) - dados solicitados não recebido da forma correta
+    * @return (422) - já existe no banco de dados e não pode repetir
+    * @return (500) - erro interno servidor
+    * 
+    * caso não receber os dados solicitador irá retornar 405
+    * caso contrário irá criar var para o select e executar, se o numero do equipamento já se encontrar na base de dados irá retornar 422
+    * caso contrário irá executar o insert e retornar 200, caso der erro irá retornar 500
+    */
+    static cadastrarPeca = (req, res) => {
         let peca = req.body;
 
         // tratamento caso nao recebe o que foi requisitado
@@ -86,7 +129,7 @@ class PecasController {
 
             select.then((content) => {
                 if(content.length !== 0) {
-                    res.status(404).send({Message: `SKU: ${peca.sku} já existe na base de dados`});
+                    res.status(422).send({Message: `SKU: ${peca.sku} já existe na base de dados`});
                 } else {
                     // variavel responsavel por executar a query do insert
                     var insert = cadastrarPeca(peca);
@@ -103,6 +146,21 @@ class PecasController {
     }
 
 
+    /**
+    * Cadastra atributo.
+    *
+    * @method POST
+    * @param id
+    * @param id_atributo
+    * @param valor
+    * @return (200) - json objeto equipamentos
+    * @return (404) - NOT FOUND / Valor solicitado não encotrado
+    * @return (500) - erro interno servidor
+    * 
+    * irá fazer o select para verificar se a peça informada via GET existe
+    * caso não existir ira retornar 404 caso contrário irá verificar se a peça está ativa
+    * caso passar por todas etapas irá criar variavel de insert caso ok retorna 200 caso contrário 500
+    */
     static cadastrarAtributo = (req, res) => {/* POST */
         const id = req.params.id, id_atributo = req.body.id_atributo;
         var valor = req.body.valor;
@@ -128,7 +186,23 @@ class PecasController {
         });
     }
 
-    static alterarQuantidade = (req, res) => {/* PUT */
+    /**
+    * Altera a quantidade da peça.
+    *
+    * @method PUT
+    * @param id
+    * @param qnt
+    * @return (200) - json objeto equipamentos
+    * @return (400) - O dado enviado é inválido
+    * @return (404) - NOT FOUND / Valor solicitado não encotrado
+    * @return (405) - Peça encontra-se desativada e não é possivel alterar
+    * @return (500) - erro interno servidor
+    * 
+    * irá fazer o select para verificar se a peça informada via GET existe
+    * caso não existir ira retornar 404 caso contrário irá verificar se a peça está ativa caso a peça estar inativa irá retornar 405
+    * caso passar por todas etapas irá criar variavel de update enviando o valor caso ok retorna 200 caso contrário 500
+    */
+    static alterarQuantidade = (req, res) => {
         var id = req.params.id;
         var select = peca(id);
         
@@ -156,7 +230,21 @@ class PecasController {
         });
     }
 
-    static desativarPeca = (req, res) => {/* DELETE */
+    /**
+    * Desativa peça.
+    *
+    * @method DELETE
+    * @param id
+    * @return (200) - message
+    * @return (404) - NOT FOUND / Valor solicitado não encotrado
+    * @return (405) - Peça encontra-se desativada
+    * @return (500) - erro interno servidor
+    * 
+    * irá fazer o select para verificar se a peça informada via GET existe
+    * caso não existir ira retornar 404 caso contrário irá verificar se a peça já se encontra desativada caso a peça estar inativa irá retornar 405
+    * caso passar por todas etapas irá criar variavel de update enviando o valor caso ok retorna 200 caso contrário 500
+    */
+    static desativarPeca = (req, res) => {
         var id = req.params.id;
         var select = peca(id);
 

@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "predev": "npm install",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

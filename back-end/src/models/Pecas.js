@@ -1,5 +1,4 @@
 import conn from "../config/dbConnect.js";
-import var_dump from "var_dump";
 
 // function que faz a consulta de todos pecas
 export const listarPecas = async(params) => {
