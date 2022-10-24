@@ -28,5 +28,5 @@ export const desativarEquipamento = async(id, status) => {
 }
 
 export const desativarAtributo = async(id) => {
-  return await conn.where({ id_peca: id }).update({ is_active: false }).table('equipamentos_atributos');
+  return await conn.where({ id_equipamento: id }).update({ is_active: false }).table('equipamentos_atributos');
 }

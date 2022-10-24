@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `equipamentos_atributos` (
   `id_equipamento` int(11) NOT NULL,
   `id_atributo` int(11) NOT NULL,
   `valor` varchar(50) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
   KEY `FK__equipamentos` (`id_equipamento`),
   KEY `FK__atributos` (`id_atributo`),
   CONSTRAINT `FK__atributos` FOREIGN KEY (`id_atributo`) REFERENCES `atributos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,

@@ -1,4 +1,11 @@
-import { cadastrarEquipamento, desativarEquipamento, equipamento, equipamento_atributos, listarEquipamentos } from '../models/Equipamentos.js';
+import {
+    cadastrarEquipamento,
+    desativarAtributo,
+    desativarEquipamento,
+    equipamento,
+    equipamento_atributos,
+    listarEquipamentos
+} from '../models/Equipamentos.js';
 import { dd, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das pecas
@@ -6,6 +13,7 @@ class EquipamentosController {
     /**
     * Lista todos equipamentos.
     *
+    * @method GET
     * @param status (true, false, null)
     * @return (200) - objeto equipamentos
     * @return (500) - erro interno servidor
@@ -23,12 +31,11 @@ class EquipamentosController {
         removeUndefined(query);
         
         var status = query.is_active;
+        status = status === 'true' ? '*' : status === 'false' ? false : true;
 
-        if(status === 'true' || status === 'false' || status === undefined) {
-            status = status === undefined ? true : status === 'true' ? true : false;
-
+        if(status === true || status === false) {
             query.is_active = status;
-        };
+        }
 
         if(status === true || status === false) {
             var select = listarEquipamentos(query);
@@ -54,6 +61,7 @@ class EquipamentosController {
     /**
     * Lista equipamento e atributos detalhados
     *
+    * @method GET
     * @param id
     * @return objeto {equipamento, atributos}(200)
     * @return Equipamento não existe(404)
@@ -105,7 +113,7 @@ class EquipamentosController {
             let query = {
                 numero: equipamento.numero
             }
-            var select = listarEquipamentos(query);
+            var select = listarEquipamentos(query); 
 
             select.then((content) => {
                 if(content.length !== 0) {
@@ -113,7 +121,6 @@ class EquipamentosController {
                 } else {
                     // variavel responsavel por executar a query do insert
                     var insert = cadastrarEquipamento(equipamento);
-                
         
                     insert.then(() => {
                         res.status(200).send({message:  `Equipamento foi cadastrado com sucesso`});
@@ -157,7 +164,7 @@ class EquipamentosController {
                     desativarAtributo(id).then(() => {
                         res.status(200).json(`${equipamento[0].nome} desativada com sucesso`);
                     }).catch(err => {
-                        desativarPeca(id, true);
+                        desativarEquipamento(id, true);
                         console.log(err);
                         res.status(500).send({message: `falha ao desativar atributos`});
                     });
