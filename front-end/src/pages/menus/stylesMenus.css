@@ -3,64 +3,74 @@
     margin: 0%;
 }
 .buttonOne{
-    background-color: rgb(243, 234, 234);
+    background-color: #1492E1;
     text-align: center;
-    padding: 11%;
+    padding: 10%;
     height: 60%;
     width: 50%;
     display: inline-block;
     border-right: solid 2px rgb(255, 255, 255);
     margin: 0;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top: #F7FFF7 solid 4px;
 }
 .buttonTwo{
-    background-color: rgb(243, 234, 234);
+    background-color: #1492E1;
     text-align: center;
-    padding: 11%;
+    padding: 10%;
     width: 50%;
     display: inline-block;
     border-left: solid 2px rgb(255, 255, 255);
     margin: 0;
+    border-top: #F7FFF7 solid 4px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .buttonThree{
-    background-color: rgb(243, 234, 234);
+    background-color: #1492E1;
     text-align: center;
-    padding: 11%;
+    padding: 10%;
     width: 50%;
     display: inline-block;
     border-top: solid 4px rgb(255, 255, 255);
     border-right: solid 2px rgb(255, 255, 255);
     margin: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 .buttonFour{
-    background-color: rgb(243, 234, 234);
+    background-color: #1492E1;
     text-align: center;
-    padding: 11%;
+    padding: 10%;
     width: 50%;
     display: inline-block;
     border-left: solid 2px rgb(255, 255, 255);
     border-top: solid 4px rgb(255, 255, 255);
     margin: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
     
 /*Animação botão*/
 .top a:hover{
-    background-color: rgb(228, 216, 216);
+    background-color: #56B5F0;
 }
 .top a:active{
-    background-color: rgb(202, 190, 190);
+    background-color: #A3D5FF;
 }
 .down a:hover{
-    background-color: rgb(228, 216, 216);
+    background-color: #56B5F0;
 }
 .down a:active{
-    background-color: rgb(202, 190, 190);
+    background-color: #A3D5FF;
 }
 .text-button {
-    font-family: Stencil Std, fantasy;
+    font-family: Tahoma;
     text-decoration: none !important;
     font-size: 150%;
-    color: rgb(41, 37, 37);
+    color: #F7FFF7;
 }
 a:link {
     text-decoration: none !important;

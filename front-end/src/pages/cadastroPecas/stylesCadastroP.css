@@ -10,12 +10,11 @@
     background-color: white;
 }
 
-.box { 
+.boxCAD { 
     margin-top: 15px;
     height: 660px;
     width: 1100px;
-    border: rgb(87, 87, 87) 1px solid;
-    background-color: rgb(204, 204, 204);
+    background-color: #707078;
     border-radius: 10px;
     overflow: visible;
     padding: 55px 33px 33px 33px;
@@ -36,4 +35,22 @@
 .botaoMais:hover { 
     background-color: #157347;
     border-color: #157347;
+}
+
+.dropdown{
+    display: inline-block;
+    margin: 5px;
+}
+
+.atributos{
+    padding-left: 18%;
+    padding-right: 18%;
+}
+
+.form-control{
+    margin: 0;
+}
+
+.input-group-text{
+    height: 38px;
 }

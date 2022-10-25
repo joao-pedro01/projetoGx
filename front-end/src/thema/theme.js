@@ -19,6 +19,8 @@ export const darkTheme = {
     inputthemecheck: "#F7FFF7",
     labelinputball: "#1E1E1E",
     test: "#0E131F",
+    borderboxcad: "#F7FFF7 1px solid",
+    borderbuttonmenutop: "#1E1E1E solid 4px",
 };
 
 /*Style Global*/
@@ -28,6 +30,13 @@ export const GlobalStyle = createGlobalStyle`
     }
     .react-switch-label{
         background-color: ${props => props.theme.inputthemecheck};
+    }
+
+    .formCPecas span{
+        color: ${props => props.theme.color};
+    }
+    .box{
+        border: ${props => props.theme.borderboxcad};
     }
 
 
@@ -61,10 +70,12 @@ export const GlobalStyle = createGlobalStyle`
     .buttonOne{
         border-right: ${props => props.theme.buttonborder};
         background-color: ${props => props.theme.buttoncolor};
+        border-top: ${props => props.theme.borderbuttonmenutop};
     }
     .buttonTwo{
         background-color: ${props => props.theme.buttoncolor};
         border-left: ${props => props.theme.buttonborder};
+        border-top: ${props => props.theme.borderbuttonmenutop};
     }
     .buttonThree{
         background-color: ${props => props.theme.buttoncolor};
@@ -86,5 +97,9 @@ export const GlobalStyle = createGlobalStyle`
         background-color: ${props => props.theme.buttoncoloractive};
     }
     
+
+    .boxCAD{
+        background-color: ${props => props.theme.buttoncoloractive};
+    }
 
 `
