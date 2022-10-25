@@ -4,12 +4,14 @@ import {createGlobalStyle, withTheme} from 'styled-components';
 export const lightTheme = {
     body: "#F7FFF7",
     inputthemecheck: "#1E1E1E",
+    test: "#C4E8CB !important",
+    test2: "#F7FFF7 !important",
 };
 
 /*Variavei DarkMode*/
 export const darkTheme = {
     body: "#1E1E1E",
-    color: "#F7FFF7",
+    color: "#F7FFF7 !important",
     border: "#F7FFF7 2px solid",
     buttoncolor: "#303030",
     buttoncolorhover: "#404040",
@@ -18,10 +20,16 @@ export const darkTheme = {
     buttonbordertop: "solid 4px #1E1E1E",
     inputthemecheck: "#F7FFF7",
     labelinputball: "#1E1E1E",
-    test: "#0E131F",
+    test: "#4E4E51 !important",
+    test2: "#686466 !important",
     borderboxcad: "#F7FFF7 1px solid",
     borderbuttonmenutop: "#1E1E1E solid 4px",
 };
+
+/*
+#686466
+#7B6AA0
+*/
 
 /*Style Global*/
 export const GlobalStyle = createGlobalStyle`
@@ -40,9 +48,16 @@ export const GlobalStyle = createGlobalStyle`
     }
 
 
-    .tabletest{
+    .tabletest th{
         background-color: ${props => props.theme.test};
+        color: ${props => props.theme.color};
     }
+
+    .tabletest td{
+        background-color: ${props => props.theme.test2};
+        color: ${props => props.theme.color};
+    }
+
     .buttonArea{
         background-color: ${props => props.theme.body};
     }

@@ -18,7 +18,7 @@ const Pecas = () => {
     const [data, setDate] = useState();
 
     useEffect(() => {
-        Axios.get('http://172.16.9.95:8080/api/pecas')
+        Axios.get('http://172.22.2.22:8080/api/pecas')
         .then(res => {
           console.log("Getting from ::::", res.data)
           setDate(res.data)

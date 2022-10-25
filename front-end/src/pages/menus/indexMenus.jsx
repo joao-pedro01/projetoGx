@@ -9,12 +9,12 @@ const Menus = () => {
         <div className='MenuContainer'>
                 <HeaderPMS/>
             <div className='top'>
-                <span className="top"><a className='buttonOne' href='/menucadastro'><div className='text-button'><AiOutlineArrowUp /> Cadastrar</div></a></span>
-                <a className='buttonTwo' href='/remover'><div className='text-button'><AiOutlineArrowDown/> Retirar</div></a>
+                <span className="top"><a className='buttonOne' href='/menucadastro'><div className='text-button'><AiOutlineArrowUp /> <b>Cadastrar</b></div></a></span>
+                <a className='buttonTwo' href='/remover'><div className='text-button'><AiOutlineArrowDown/> <b>Retirar</b></div></a>
             </div>
             <div className='down'>
-                <a className='buttonThree' href='/pecas'><div className='text-button'><AiOutlineBars /> Listar Peças</div></a>
-                <a className='buttonFour' href='/relatorio'><div className='text-button'><AiOutlineAudit /> Relatórios</div></a>
+                <a className='buttonThree' href='/pecas'><div className='text-button'><AiOutlineBars /> <b>Listar P.</b></div></a>
+                <a className='buttonFour' href='/relatorio'><div className='text-button'><AiOutlineAudit /> <b>Relatórios</b></div></a>
             </div>
 
         </div>

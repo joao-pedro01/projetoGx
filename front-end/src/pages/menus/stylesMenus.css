@@ -3,7 +3,7 @@
     margin: 0%;
 }
 .buttonOne{
-    background-color: #1492E1;
+    background-color: #2179FD;
     text-align: center;
     padding: 10%;
     height: 60%;
@@ -16,7 +16,7 @@
     border-top: #F7FFF7 solid 4px;
 }
 .buttonTwo{
-    background-color: #1492E1;
+    background-color: #2179FD;
     text-align: center;
     padding: 10%;
     width: 50%;
@@ -29,7 +29,7 @@
 }
 
 .buttonThree{
-    background-color: #1492E1;
+    background-color: #2179FD;
     text-align: center;
     padding: 10%;
     width: 50%;
@@ -41,7 +41,7 @@
     border-bottom-right-radius: 10px;
 }
 .buttonFour{
-    background-color: #1492E1;
+    background-color: #2179FD;
     text-align: center;
     padding: 10%;
     width: 50%;
@@ -55,16 +55,16 @@
     
 /*Animação botão*/
 .top a:hover{
-    background-color: #56B5F0;
+    background-color: #0252CA;
 }
 .top a:active{
-    background-color: #A3D5FF;
+    background-color: #0242A2;
 }
 .down a:hover{
-    background-color: #56B5F0;
+    background-color: #0252CA;
 }
 .down a:active{
-    background-color: #A3D5FF;
+    background-color: #0242A2;
 }
 .text-button {
     font-family: Tahoma;
