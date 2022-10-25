@@ -1,3 +1,4 @@
+import { cadastrarMovimento } from '../models/Movimentos.js';
 import {
     alterarQuantidade,
     cadastrarAtributo,
@@ -191,7 +192,7 @@ class PecasController {
     *
     * @method PUT
     * @param id
-    * @param qnt
+    * @param saldo
     * @return (200) - json objeto equipamentos
     * @return (400) - O dado enviado é inválido
     * @return (404) - NOT FOUND / Valor solicitado não encotrado
@@ -207,21 +208,30 @@ class PecasController {
         var select = peca(id);
         
         select.then((peca) => {
-            var qnt = req.body.qnt;
+            var saldo = req.body.saldo;
             // se a peca nao existir vai entrar no if
             if(peca.length == 0) {
                 res.status(404).send({message: "peça não encontrada"});
             }else if(peca[0].is_active == false) {
                 res.status(405).send({message: "Peça esta desativada não pode alterar"});
-            }else if(peca[0].qnt + qnt < 0) {
+            }else if(peca[0].saldo + saldo < 0) {
                 res.status(400).send({message: 'Não é possivel pois não tem a quantidade em estoque'});
             }else {
-                var qnt = peca[0].qnt + qnt;
+                // se valor < 0 return S (saida), senao return E (entrada)
+                let valor = saldo < 0 ? "s".toUpperCase() : "e".toUpperCase();
+                var saldo = peca[0].saldo + saldo;
                 /*  variavel responsavel por executar alterarQuantidade, passando o id da peca e a quantidade a ser alterada, podendo ser positiva(somando) e negativa(subtraindo) com o valor do banco de dados */
-                let update = alterarQuantidade(id, qnt);
+                let update = alterarQuantidade(id, saldo);
                 // da a resposta se foi sucess ou erro 
                 update.then(() => {
-                    res.status(200).json(`${peca[0].nome} foi alterado no estoque para: ${qnt}`);
+                    let query = {
+                        id_usuario: req.body.id_usuario,
+                        id_peca: id,
+                        tipo: valor,
+                        valor: peca[0].saldo
+                    }
+                    cadastrarMovimento(query);
+                    res.status(200).json(`${peca[0].nome} foi alterado no estoque para: ${saldo}`);
                 }).catch(err => {
                     console.log(err);
                     res.status(500).send({message: `falha ao atualizar a quantidade da peça`});

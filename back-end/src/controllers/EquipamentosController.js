@@ -9,7 +9,7 @@ import {
 import { dd, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das pecas
-class EquipamentosController {  
+class EquipamentosController {
     /**
     * Lista todos equipamentos.
     *

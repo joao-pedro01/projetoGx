@@ -5,6 +5,6 @@ const router = express.Router();
 
 // rotas para acoes usuarios
 router
-    .get("/api/categorias/", CategoriaController.listarCategoria)
+    .get("/api/categorias/", CategoriaController.listarCategorias)
 
 export default router;
