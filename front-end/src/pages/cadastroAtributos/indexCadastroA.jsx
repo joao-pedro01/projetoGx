@@ -41,7 +41,7 @@ const CadastroA = () => {
         <div className='header'>
             <HeaderPMS/> 
             <div className='container'>
-                <div className='box'>
+                <div className='boxCAD'>
                     <div className='atributos'>
                       <>
                         <InputGroup className="mb-3">
