@@ -6,6 +6,7 @@ import MainPage from './pages/listaPecas/indexLista';
 import Header from './pages/header/indexHeader';
 import Menus from './pages/menus/indexMenus';
 import CadastroP from './pages/cadastroPecas/indexCadastroP';
+import CadastroA from './pages/cadastroAtributos/indexCadastroA'
 import './thema/themeInput.css';
 
 
@@ -44,6 +45,7 @@ const App = () => {
               <Route exact path="/testeHeader" element={<Header/>}/>
               <Route exact path="/menu" element={<Menus/>}/>
               <Route exact path="/cadastro/pecas" element={<CadastroP/>}/>
+              <Route exact path="/cadastro/atributos" element={<CadastroA/>}/>
             </Routes>
           </Router>
       </div>
