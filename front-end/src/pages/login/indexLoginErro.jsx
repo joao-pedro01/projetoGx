@@ -3,6 +3,7 @@ import pms from './assets/logo_pms.png' // import logo prefeitura
 import './stylesLogin.css'  //import estilizacao css
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 import Axios from 'axios';
 
 const Login = () => {
@@ -28,6 +29,11 @@ const Login = () => {
                 <form className="formLogin" action="#" method="post" onSubmit={handleSubmit}> {/* capturar dados do form */}
                 <span className="loginTitulo"><img src= {pms} className='img-fluid'></img></span> {/* imagem pms */} 
                 <h1 className="loginTitulo"><b>ESTOQUE</b></h1> {/* titulo da pagina */}
+                <Alert className="border" variant="danger">
+                    <p>
+                        Usuário/senha incorretos ou usuário não encontrado!
+                    </p>
+                </Alert>
                 <div className='inputsL'> {/* div lista de inputs */}
                     <Form.Control type="text" placeholder="Nome de usuário" required
                     value= {user} onChange = {(event) => setUser(event.target.value)} />  {/* define o input digitado para a const user*/}

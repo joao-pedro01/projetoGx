@@ -9,7 +9,7 @@ const Menus = () => {
         <div className='MenuContainer'>
                 <HeaderPMS/>
             <div className='top'>
-                <span className="top"><a className='buttonOne' href='/menucadastro'><div className='text-button'><AiOutlineArrowUp /> <b>Cadastrar</b></div></a></span>
+                <span className="top"><a className='buttonOne' href='/menu/cadastros'><div className='text-button'><AiOutlineArrowUp /> <b>Cadastrar</b></div></a></span>
                 <a className='buttonTwo' href='/remover'><div className='text-button'><AiOutlineArrowDown/> <b>Retirar</b></div></a>
             </div>
             <div className='down'>
