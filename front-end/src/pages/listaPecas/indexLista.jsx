@@ -27,7 +27,7 @@ const Pecas = () => {
 
     const arr = data?.map((data, index) => {
       return (
-      <tr>
+      <tr >
         <td>{data.id}</td>
         <td>{data.sku}</td>
         <td>{data.nome}</td>
@@ -36,6 +36,8 @@ const Pecas = () => {
       </tr>
       )
     })
+
+
   
     return (
       <div className="listaPecas">
