@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyle } from './thema/theme.js';
 import Login from './pages/login/indexLogin';
+import LoginErro from './pages/login/indexLoginErro'
 import MainPage from './pages/listaPecas/indexLista';
 import Header from './pages/header/indexHeader';
 import Menus from './pages/menus/indexMenus';
@@ -44,10 +45,11 @@ const App = () => {
           <Router> {/* Sistema de rotas da pagina */}
             <Routes>
               <Route exact path="/" element={<Login />} />   
+              <Route exact path="/erro" element ={<LoginErro />}/>
               <Route exact path="/pecas" element={<MainPage />} />
               <Route exact path="/testeHeader" element={<Header/>}/>
               <Route exact path="/menu" element={<Menus/>}/>
-              <Route exact path="/menucadastro" element={<MenusCad/>}/>
+              <Route exact path="/menu/cadastros" element={<MenusCad/>}/>
               <Route exact path="/cadastro/pecas" element={<CadastroP/>}/>
               <Route exact path="/cadastro/atributos" element={<CadastroA/>}/>
               <Route exact path="/cadastro/categoria" element={<CadastroC/>}/>

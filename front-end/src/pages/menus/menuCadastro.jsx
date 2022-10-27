@@ -12,12 +12,12 @@ const MenusCad = () => {
         <div className='MenuContainer'>
                 <HeaderPMS/>
             <div className='top'>
-                <a className='buttonOne' href='/cadastro/atributos'><div className='text-button'>Cadastro de Atributos</div></a>
-                <a className='buttonTwo' href='/cadastro/categoria'><div className='text-button'>Cadastro de Categorias</div></a>
+                <a className='buttonOne' href='/cadastro/atributos'><div className='text-button'><b>Cadastro de Atributos</b></div></a>
+                <a className='buttonTwo' href='/cadastro/categoria'><div className='text-button'><b>Cadastro de Categorias</b></div></a>
             </div>
             <div className='down'>
-                <a className='buttonThree' href='/cadastro/equipamentos'><div className='text-button'>Cadastro de Equipamentos</div></a>
-                <a className='buttonFour' href='/cadastro/pecas'><div className='text-button'>Cadastro de Peças</div></a>
+                <a className='buttonThree' href='/cadastro/equipamentos'><div className='text-button'><b>Cadastro de Equipamentos</b></div></a>
+                <a className='buttonFour' href='/cadastro/pecas'><div className='text-button'><b>Cadastro de Peças</b></div></a>
             </div>
 
         </div>

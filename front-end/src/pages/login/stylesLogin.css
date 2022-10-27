@@ -28,6 +28,13 @@
     overflow: visible;
     padding: 55px 33px 33px 33px;
 }
+.login p {
+    text-align: center;
+}
+.error {
+    width:70% !important;
+    left: 50% !important;
+}
 
 .loginForm {
     width: 100%;
@@ -35,7 +42,7 @@
 
 .loginTitulo { 
     display: block;
-    font-size: 30px;
+    font-size: 25px;
     color: black;
     line-height: 1.2;
     text-align: center;
@@ -43,7 +50,7 @@
 }
 
 .loginTitulo img { 
-    width: 175px;
+    width: 125px;
 }
 
 .inputsL { 
@@ -63,3 +70,6 @@
     padding: 0 7px;
 }
 
+.role=alert {
+    
+}
