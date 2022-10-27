@@ -24,15 +24,11 @@ class CategoriasController {
             tipo: req.query.tipo,
         };
         removeUndefined(query);
-        
         var status = query.is_active;
         status = status === 'true' ? '*' : status === 'false' ? false : true;
-
-        if(status === true || status === false) {
+        
+        if(query) {
             query.is_active = status;
-        }
-
-        if(status === true || status === false) {
             var select = listarCategorias(query);
 
             select.then((equipamentos) => {
@@ -42,7 +38,7 @@ class CategoriasController {
                 res.status(500).send({message: `falha ao listar equipamentos peça`});
             });
         }else {
-            var select = listarEquipamentos();
+            var select = listarCategorias();
 
             select.then((equipamentos) => {
                 res.status(200).json(equipamentos);
