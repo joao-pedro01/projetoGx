@@ -47,6 +47,12 @@ const CadastroP = () => {
     })
   }
 
+  //const arr = data?.map((data, index) => {
+  //  return (
+  //    {value: }
+  //  )
+  // })
+
     return (
         <div className='header'>
             <HeaderPMS/> 
@@ -84,6 +90,7 @@ const CadastroP = () => {
                           />
                         </InputGroup>
                       <AsyncSelect
+                        isMulti
                         cacheOptions
                         defaultOptions
                         value={selectedValue}
