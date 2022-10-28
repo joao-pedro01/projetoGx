@@ -92,6 +92,10 @@ class AtributosController {
         }
     }
 
+    static alterarAtributo = (req, res) => {
+        
+    }
+
     /**
     * Desativa atributo.
     *
