@@ -1,4 +1,5 @@
 import { cadastrarAtributo, desativarAtributo, listarAtributos } from '../models/Atributos.js';
+import { cadastrarMovimento } from '../models/Movimentos.js';
 import { dd, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das pecas
@@ -93,7 +94,36 @@ class AtributosController {
     }
 
     static alterarAtributo = (req, res) => {
+        var id = req.params.id;
+        let select = listarAtributos({ id: id });
         
+        select.then((atributo) => {
+            var saldo = req.body.saldo;
+            // se a categoria nao existir vai entrar no if
+            if(atributo.length == 0) {
+                res.status(404).send({message: "Atributo não encontrado"});
+            }else if(atributo[0].is_active == false) {
+                res.status(405).send({message: "Atributo esta desativado não pode alterar"});
+            }else {
+                // se valor < 0 return S (saida), senao return E (entrada)
+                let valor = saldo < 0 ? "s".toUpperCase() : "e".toUpperCase();
+                var saldo = atributo[0].saldo + saldo;
+                let update = alterarQuantidade(id, saldo);
+                update.then(() => {
+                    let query = {
+                        id_usuario: req.body.id_usuario,
+                        id_peca: id,
+                        tipo: valor,
+                        valor: categoria[0].saldo
+                    }
+                    cadastrarMovimento(query);
+                    res.status(200).json(`${atributo[0].nome} foi alterado no estoque para: ${saldo}`);
+                }).catch(err => {
+                    console.log(err);
+                    res.status(500).send({message: `falha ao atualizar a quantidade da Categoria`});
+                });
+            }
+        });
     }
 
     /**
@@ -125,7 +155,7 @@ class AtributosController {
                 // caso passar por todos os if ira desativar a equipamento
                 update.then(() => {
                     desativarAtributo(id).then(() => {
-                        res.status(200).json(`${atributo[0].nome} desativada com sucesso`);
+                        res.status(200).json(`${atributo[0].id} desativada com sucesso`);
                     }).catch(err => {
                         desativarAtributo(id, true);
                         console.log(err);
