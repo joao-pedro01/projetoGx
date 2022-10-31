@@ -1,4 +1,4 @@
-import {createGlobalStyle, withTheme} from 'styled-components';
+import {createGlobalStyle, withTheme} from 'styled-components'; //Import da Biblioteca 'styled-components'
 
 /*Variavei LightMode*/
 export const lightTheme = {
@@ -28,12 +28,7 @@ export const darkTheme = {
     borderbuttonmenutop: "#1E1E1E solid 4px",
 };
 
-/*
-#686466
-#7B6AA0
-*/
-
-/*Style Global*/
+/*Export do 'Style Global'*/
 export const GlobalStyle = createGlobalStyle`
     .react-switch-label .react-switch-button{
         background-color: ${props => props.theme.labelinputball};
@@ -47,6 +42,9 @@ export const GlobalStyle = createGlobalStyle`
     }
     .box{
         border: ${props => props.theme.borderboxcad};
+    }
+    .boxCAD h3{
+        color: ${props => props.theme.color};
     }
 
     .tabletest th{
@@ -112,10 +110,15 @@ export const GlobalStyle = createGlobalStyle`
     .top a:active, .down a:active{
         background-color: ${props => props.theme.buttoncoloractive};
     }
-    
+
 
     .boxCAD{
         background-color: ${props => props.theme.buttoncoloractive};
     }
 
 `
+
+/*
+#686466
+#7B6AA0
+*/
