@@ -147,7 +147,7 @@ class AtributosController {
         select.then((atributo) => {
             // se a atributo nao existir vai entrar no if
             if(atributo.length == 0) {
-                res.status(404).json("Atributo não existe!!!");
+                res.status(404).json("Atributo não existe");
             }else if(atributo[0].is_active == false) {
                 res.status(405).json("Atributo já esta desativada");
             }else {
