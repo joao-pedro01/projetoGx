@@ -102,7 +102,7 @@ const CadastroP = () => {
                         min="4"
                         max="8"
                       />
-                      <span className="cadastroButton"><Button type="submit" className="mt-3" variant="success">Cadastrar</Button>{' '}</span>
+                      <span className="button-cadastrar"><Button type="submit" className="mt-3" variant="success">Cadastrar</Button>{' '}</span>
                       </form>       
                 </div>
             </div>

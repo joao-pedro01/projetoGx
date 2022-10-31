@@ -3,7 +3,7 @@
     margin: 0%;
 }
 .buttonOne{
-    background-color: #2179FD;
+    background-color: #3981EC;
     text-align: center;
     padding: 10%;
     height: 60%;
@@ -16,7 +16,7 @@
     border-top: #F7FFF7 solid 4px;
 }
 .buttonTwo{
-    background-color: #2179FD;
+    background-color: #3981EC;
     text-align: center;
     padding: 10%;
     width: 50%;
@@ -29,7 +29,7 @@
 }
 
 .buttonThree{
-    background-color: #2179FD;
+    background-color: #3981EC;
     text-align: center;
     padding: 10%;
     width: 50%;
@@ -41,7 +41,7 @@
     border-bottom-right-radius: 10px;
 }
 .buttonFour{
-    background-color: #2179FD;
+    background-color: #3981EC;
     text-align: center;
     padding: 10%;
     width: 50%;

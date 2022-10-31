@@ -26,9 +26,19 @@ export const darkTheme = {
     td: "#686466 !important",
     borderboxcad: "#F7FFF7 1px solid",
     borderbuttonmenutop: "#1E1E1E solid 4px",
+
+    buttoncadcolor: "#8137D1",
+    buttoncadcolorhover: "#7532bb",
+    buttoncadcoloractive: "#61279F !important",
+    buttoncadcolorborder: "#8137D1 2px solid",
+    buttoncadcolorborderhover: "#7532bb 2px solid",
+    buttoncadcolorborderactive: "#61279F 2px solid !important",
+    inputgrouptext: "#7D787A",
+    inputgrouptextborder: "#515151 1px solid",
+
 };
 
-/*Export do 'Style Global'*/
+/*Export do Style Global*/
 export const GlobalStyle = createGlobalStyle`
     .react-switch-label .react-switch-button{
         background-color: ${props => props.theme.labelinputball};
@@ -46,6 +56,11 @@ export const GlobalStyle = createGlobalStyle`
     .boxCAD h3{
         color: ${props => props.theme.color};
     }
+    .atributos b{
+        color: ${props => props.theme.color};
+    }
+
+
 
     .tabletest th{
         background-color: ${props => props.theme.th};
@@ -114,6 +129,27 @@ export const GlobalStyle = createGlobalStyle`
 
     .boxCAD{
         background-color: ${props => props.theme.buttoncoloractive};
+    }
+    .button-cadastrar Button{
+        background-color: ${props => props.theme.buttoncadcolor};
+        border: ${props => props.theme.buttoncadcolorborder};
+    }
+    .button-cadastrar Button:hover{
+        background-color: ${props => props.theme.buttoncadcolorhover};
+        border: ${props => props.theme.buttoncadcolorborderhover};
+    }
+    .button-cadastrar Button:active{
+        background-color: ${props => props.theme.buttoncadcoloractive};
+        border: ${props => props.theme.buttoncadcolorborderactive};
+    }
+
+    .input-group-text{
+        background-color: ${props => props.theme.inputgrouptext};
+        border: ${props => props.theme.inputgrouptextborder};
+        color: ${props => props.theme.color};
+    }
+    .form-control{
+        border: ${props => props.theme.inputgrouptextborder};
     }
 
 `

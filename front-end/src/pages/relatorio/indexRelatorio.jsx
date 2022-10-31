@@ -10,7 +10,7 @@ const Relatorio = () => {
             <Header /> 
             <div className='container'>
                 <div className='boxCAD'>
-                <h3><b>Retirada de Relatório</b></h3>
+                <h3><b>Relatórios</b></h3>
                 <AsyncSelect cacheOptions defaultOptions value={''} getOptionLabel={e => e.atributo} loadOptions={''} placeholder="Selecione o Relatório..." min="4" max="8" />
                 <Button className= "botaoCadastro" variant="primary" href=""><AiOutlineDownload /> Download</Button>
                 </div>
