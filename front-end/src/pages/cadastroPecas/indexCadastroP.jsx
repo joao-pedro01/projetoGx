@@ -21,6 +21,7 @@ const CadastroP = () => {
   const [nome, setNome] = useState ('')
   const [sku, setSKU] = useState ('')
   const [saldo, setSaldo] = useState('')
+  const [categoria, setCategoria] = useState('')
 
   const handleInputChange = value => { 
     setValue(value)
@@ -70,7 +71,17 @@ const CadastroP = () => {
                             value={nome} onChange={(e) => setNome(e.target.value)}
                           />
                         </InputGroup>
-                        <InputGroup className="mb-3">
+                        <AsyncSelect
+                        cacheOptions
+                        defaultOptions
+                        value={selectedValue}
+                        getOptionLabel={e => e.categorias}
+                        loadOptions={fetchData}
+                        onInputChange={handleInputChange}
+                        onChange={handleChange}
+                        placeholder="Selecione a categoria..."
+                      />                    
+                        <InputGroup className="mb-3 mt-3">
                           <InputGroup.Text id="basic-addon1"><AiOutlineFieldNumber></AiOutlineFieldNumber></InputGroup.Text>
                           <Form.Control
                             type="text"

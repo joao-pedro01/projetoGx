@@ -11,6 +11,7 @@ import CadastroP from './pages/cadastroPecas/indexCadastroP';
 import CadastroA from './pages/cadastroAtributos/indexCadastroA';
 import CadastroC from './pages/cadastroCategorias/indexCadastroC';
 import CadastroE from './pages/cadastroEquipamentos/indexCadastroE';
+import CadastroTeste from './pages/cadastroTeste/indexCadastroTeste'
 import './thema/themeInput.css';
 
 
@@ -54,6 +55,7 @@ const App = () => {
               <Route exact path="/cadastro/atributos" element={<CadastroA/>}/>
               <Route exact path="/cadastro/categoria" element={<CadastroC/>}/>
               <Route exact path="/cadastro/equipamentos" element={<CadastroE/>}/>
+              <Route exact path="/teste" element={<CadastroTeste/>}/>
             </Routes>
           </Router>
       </div>
