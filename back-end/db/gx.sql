@@ -47,7 +47,8 @@ CREATE TABLE IF NOT EXISTS `usuarios`(
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
- `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `movimentos`(
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(11) NOT NULL,
   `id_peca` int(11) DEFAULT NULL,
   `id_equipamento` int(11) DEFAULT NULL,

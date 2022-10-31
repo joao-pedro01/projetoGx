@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import HeaderPMS from '../header/indexHeader'
-import './stylesCadastroA.css'  //import estilizacao css
 import Axios from 'axios';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -43,6 +42,7 @@ const CadastroA = () => {
             <div className='container'>
                 <div className='boxCAD'>
                     <div className='atributos'>
+                      <p><b>Cadastro Atributos</b></p>
                       <>
                         <InputGroup className="mb-3">
                           <InputGroup.Text id="basic-addon1"><AiFillTool></AiFillTool></InputGroup.Text>

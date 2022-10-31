@@ -8,3 +8,11 @@ export const listarCategorias = async(params) => {
     return await conn.select('*').table('categorias').where(params);
   }
 }
+
+export const cadastrarCategoria = async(dados) => {
+  return await conn.insert(dados).into('categorias');
+}
+
+export const desativarCategoria = async(id, status) => {
+  return await conn.where({id: id}).update({is_active: status}).table('categorias');
+}

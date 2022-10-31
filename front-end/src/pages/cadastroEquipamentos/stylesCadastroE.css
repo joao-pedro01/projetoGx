@@ -6,24 +6,14 @@
     flex-wrap: wrap;
     align-items:  center;
     justify-content: center;
-    padding:  15px;
-    background-color: white;
 }
 
 .boxCAD { 
-    margin-top: 15px;
-    height: 660px;
-    width: 1100px;
-    background-color: rgb(204, 204, 204);
+    margin-top: 10px;
+    height: 450px;
+    width: 600px;
+    background-color: #a3b9b6;
     border-radius: 10px;
     overflow: visible;
-    padding: 55px 33px 33px 33px;
-}
-
-.input-group-text{
-    height: 38px;
-}
-
-.form-control{
-    margin-top: 0;
+    padding: 55px 55px 55px 55px;
 }

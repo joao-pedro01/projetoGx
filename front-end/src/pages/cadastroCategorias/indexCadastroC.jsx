@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import HeaderPMS from '../header/indexHeader'
-import './stylesCadastroC.css'  //import estilizacao css
 import Axios from 'axios';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
