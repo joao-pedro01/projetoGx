@@ -13,6 +13,7 @@ import CadastroC from './pages/cadastroCategorias/indexCadastroC';
 import CadastroE from './pages/cadastroEquipamentos/indexCadastroE';
 import Relatorio from './pages/relatorio/indexRelatorio.jsx';
 import Retirada from './pages/retirada/indexRetirada.jsx';
+import CadastroTeste from './pages/cadastroTeste/indexCadastroTeste'
 import './thema/themeInput.css';
 
 
@@ -59,6 +60,7 @@ const App = () => {
               <Route exact path="/cadastro/equipamentos" element={<CadastroE/>}/>
               <Route exact path="/Relatorio" element={<Relatorio/>}/>
               <Route exact path="/Retirada" element={<Retirada/>}/>
+              <Route exact path="/teste" element={<CadastroTeste/>}/>
             </Routes>
           </Router>
       </div>

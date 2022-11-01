@@ -4,6 +4,7 @@ import './stylesLogin.css'  //import estilizacao css
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Axios from 'axios';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 
 const Login = () => {
 
@@ -37,7 +38,9 @@ const Login = () => {
                     value= {password} onChange = {(event) => setPassword(event.target.value)} /> {/* define o input digitado para a const password*/}
                 </div>
                 <div className='containerLoginBotao'>
-                    <button type="submit" class="btn btn-primary btn-block" >Entrar</button>
+                <Link to="/menu">
+                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                </Link>
                 </div>
                 </form>
             </div>
