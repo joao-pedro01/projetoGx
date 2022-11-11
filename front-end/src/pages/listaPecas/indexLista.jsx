@@ -26,6 +26,8 @@ const Pecas = () => {
     }, []);
 
     const arr = data?.map((data, index) => {
+      const active = () => {
+      }
       return (
       <tr>
         <td>{data.id}</td>
