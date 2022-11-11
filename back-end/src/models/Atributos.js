@@ -12,8 +12,8 @@ export const cadastrarAtributo = async(atributo) => {
     return await conn.insert(atributo).table('atributos');
 }
 export const alterarAtributo = async(id, value) => {
-    return await conn.update({ nome: value }).where({id: id}).table('atributos');
+    return await conn.update({ id: value }).where({id: id}).table('atributos');
 }
 export const desativarAtributo = async(id) => {
-    return await conn.where({ id: id }).update({ is_active: false }).table('atributos');
+    return await conn.where({ id : id }).update({ is_active: false }).table('atributos');
 }

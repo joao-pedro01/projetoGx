@@ -28,7 +28,7 @@ const Pecas = () => {
     const arr = data?.map((data, index) => {
       return (
       <tr>
-        <td>{data.id}></td>
+        <td>{data.id}</td>
         <td>{data.sku}</td>
         <td>{data.nome}</td>
         <td>{data.is_active} </td>

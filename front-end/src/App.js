@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme, GlobalStyle } from './thema/theme.js';
+import { lightTheme, darkTheme, GlobalStyle } from './thema/theme.js'; //import dos Themas
 import Login from './pages/login/indexLogin';
 import LoginErro from './pages/login/indexLoginErro'
 import MainPage from './pages/listaPecas/indexLista';
@@ -11,6 +11,8 @@ import CadastroP from './pages/cadastroPecas/indexCadastroP';
 import CadastroA from './pages/cadastroAtributos/indexCadastroA';
 import CadastroC from './pages/cadastroCategorias/indexCadastroC';
 import CadastroE from './pages/cadastroEquipamentos/indexCadastroE';
+import Relatorio from './pages/relatorio/indexRelatorio.jsx';
+import Retirada from './pages/retirada/indexRetirada.jsx';
 import CadastroTeste from './pages/cadastroTeste/indexCadastroTeste'
 import './thema/themeInput.css';
 
@@ -25,6 +27,7 @@ import {
 
 const StyledApp = styled.div``;
 
+/*Sistema para salvar a troca do thema*/
 const useLocalState = (key, defaultValue) => {
   const [value, setValue] = useState(() => {const storedValue = localStorage.getItem(key); return storedValue === null ? defaultValue : JSON.parse(storedValue);})
   
@@ -38,7 +41,7 @@ const useLocalState = (key, defaultValue) => {
 };
 
 const App = () => {
-  const [theme, setTheme] = useLocalState("theme", "light");
+  const [theme, setTheme] = useLocalState("theme", "light"); /*Var da troca do thema*/
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
     <GlobalStyle />
@@ -55,11 +58,13 @@ const App = () => {
               <Route exact path="/cadastro/atributos" element={<CadastroA/>}/>
               <Route exact path="/cadastro/categoria" element={<CadastroC/>}/>
               <Route exact path="/cadastro/equipamentos" element={<CadastroE/>}/>
+              <Route exact path="/Relatorio" element={<Relatorio/>}/>
+              <Route exact path="/Retirada" element={<Retirada/>}/>
               <Route exact path="/teste" element={<CadastroTeste/>}/>
             </Routes>
           </Router>
       </div>
-      <div className='ee'>
+      <div className='ee'> {/*Checkbox para trocar o Thema*/}
         <input className="react-switch-checkbox" id={`react-switch-new`} type="checkbox" onChange={() => setTheme((cur) => (cur === "light" ? "dark" : "light"))}/>
         <label className="react-switch-label" htmlFor={`react-switch-new`}>
           <span className={`react-switch-button`} />
