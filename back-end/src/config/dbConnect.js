@@ -9,7 +9,7 @@ var conn = knex({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: 'gx',
-    port: '3306'
+    port: process.env.DB_PORT
   }
 });
 export default conn;
