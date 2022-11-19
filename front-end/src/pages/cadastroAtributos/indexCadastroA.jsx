@@ -42,7 +42,7 @@ const CadastroA = () => {
             <div className='container'>
                 <div className='boxCAD'>
                     <div className='atributos'>
-                      <p><b>Cadastro Atributos</b></p>
+                    <h3><b>Cadastro de Peças</b></h3>
                       <>
                         <InputGroup className="mb-3">
                           <InputGroup.Text id="basic-addon1"><AiFillTool></AiFillTool></InputGroup.Text>

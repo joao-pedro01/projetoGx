@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import HeaderPMS from '../header/indexHeader'
 import Axios from 'axios';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
-import AsyncSelect from 'react-select/async';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { AiFillTool } from "react-icons/ai";
@@ -12,32 +9,31 @@ import { BsFileEarmarkCode } from "react-icons/bs";
 import Button from 'react-bootstrap/Button'
 
 
-const animatedComponents = makeAnimated();
 
 const CadastroP = () => {
 
-  const [inputValue, setValue] = useState ('')
-  const [selectedValue, setSelectedValue] = useState(null)
+
   const [nome, setNome] = useState ('')
   const [sku, setSKU] = useState ('')
   const [saldo, setSaldo] = useState('')
   const [categoria, setCategoria] = useState('')
+  const [valores, setValores] = useState([])
+  const [vatributos, setVAtributos] = useState([])
+  const [atributos, setAtributos] = useState([])
 
-  const handleInputChange = value => { 
-    setValue(value)
-    console.log("onClick",{value, setValue})
-  }
 
-  const handleChange = value => {
-    setSelectedValue(value)
-    console.log("valores2",{value, setValue})
-  }
-  const fetchData = () => {
-    Axios.get('http://172.22.2.22:8080/api/categorias')
-    .then(res => {
-      console.log("Getting from ::::", res.data)
-    }).catch(err => console.log(err))
-}
+useEffect(() => {
+  Axios.get('http://172.22.2.22:8080/api/categorias')
+  .then(res => {
+    console.log("Getting from ::::", res.data)
+    setValores(res.data)
+  }).catch(err => console.log(err))
+  Axios.get('http://172.22.2.22:8080/api/atributos')
+  .then(res => {
+    console.log("Getting from ::::", res.data)
+    setVAtributos(res.data)
+  }).catch(err => console.log(err))
+}, []);
 
   const handleSubmit = (e) => { 
     Axios.post('http://172.22.2.22:8080/api/pecas',{nome, saldo, sku})
@@ -47,15 +43,8 @@ const CadastroP = () => {
     })
     .catch(function(error){
       console.log(error)
-      console.log("teste:",{setValue})
     })
   }
-
-  //const arr = data?.map((data, index) => {
-  //  return (
-  //    {value: }
-  //  )
-  // })
 
     return (
         <div className='header'>
@@ -63,6 +52,7 @@ const CadastroP = () => {
             <div className='container'>
                 <div className='boxCAD'>
                     <div className='atributos'>
+                    <h3><b>Cadastro de Peças</b></h3>
                       <form className='formCPecas' onSubmit={handleSubmit}>
                         <InputGroup className="mb-3">
                           <InputGroup.Text id="basic-addon1"><AiFillTool></AiFillTool></InputGroup.Text>
@@ -74,19 +64,25 @@ const CadastroP = () => {
                             value={nome} onChange={(e) => setNome(e.target.value)}
                           />
                         </InputGroup>
-                        <AsyncSelect
-                        cacheOptions
-                        defaultOptions
-                        value={selectedValue}
-                        getOptionLabel={e => e.categorias}
-                        loadOptions={fetchData}
-                        onInputChange={handleInputChange}
-                        onChange={handleChange}
-                        placeholder="Selecione a categoria..."
-                      />                    
+                        <Form.Select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
+                          <option value="0">Selecione a categoria...</option>
+                          {valores.map((categorias) => (
+                            <option key={categorias.id} value={categorias.id}>
+                              {categorias.categoria}
+                            </option>
+                          ))}
+                        </Form.Select> 
+                        <Form.Select className="mt-3" value={atributos} onChange={(e) => setAtributos(e.target.value)} onSelect={<HeaderPMS/>}> {// descobrir como fazer esse onSelect
+                        }<option value="0">Selecione um atributo...</option>
+                          {vatributos.map((atributos) => (
+                            <option key={atributos.id} value={atributos.id}>
+                              {atributos.nome}
+                            </option>
+                          ))}
+                        </Form.Select> 
                         <InputGroup className="mb-3 mt-3">
                           <InputGroup.Text id="basic-addon1"><AiOutlineFieldNumber></AiOutlineFieldNumber></InputGroup.Text>
-                          <Form.Control
+                          <Form.Control 
                             type="text"
                             placeholder="Quantidade..."
                             aria-label="quantidade"
