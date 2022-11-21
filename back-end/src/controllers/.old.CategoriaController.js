@@ -3,7 +3,7 @@ import {
     desativarCategoria,
     listarCategorias
 } from '../models/Categoria.js';
-import { dd, removeNull, removeUndefined } from './functions.js';
+import { dd, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das pecas
 class CategoriasController {
@@ -11,9 +11,7 @@ class CategoriasController {
     * Lista todas categorias.
     *
     * @method GET
-    * @param status : boolean
-    * @param categoria : string
-    * @param tipo : string
+    * @param status (true, false, null)
     * @return (200) - objeto equipamentos
     * @return (500) - erro interno servidor
     * 
@@ -24,7 +22,7 @@ class CategoriasController {
     static listarCategorias = (req, res) => {
         var query = {
             is_active: req.query.status,
-            categoria: req.query.nome,
+            nome: req.query.nome,
             tipo: req.query.tipo,
         };
         removeUndefined(query);
@@ -36,12 +34,11 @@ class CategoriasController {
             var select = listarCategorias(query);
 
             select.then((categorias) => {
-                // removeNull(categorias);
                 res.status(200).json(categorias);
             }).catch(err => {
                 console.log(err);
-                res.status(500).send({message: `falha ao listar categorias`});
-            })
+                res.status(500).send({message: `falha ao listar categorias peça`});
+            });
         }else {
             var select = listarCategorias();
 
@@ -50,8 +47,8 @@ class CategoriasController {
             }).catch(err => {
                 console.log(err);
                 res.status(500).send({message: `falha ao listar categorias com query`});
-            })
-        }
+            });
+        };
     }
 
     /**
@@ -72,24 +69,28 @@ class CategoriasController {
     static cadastrarCategoria = (req, res) => {
         let categoria = req.body;
 
-        
-        var select = listarCategorias(categoria);
+        // tratamento caso nao recebe o que foi requisitado
+        if(categoria.nome == undefined || categoria.tipo == undefined){
+            res.status(405).send({message: 'input indefinido'});
+        }else {
+            var select = listarCategorias(categoria);
 
-        select.then((content) => {
-            if(content.length !== 0) {
-                res.status(422).send({Message: `${categoria.nome} já existe na base de dados`});
-            } else {
-                // variavel responsavel por executar a query do insert
-                var insert = cadastrarCategoria(categoria);
-    
-                insert.then(() => {
-                    res.status(200).send({message:  `Categoria foi cadastrada com sucesso`});
-                }).catch(err => {
-                    console.log(err);
-                    res.status(500).send({message: `falha ao cadastrar categoria`});
-                });
-            }
-        });
+            select.then((content) => {
+                if(content.length !== 0) {
+                    res.status(422).send({Message: `${categoria.nome} já existe na base de dados`});
+                } else {
+                    // variavel responsavel por executar a query do insert
+                    var insert = cadastrarCategoria(categoria);
+        
+                    insert.then(() => {
+                        res.status(200).send({message:  `Categoria foi cadastrada com sucesso`});
+                    }).catch(err => {
+                        console.log(err);
+                        res.status(500).send({message: `falha ao cadastrar categoria`});
+                    });
+                }
+            });
+        }
     }
 
     /**
