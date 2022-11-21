@@ -94,7 +94,7 @@ class CategoriasController {
     }
 
     /**
-    * Altera a dados da categoria.
+    * Altera a quantidade da categoria.
     *
     * @method PUT
     * @param id : id
