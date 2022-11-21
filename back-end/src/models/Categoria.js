@@ -13,6 +13,10 @@ export const cadastrarCategoria = async(dados) => {
   return await conn.insert(dados).into('categorias');
 }
 
+export const alterarQuantidade = async(id, qnt) => {
+  return await conn.where({id: id}).update({qnt: qnt}).table('categorias');
+}
+
 export const desativarCategoria = async(id, status) => {
   return await conn.where({id: id}).update({is_active: status}).table('categorias');
 }

@@ -1,4 +1,5 @@
 import {
+    alterarQuantidade,
     cadastrarCategoria,
     desativarCategoria,
     listarCategorias
@@ -96,9 +97,8 @@ class CategoriasController {
     * Altera a dados da categoria.
     *
     * @method PUT
-    * @param id
-    * @param nome
-    * @param tipo
+    * @param id : id
+    * @param qnt : int
     * @return (200) - json objeto equipamentos
     * @return (400) - O dado enviado é inválido
     * @return (404) - NOT FOUND / Valor solicitado não encotrado
@@ -109,37 +109,42 @@ class CategoriasController {
     * caso não existir ira retornar 404 caso contrário irá verificar se a peça está ativa caso a peça estar inativa irá retornar 405
     * caso passar por todas etapas irá criar variavel de update enviando o valor caso ok retorna 200 caso contrário 500
     */
-    static alterarCategoria = (req, res) => {
+    static alterarQuantidadeCategoria = (req, res) => {
         var id = req.params.id;
         let select = listarCategorias({ id: id });
-        
         select.then((categoria) => {
             var saldo = req.body.saldo;
-            // se a categoria nao existir vai entrar no if
+            // se a categoria nao existir vai entrar no if e retornar erro senão vai verificar se esta desativada retornando 405
             if(categoria.length == 0) {
                 res.status(404).send({message: "Categoria não encontrada"});
             }else if(categoria[0].is_active == false) {
                 res.status(405).send({message: "Categoria esta desativada não pode alterar"});
             }else {
                 // se valor < 0 return S (saida), senao return E (entrada)
-                let valor = saldo < 0 ? "s".toUpperCase() : "e".toUpperCase();
-                var saldo = categoria[0].saldo + saldo;
+                /* let valor = saldo < 0 ? "s".toUpperCase() : "e".toUpperCase(); */
+                var saldo = categoria[0].qnt + saldo;
                 let update = alterarQuantidade(id, saldo);
                 update.then(() => {
+                    res.status(200).json(`${categoria[0].nome} foi alterado no estoque para: ${saldo}`);
+                }).catch(err => {
+                    console.log(err);
+                    res.status(500).send({message: `falha ao atualizar a quantidade da Categoria`});
+                })
+                
+                /* update.then(() => {
                     let query = {
                         id_usuario: req.body.id_usuario,
                         id_peca: id,
                         tipo: valor,
                         valor: categoria[0].saldo
-                    }
+                    };
                     cadastrarMovimento(query);
-                    res.status(200).json(`${peca[0].nome} foi alterado no estoque para: ${saldo}`);
                 }).catch(err => {
                     console.log(err);
                     res.status(500).send({message: `falha ao atualizar a quantidade da Categoria`});
-                });
+                }) */
             }
-        });
+        })
     }
 
     /**
