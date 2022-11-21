@@ -5,6 +5,14 @@ export function dd(params) {
     process.exit();
 };
 
+export function removeNull(obj) {
+    Object.keys(obj).forEach(key => {
+        if(obj[key] === null) {
+            delete obj[key];
+        };
+    });
+};
+
 export function removeUndefined(obj) {
     Object.keys(obj).forEach(key => {
         if(obj[key] === undefined) {

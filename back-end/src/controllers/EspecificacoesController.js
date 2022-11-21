@@ -2,7 +2,7 @@ import {
     listarCategoriasEspecificacoes,
     listarEspecificacoes
 } from '../models/Especificacoes.js';
-import { dd, removeUndefined } from './functions.js';
+import { dd, removeNull, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das pecas
 class EspecificacoesController {
