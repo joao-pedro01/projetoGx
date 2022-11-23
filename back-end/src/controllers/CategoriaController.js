@@ -71,26 +71,17 @@ class CategoriasController {
     * caso contrário irá executar o insert e retornar 200, caso der erro irá retornar 500
     */
     static cadastrarCategoria = (req, res) => {
-        let categoria = req.body;
-
+        var dados = req.body;
         
-        var select = listarCategorias(categoria);
-
-        select.then((content) => {
-            if(content.length !== 0) {
-                res.status(422).send({Message: `${categoria.nome} já existe na base de dados`});
-            } else {
-                // variavel responsavel por executar a query do insert
-                var insert = cadastrarCategoria(categoria);
-    
-                insert.then(() => {
-                    res.status(200).send({message:  `Categoria foi cadastrada com sucesso`});
-                }).catch(err => {
-                    console.log(err);
-                    res.status(500).send({message: `falha ao cadastrar categoria`});
-                });
+        cadastrarCategoria(dados).then((categoria) => {
+            res.status(200).send({message: `${dados.nome} foi cadastrada com sucesso ${categoria}`})
+        }).catch((err => {
+            if(err['errno'] == 1062) {
+                res.status(422).send({message: `${dados.nome} já existe cadastrado`});
+            }else {
+                res.status(500).send({message: `falha ao cadastrar categoria`});
             }
-        });
+        }));
     }
 
     /**
