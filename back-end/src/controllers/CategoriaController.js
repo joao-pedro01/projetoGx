@@ -25,7 +25,7 @@ class CategoriasController {
     static listarCategorias = (req, res) => {
         var query = {
             is_active: req.query.status,
-            categoria: req.query.nome,
+            nome: req.query.nome,
             tipo: req.query.tipo,
         };
         removeUndefined(query);
