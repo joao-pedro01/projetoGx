@@ -58,6 +58,10 @@ class UsuarioController {
             }
         });
     }
+
+    static logout = (req, res) => {
+        res.json({ auth: false, token: null });
+    }
 }
 
 export default UsuarioController;
