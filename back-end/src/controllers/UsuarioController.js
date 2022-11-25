@@ -1,4 +1,7 @@
-import { cadastrarUsuario } from '../models/Usuarios.js';
+import { cadastrarUsuario, loginUsuario } from '../models/Usuarios.js';
+import md5 from "md5";
+import jwt from "jsonwebtoken";
+// import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import { dd } from './functions.js';
 // class responsavel por todas acoes do usuario
@@ -14,8 +17,10 @@ class UsuarioController {
         let data = new Date();
         let dataFormatada = data.getFullYear() + "/" + ((data.getMonth() + 1)) + "/" + ((data.getDate() ));
 
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(senha, salt);
+        // const salt = bcrypt.genSaltSync(10);
+        // const hash = bcrypt.hashSync(senha, salt);
+        const hash = md5(senha);
+
         var query = {
             nome: nome,
             senha: hash,
@@ -26,6 +31,31 @@ class UsuarioController {
         }).catch(err => {
             console.log(err);
             res.status(500).send({message: `falha ao cadastrar usuario`});
+        });
+    }
+
+    static loginUsuario = (req, res) => {
+        var usuario = req.body.usuario;
+        var senha = req.body.senha;
+        var hash = md5(senha);
+        /* const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(senha, salt); */
+        var query = {
+            nome: usuario,
+            senha: hash
+        }
+
+        loginUsuario(query).then((usuario) => {
+            if(usuario.length == 0) {
+                res.status(400).json({ erro: true, message: "Usuário ou a senha incorreta!" });
+            }else {
+                var token = jwt.sign({id: usuario.id}, "D62ST92Y7A6V7K5C6W9ZU6W8KS3", {
+                    expiresIn: 1200 //20 min
+                    // expiresIn: 60 //1 min
+                    // expiresIn: '7d' // 7 dia
+                });
+                res.json({erro: false, message: "Login realizado com sucesso!", token});
+            }
         });
     }
 }
