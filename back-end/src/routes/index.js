@@ -6,6 +6,7 @@ import pecas from "./PecasRoutes.js";
 import equipamentos from "./EquipamentosRoutes.js";
 import categoria from "./CategoriaRoutes.js";
 import atributo from "./AtributosRoutes.js";
+import { dd, verifyJWT } from "../controllers/functions.js";
 
 const routes = (app) => {
     // rotas principais
@@ -26,6 +27,7 @@ const routes = (app) => {
     app.use(
         express.json(),
         usuarios,
+        verifyJWT,
         pecas,
         equipamentos,
         categoria,

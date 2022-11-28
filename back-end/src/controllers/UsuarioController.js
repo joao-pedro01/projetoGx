@@ -1,14 +1,17 @@
-import { cadastrarUsuario, loginUsuario } from '../models/Usuarios.js';
+import { cadastrarUsuario, listarUsuarios, loginUsuario } from '../models/Usuarios.js';
 import md5 from "md5";
 import jwt from "jsonwebtoken";
-// import User from "../models/user.js";
+import jwtr from 'jwt-redis';
 import bcrypt from "bcryptjs";
 import { dd } from './functions.js';
+
 // class responsavel por todas acoes do usuario
 class UsuarioController {
     // function que retorna os usuarios
     static listarUsuarios = (req, res) => {
-        res.status(200).json(usuarios);
+        listarUsuarios().then((usuarios) => {
+            res.status(200).json(usuarios);
+        });
     }
 
     static cadastrarUsuario = (req, res) => {
@@ -46,10 +49,10 @@ class UsuarioController {
         }
 
         loginUsuario(query).then((usuario) => {
-            if(usuario.length == 0) {
+            if(usuario == undefined) {
                 res.status(400).json({ erro: true, message: "Usuário ou a senha incorreta!" });
             }else {
-                var token = jwt.sign({id: usuario.id}, "D62ST92Y7A6V7K5C6W9ZU6W8KS3", {
+                var token = jwt.sign({id: usuario.id}, process.env.SECRET, {
                     expiresIn: 1200 //20 min
                     // expiresIn: 60 //1 min
                     // expiresIn: '7d' // 7 dia
@@ -61,6 +64,10 @@ class UsuarioController {
 
     static logout = (req, res) => {
         res.json({ auth: false, token: null });
+    }
+
+    static test = (req, res) => {
+        res.json(jwt.decode(req.headers["x-access-token"]));
     }
 }
 
