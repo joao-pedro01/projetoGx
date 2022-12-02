@@ -1,4 +1,4 @@
-import { cadastrarUsuario, listarUsuarios, loginUsuario } from '../models/Usuarios.js';
+import { buscaUsuario, cadastrarUsuario, listarUsuarios, loginUsuario } from '../models/Usuarios.js';
 import md5 from "md5";
 import jwt from "jsonwebtoken";
 import jwtr from 'jwt-redis';
@@ -29,12 +29,16 @@ class UsuarioController {
             senha: hash,
             criado: dataFormatada
         };
-        cadastrarUsuario(query).then((usuario) => {
-            res.status(200).send({message: 'Usuario cadastrado com sucesso'});
-        }).catch(err => {
-            console.log(err);
-            res.status(500).send({message: `falha ao cadastrar usuario`});
-        });
+
+        buscaUsuario({"nome": nome}).then((usuario) => {
+            dd(usuario)
+            cadastrarUsuario(query).then((usuario) => {
+                res.status(200).send({message: 'Usuario cadastrado com sucesso'});
+            }).catch(err => {
+                console.log(err);
+                res.status(500).send({message: `falha ao cadastrar usuario`});
+            });
+        })
     }
 
     static loginUsuario = (req, res) => {

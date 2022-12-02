@@ -12,3 +12,7 @@ export const cadastrarUsuario = async(dados) => {
 export const loginUsuario = async(usuario) => {
   return await conn.select('id', 'nome', 'criado', 'is_active').table('usuarios').first().where(usuario);
 }
+
+export const buscaUsuario = async(usuario) => {
+  return await conn.select('*').table('usuarios').first().where(usuario);
+}
