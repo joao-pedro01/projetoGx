@@ -3,7 +3,7 @@ import {
     desativarCategoria,
     listarCategorias
 } from '../models/Categoria.js';
-import { dd, removeUndefined } from './functions.js';
+import { dd, removeNull, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das pecas
 class CategoriasController {
@@ -34,6 +34,7 @@ class CategoriasController {
             var select = listarCategorias(query);
 
             select.then((categorias) => {
+                removeNull(categorias);
                 res.status(200).json(categorias);
             }).catch(err => {
                 console.log(err);
@@ -48,7 +49,7 @@ class CategoriasController {
                 console.log(err);
                 res.status(500).send({message: `falha ao listar categorias com query`});
             });
-        };
+        }
     }
 
     /**
