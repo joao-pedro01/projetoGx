@@ -37,7 +37,7 @@ class CategoriasController {
             var select = listarCategorias(query);
 
             select.then((categorias) => {
-                // removeNull(categorias);
+                removeNull(categorias);
                 res.status(200).json(categorias);
             }).catch(err => {
                 console.log(err);

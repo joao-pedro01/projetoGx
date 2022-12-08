@@ -1,12 +1,11 @@
 import {
-    // cadastrarCategoria,
-    // desativarCategoria,
-    listarCategorias, listarCategoriasEspecificacoes, listarEspecificacoes
-} from '../models/Categoria.js';
-import { dd, removeUndefined } from './functions.js';
+    listarCategoriasEspecificacoes,
+    listarEspecificacoes
+} from '../models/Especificacoes.js';
+import { dd, removeNull, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das pecas
-class CategoriasController {
+class EspecificacoesController {
     /**
     * Lista todas categorias.
     *
@@ -22,11 +21,11 @@ class CategoriasController {
     static listarEspecificacoes = (req, res) => {
         var select = listarEspecificacoes();
 
-        select.then((categorias) => {
-            res.status(200).json(categorias);
+        select.then((especificacoes) => {
+            res.status(200).json(especificacoes);
         }).catch(err => {
             console.log(err);
-            res.status(500).send({message: `falha ao listar categorias com query`});
+            res.status(500).send({message: `falha ao listar especificacoes`});
         });
     }
 
@@ -34,7 +33,7 @@ class CategoriasController {
         var select = listarCategoriasEspecificacoes();
         select.then((especificacoes) => {
             //var especificacoes = listarEspecificacoes();
-                res.status(200).json({especificacoes});
+            res.status(200).json({especificacoes});
         }).catch(err => {
             console.log(err)
             res.status(500);
@@ -42,4 +41,4 @@ class CategoriasController {
     }
 }
 
-export default CategoriasController;
+export default EspecificacoesController;
