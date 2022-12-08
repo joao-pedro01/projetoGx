@@ -1,4 +1,5 @@
 import conn from "../config/dbConnect.js";
+import { dd } from "../controllers/functions.js";
 
 // function que faz a consulta de todos pecas
 export const listarEspecificacoes = async(params) => {
@@ -14,7 +15,7 @@ export const listarEspecificacoes = async(params) => {
 }
 
 export const especificacao = async(id) => {
-    return await conn.select('marca', 'modelo', 'is_active').table('especificacoes').where('id', id);
+    return await conn.select('marca', 'modelo', 'is_active', 'saldo').table('especificacoes').where('id', id);
 }
 
 // export const equipamento_atributos = async(id) => {
@@ -24,13 +25,13 @@ export const especificacao = async(id) => {
 // }
 
 export const cadastrarEquipamento = async(dados) => {
-return await conn.insert(dados).into('equipamentos');
+    return await conn.insert(dados).into('equipamentos');
 }
 
-export const desativarEquipamento = async(id, status) => {
-return await conn.where({id: id}).update({is_active: status}).table('equipamentos');
-}
+export const alterarQuantidade = async(id, value) => {
+    return await conn.update({ saldo: value }).where({id: id}).table('especificacoes');
+  }
 
 export const desativarEspecificacao = async(id) => {
-return await conn.where({ id: id }).update({ is_active: false }).table('especificacoes');
+    return await conn.where({ id: id }).update({ is_active: false }).table('especificacoes');
 }

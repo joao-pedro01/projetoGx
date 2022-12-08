@@ -1,12 +1,13 @@
 
 import {
+    alterarQuantidade,
     desativarEspecificacao,
     especificacao,
     listarEspecificacoes
 } from '../models/Especificacoes.js';
 import { dd, removeNull, removeUndefined } from './functions.js';
 
-// class responsavel por todas acoes das pecas
+// class responsavel por todas acoes das especificacaos
 class EspecificacoesController {
     /**
     * 
@@ -44,6 +45,49 @@ class EspecificacoesController {
                 res.status(500).send({message: `falha ao listar categorias com query`});
             })
         }
+    }
+    /**
+        * Altera a quantidade da peça.
+        *
+        * @method PUT
+        * @param id
+        * @param saldo
+        * @return (200) - json objeto equipamentos
+        * @return (400) - O dado enviado é inválido
+        * @return (404) - NOT FOUND / Valor solicitado não encotrado
+        * @return (405) - Peça encontra-se desativada e não é possivel alterar
+        * @return (500) - erro interno servidor
+        * 
+        * irá fazer o select para verificar se a peça informada via GET existe
+        * caso não existir ira retornar 404 caso contrário irá verificar se a peça está ativa caso a peça estar inativa irá retornar 405
+        * caso passar por todas etapas irá criar variavel de update enviando o valor caso ok retorna 200 caso contrário 500
+        */
+    static alterarQuantidade = (req, res) => {
+        var id = req.params.id;
+        var select = especificacao(id);
+        
+        select.then((especificacao) => {
+            var saldo = req.body.saldo;
+            // se a especificacao nao existir vai entrar no if
+            if(especificacao.length == 0) {
+                res.status(404).send({message: "Especificação não encontrada"});
+            }else if(especificacao[0].is_active == false) {
+                res.status(405).send({message: "Especificação esta desativada não pode alterar"});
+            }else if(especificacao[0].saldo + saldo < 0) {
+                res.status(400).send({message: 'Não tem em estoque'});
+            }else {
+                // se valor < 0 return S (saida), senao return E (entrada)
+                let valor = saldo < 0 ? "s".toUpperCase() : "e".toUpperCase();
+                var saldo = especificacao[0].saldo + saldo;
+                /*  variavel responsavel por executar alterarQuantidade, passando o id da especificacao e a quantidade a ser alterada, podendo ser positiva(somando) e negativa(subtraindo) com o valor do banco de dados */
+                alterarQuantidade(id, saldo).then(() => {
+                    res.status(200).json(`foi alterado no estoque para: ${saldo}`);
+                }).catch(err => {
+                    console.log(err);
+                    res.status(500).send({message: `falha ao atualizar a quantidade da peça`});
+                });
+            }
+        });
     }
 
     /**

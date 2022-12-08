@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
     .get("/api/especificacoes/", EspecificacoesController.listarEspecificacoes)
+    .put("/api/especificacoes/:id", EspecificacoesController.alterarQuantidade)
     .delete("/api/especificacoes/:id", EspecificacoesController.desativarEspecificacoes)
 
 export default router;
