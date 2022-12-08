@@ -56,7 +56,11 @@ class UsuarioController {
             if(usuario == undefined) {
                 res.status(400).json({ erro: true, message: "Usuário ou a senha incorreta!" });
             }else {
-                var token = jwt.sign({id: usuario.id}, process.env.SECRET, {
+                let dados = {
+                    id: usuario.id,
+                    nome: usuario.nome
+                }
+                var token = jwt.sign(dados, process.env.SECRET, {
                     expiresIn: 1200 //20 min
                     // expiresIn: 60 //1 min
                     // expiresIn: '7d' // 7 dia
