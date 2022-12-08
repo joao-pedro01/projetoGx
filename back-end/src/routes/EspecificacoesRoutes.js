@@ -5,5 +5,6 @@ const router = express.Router();
 
 router
     .get("/api/especificacoes/", EspecificacoesController.listarEspecificacoes)
+    .delete("/api/especificacoes/:id", EspecificacoesController.desativarEspecificacoes)
 
 export default router;
