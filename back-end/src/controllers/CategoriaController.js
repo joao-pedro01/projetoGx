@@ -1,4 +1,5 @@
 import {
+    alterarQuantidade,
     cadastrarCategoria,
     desativarCategoria,
     listarCategorias
@@ -11,7 +12,9 @@ class CategoriasController {
     * Lista todas categorias.
     *
     * @method GET
-    * @param status (true, false, null)
+    * @param status : boolean
+    * @param categoria : string
+    * @param tipo : string
     * @return (200) - objeto equipamentos
     * @return (500) - erro interno servidor
     * 
@@ -38,8 +41,8 @@ class CategoriasController {
                 res.status(200).json(categorias);
             }).catch(err => {
                 console.log(err);
-                res.status(500).send({message: `falha ao listar categorias peça`});
-            });
+                res.status(500).send({message: `falha ao listar categorias`});
+            })
         }else {
             var select = listarCategorias();
 
@@ -48,7 +51,7 @@ class CategoriasController {
             }).catch(err => {
                 console.log(err);
                 res.status(500).send({message: `falha ao listar categorias com query`});
-            });
+            })
         }
     }
 
@@ -68,39 +71,25 @@ class CategoriasController {
     * caso contrário irá executar o insert e retornar 200, caso der erro irá retornar 500
     */
     static cadastrarCategoria = (req, res) => {
-        let categoria = req.body;
-
-        // tratamento caso nao recebe o que foi requisitado
-        if(categoria.nome == undefined || categoria.tipo == undefined){
-            res.status(405).send({message: 'input indefinido'});
-        }else {
-            var select = listarCategorias(categoria);
-
-            select.then((content) => {
-                if(content.length !== 0) {
-                    res.status(422).send({Message: `${categoria.nome} já existe na base de dados`});
-                } else {
-                    // variavel responsavel por executar a query do insert
-                    var insert = cadastrarCategoria(categoria);
+        var dados = req.body;
         
-                    insert.then(() => {
-                        res.status(200).send({message:  `Categoria foi cadastrada com sucesso`});
-                    }).catch(err => {
-                        console.log(err);
-                        res.status(500).send({message: `falha ao cadastrar categoria`});
-                    });
-                }
-            });
-        }
+        cadastrarCategoria(dados).then((categoria) => {
+            res.status(200).send({message: `${dados.nome} foi cadastrada com sucesso ${categoria}`})
+        }).catch((err => {
+            if(err['errno'] == 1062) {
+                res.status(422).send({message: `${dados.nome} já existe cadastrado`});
+            }else {
+                res.status(500).send({message: `falha ao cadastrar categoria`});
+            }
+        }));
     }
 
     /**
-    * Altera a dados da categoria.
+    * Altera a quantidade da categoria.
     *
     * @method PUT
-    * @param id
-    * @param nome
-    * @param tipo
+    * @param id : id
+    * @param qnt : int
     * @return (200) - json objeto equipamentos
     * @return (400) - O dado enviado é inválido
     * @return (404) - NOT FOUND / Valor solicitado não encotrado
@@ -111,37 +100,42 @@ class CategoriasController {
     * caso não existir ira retornar 404 caso contrário irá verificar se a peça está ativa caso a peça estar inativa irá retornar 405
     * caso passar por todas etapas irá criar variavel de update enviando o valor caso ok retorna 200 caso contrário 500
     */
-    static alterarCategoria = (req, res) => {
+    static alterarQuantidadeCategoria = (req, res) => {
         var id = req.params.id;
         let select = listarCategorias({ id: id });
-        
         select.then((categoria) => {
             var saldo = req.body.saldo;
-            // se a categoria nao existir vai entrar no if
+            // se a categoria nao existir vai entrar no if e retornar erro senão vai verificar se esta desativada retornando 405
             if(categoria.length == 0) {
                 res.status(404).send({message: "Categoria não encontrada"});
             }else if(categoria[0].is_active == false) {
                 res.status(405).send({message: "Categoria esta desativada não pode alterar"});
             }else {
                 // se valor < 0 return S (saida), senao return E (entrada)
-                let valor = saldo < 0 ? "s".toUpperCase() : "e".toUpperCase();
-                var saldo = categoria[0].saldo + saldo;
+                /* let valor = saldo < 0 ? "s".toUpperCase() : "e".toUpperCase(); */
+                var saldo = categoria[0].qnt + saldo;
                 let update = alterarQuantidade(id, saldo);
                 update.then(() => {
+                    res.status(200).json(`${categoria[0].nome} foi alterado no estoque para: ${saldo}`);
+                }).catch(err => {
+                    console.log(err);
+                    res.status(500).send({message: `falha ao atualizar a quantidade da Categoria`});
+                })
+                
+                /* update.then(() => {
                     let query = {
                         id_usuario: req.body.id_usuario,
                         id_peca: id,
                         tipo: valor,
                         valor: categoria[0].saldo
-                    }
+                    };
                     cadastrarMovimento(query);
-                    res.status(200).json(`${peca[0].nome} foi alterado no estoque para: ${saldo}`);
                 }).catch(err => {
                     console.log(err);
                     res.status(500).send({message: `falha ao atualizar a quantidade da Categoria`});
-                });
+                }) */
             }
-        });
+        })
     }
 
     /**
