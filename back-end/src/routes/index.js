@@ -6,6 +6,7 @@ import pecas from "./PecasRoutes.js";
 import equipamentos from "./EquipamentosRoutes.js";
 import categoria from "./CategoriaRoutes.js";
 import atributo from "./AtributosRoutes.js";
+import especificacao from "./EspecificacoesRoutes.js";
 
 const routes = (app) => {
     // rotas principais
@@ -29,7 +30,8 @@ const routes = (app) => {
         pecas,
         equipamentos,
         categoria,
-        atributo
+        atributo,
+        especificacao
     );
 };
 
