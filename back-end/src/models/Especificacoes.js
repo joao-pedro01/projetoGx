@@ -7,10 +7,10 @@ export const listarEspecificacoes = async(params) => {
     return await conn.select('*').table('especificacoes');
   }else {
     return await conn
-        .select('*')
-        .table('especificacoes')
-        .where('especificacoes.is_active', params.is_active)
-        .innerJoin('categorias', 'especificacoes.fk_categorias_id', 'categorias.id');
+      .select('*')
+      .table('especificacoes')
+      .where('especificacoes.is_active', params.is_active)
+      .innerJoin('categorias', 'especificacoes.fk_categorias_id', 'categorias.id');
   }
 }
 

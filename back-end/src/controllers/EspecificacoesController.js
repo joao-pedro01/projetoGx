@@ -46,6 +46,33 @@ class EspecificacoesController {
             })
         }
     }
+
+    /**
+    * Lista equipamento e atributos detalhados
+    *
+    * @method GET
+    * @param id
+    * @return (200) - json {especificacao, atributos}
+    * @return (404) - Peca não existe
+    * @return (500) - erro interno servidor
+    */
+     static especificacao = (req, res) => {
+        var id = req.params.id;
+        var select = especificacao(id);
+
+        select.then((especificacao) => {
+            // entra no if caso não retornar nada do db 
+            if(especificacao.length === 0) {
+                res.status(404).send({message: "Peça não encontrada"});
+            }
+
+            res.status(200).json(especificacao);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).send({message: `falha ao exibir peça`});
+        });
+    };
+
     /**
         * Altera a quantidade da peça.
         *
