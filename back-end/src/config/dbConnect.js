@@ -1,6 +1,6 @@
 import knex from 'knex';
-import * as dotenv from 'dotenv';
-dotenv.config();
+import dotenv from "dotenv-safe";
+dotenv.config({allowEmptyValues: true});
 
 var conn = knex({
   client: 'mysql2',
