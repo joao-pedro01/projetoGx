@@ -45,8 +45,6 @@ class UsuarioController {
         var usuario = req.body.usuario;
         var senha = req.body.senha;
         var hash = md5(senha);
-        /* const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(senha, salt); */
         var query = {
             nome: usuario,
             senha: hash
@@ -58,7 +56,7 @@ class UsuarioController {
             }else {
                 let dados = {
                     id: usuario.id,
-                    nome: usuario.nome
+                    nome: usuario.nome,
                 }
                 var token = jwt.sign(dados, process.env.SECRET, {
                     expiresIn: 1200 //20 min
@@ -72,10 +70,6 @@ class UsuarioController {
 
     static logout = (req, res) => {
         res.json({ auth: false, token: null });
-    }
-
-    static test = (req, res) => {
-        res.json(jwt.decode(req.headers["x-access-token"]));
     }
 }
 
