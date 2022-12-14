@@ -10,7 +10,6 @@ export function removeNull(Object) {
     Object.map(obj => {
         for(const column in obj) {
             if(obj[column] == null) {
-                console.log(column, '=', obj[column]);
                 delete obj[column];
             }
         }
