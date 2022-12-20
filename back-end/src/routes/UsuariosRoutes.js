@@ -9,5 +9,4 @@ router
     .get("/api/usuarios", UsuarioController.listarUsuarios)
     .post("/api/cadastro", UsuarioController.cadastrarUsuario)
     .post("/api/entrar", UsuarioController.loginUsuario)
-
 export default router;
