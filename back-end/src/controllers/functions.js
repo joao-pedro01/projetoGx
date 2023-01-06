@@ -24,6 +24,17 @@ export function removeUndefined(obj) {
     });
 };
 
+export function copiarObjecto(obj) {
+    if (obj === null || typeof obj !== 'object') {
+        return obj;
+    }
+    var temp = obj.constructor();
+    for (var key in obj) {
+        temp[key] = copiarObjecto(obj[key]);
+    }
+    return temp;
+}
+
 export function verifyJWT(req, res, next){
     const token = req.headers['x-access-token'];
 

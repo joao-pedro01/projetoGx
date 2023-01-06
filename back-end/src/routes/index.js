@@ -30,5 +30,5 @@ const routes = (app) => {
         especificacao
     );
 };
-
+var cep = "https://viacep.com.br/ws/"+cep+"/json/"
 export default routes;
