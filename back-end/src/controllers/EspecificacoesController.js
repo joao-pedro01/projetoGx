@@ -1,6 +1,7 @@
 
 import {
     alterarQuantidade,
+    cadastrarEspecificacao,
     desativarEspecificacao,
     especificacao,
     listarEspecificacoes
@@ -74,6 +75,45 @@ class EspecificacoesController {
     };
 
     /**
+    * Cadastra categoria.
+    *
+    * @method POST
+    * @param nome
+    * @param tipo
+    * @param marca_cat
+    * @param modelo
+    * @param atrib1_cat
+    * @param atrib2_cat
+    * @param atrib3_cat
+    * @param atrib4_cat
+    * @param atrib5_cat
+    * @param atrib6_cat
+    * @return (200) - message
+    * @return (405) - dados solicitados não recebido da forma correta
+    * @return (422) - já existe no banco de dados e não pode repetir
+    * @return (500) - erro interno servidor
+    * 
+    * caso não receber os dados solicitador irá retornar 405
+    * caso contrário irá criar var para o select e executar, se o numero do categoria já se encontrar na base de dados irá retornar 422
+    * caso contrário irá executar o insert e retornar 200, caso der erro irá retornar 500
+    */
+    static cadastrarEspecificacao = (req, res) => {
+        var dados = req.body;
+        
+        
+        cadastrarEspecificacao(dados).then((categoria) => {
+            res.status(200).send({message: `${categoria.nome} ${dados.marca} cadastrado com sucesso`})
+        }).catch((err => {
+            if(err['errno'] == 1062) {
+                res.status(422).send({message: `${dados.nome} já existe cadastrado`});
+            }else {
+                console.error(err);
+                res.status(500).send({message: `falha ao cadastrar Especificacao`});
+            }
+        }));
+    }
+
+    /**
         * Altera a quantidade da peça.
         *
         * @method PUT
@@ -88,7 +128,7 @@ class EspecificacoesController {
         * irá fazer o select para verificar se a peça informada via GET existe
         * caso não existir ira retornar 404 caso contrário irá verificar se a peça está ativa caso a peça estar inativa irá retornar 405
         * caso passar por todas etapas irá criar variavel de update enviando o valor caso ok retorna 200 caso contrário 500
-        */
+    */
     static alterarQuantidade = (req, res) => {
         var id = req.params.id;
         var select = especificacao(id);
