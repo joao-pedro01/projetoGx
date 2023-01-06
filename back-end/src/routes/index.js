@@ -2,10 +2,7 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocs from "../../helpers/swagger.json" assert { type: "json" };
 import usuarios from "./UsuariosRoutes.js";
-import pecas from "./PecasRoutes.js";
-import equipamentos from "./EquipamentosRoutes.js";
 import categoria from "./CategoriaRoutes.js";
-import atributo from "./AtributosRoutes.js";
 import especificacao from "./EspecificacoesRoutes.js";
 import { dd, verifyJWT } from "../controllers/functions.js";
 
@@ -29,12 +26,9 @@ const routes = (app) => {
         express.json(),
         usuarios,
         verifyJWT,
-        pecas,
-        equipamentos,
         categoria,
-        atributo,
         especificacao
     );
 };
-
+var cep = "https://viacep.com.br/ws/"+cep+"/json/"
 export default routes;

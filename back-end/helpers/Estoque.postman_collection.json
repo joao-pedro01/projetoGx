@@ -1,0 +1,345 @@
+{
+	"info": {
+		"_postman_id": "21674af5-d6d9-46fd-974c-8e86bef7a16d",
+		"name": "Estoque",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16524477"
+	},
+	"item": [
+		{
+			"name": "usuarios",
+			"item": [
+				{
+					"name": "LoginUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario\": \"test\",\r\n    \"senha\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/entrar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"entrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"regiane\",\r\n    \"senha\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/cadastro",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cadastro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListUsuarios",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImlhdCI6MTY2OTU5Mjg1NywiZXhwIjoxNjY5NTk0MDU3fQ.tvgQrUdZnfeyroNL_P8Fipho9AmRRGIzu5SyBYlVuew",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LogOut",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categorias",
+			"item": [
+				{
+					"name": "ListarCategoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/categorias?tipo=P",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categorias"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "hd",
+									"disabled": true
+								},
+								{
+									"key": "tipo",
+									"value": "P"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrarCategoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Positivo\",\r\n    \"tipo\": \"marca\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/categorias",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletarCategoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/categorias/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categorias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alterarCategoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alterarQuantidade",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/categorias/2?saldo=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"categorias",
+								"2"
+							],
+							"query": [
+								{
+									"key": "saldo",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Especificacoes",
+			"item": [
+				{
+					"name": "listarEspecificacoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/especificacoes/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"especificacoes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "desativarEspecificacao",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/especificacoes/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"especificacoes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alterarQnt",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"saldo\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/especificacoes/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"especificacoes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "x-access-token",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwibm9tZSI6InRlc3QiLCJpYXQiOjE2NzE1NjgwNTksImV4cCI6MTY3MTU2OTI1OX0._kZ38ot_jEYY_sP4ozZV1d7kt6Ux-BgtE14LKPV5F64",
+			"type": "string"
+		},
+		{
+			"key": "url",
+			"value": "localhost:3500",
+			"type": "string"
+		}
+	]
+}

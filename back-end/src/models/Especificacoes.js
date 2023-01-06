@@ -14,18 +14,22 @@ export const listarEspecificacoes = async(params) => {
   }
 }
 
-export const especificacao = async(id) => {
-    return await conn.select('marca', 'modelo', 'is_active', 'saldo').table('especificacoes').where('id', id);
+export const BuscaEspespecificacao = async(query) => {
+  return await conn
+  .select('marca', 'modelo', 'is_active', 'saldo')
+  .table('especificacoes')
+  .where(query);
 }
 
-// export const equipamento_atributos = async(id) => {
-// return await conn.select().table('equipamentos_atributos')
-//     .innerJoin( 'atributos', 'atributos.id', 'equipamentos_atributos.id_atributo')
-//     .where('equipamentos_atributos.id_equipamento', id);
-// }
+export const especificacao = async(id) => {
+  return await conn.select('marca', 'modelo', 'is_active', 'saldo').table('especificacoes').where('id', id);
+}
 
-export const cadastrarEquipamento = async(dados) => {
-    return await conn.insert(dados).into('equipamentos');
+
+export const cadastrarEspecificacao = async(dados) => {
+  return await conn
+  .insert(dados)
+  .into('especificacoes')
 }
 
 export const alterarQuantidade = async(id, value) => {
