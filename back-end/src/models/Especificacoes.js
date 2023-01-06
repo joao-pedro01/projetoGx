@@ -24,8 +24,13 @@ export const especificacao = async(id) => {
 //     .where('equipamentos_atributos.id_equipamento', id);
 // }
 
-export const cadastrarEquipamento = async(dados) => {
-    return await conn.insert(dados).into('equipamentos');
+export const cadastrarEspecificacao = async(dados) => {
+  conn.insert(dados).into('especificacoes')
+    return await conn
+    .select('categorias.nome')
+    .table('especificacoes')
+    .first()
+    .innerJoin('categorias', 'especificacoes.fk_categorias_id', 'categorias.id');
 }
 
 export const alterarQuantidade = async(id, value) => {
