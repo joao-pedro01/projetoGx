@@ -6,6 +6,7 @@ import {
     especificacao,
     listarEspecificacoes
 } from '../models/Especificacoes.js';
+import SkuController from './skuController.js';
 import { dd, removeNull, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das especificacaos
@@ -100,17 +101,20 @@ class EspecificacoesController {
     static cadastrarEspecificacao = (req, res) => {
         var dados = req.body;
         
-        
-        cadastrarEspecificacao(dados).then((categoria) => {
-            res.status(200).send({message: `${categoria.nome} ${dados.marca} cadastrado com sucesso`})
-        }).catch((err => {
-            if(err['errno'] == 1062) {
-                res.status(422).send({message: `${dados.nome} já existe cadastrado`});
+        dados.SKU = SkuController.GerarSku(dados);
+        listarEspecificacoes().then((query) => {
+            var sku = query.find(o => o.SKU === dados.SKU);
+            if(sku) {
+                res.status(422).send({message: `${dados.marca} já existe com SKU: ${dados.SKU}`});
             }else {
-                console.error(err);
-                res.status(500).send({message: `falha ao cadastrar Especificacao`});
+                cadastrarEspecificacao(dados).then(() => {
+                    res.status(200).send({message: `${dados.marca} cadastrado com sucesso`});
+                }).catch((err => {
+                    console.error(err);
+                    res.status(500).send({message: `falha ao cadastrar Especificacao`});
+                }));
             }
-        }));
+        });
     }
 
     /**

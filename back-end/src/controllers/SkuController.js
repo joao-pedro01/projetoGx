@@ -1,37 +1,29 @@
-import { dd } from './functions.js';
+import { copiarObjecto, dd } from './functions.js';
 
 // class responsavel por todas acoes do usuario
 class SkuController {
-    static GerarSku = (id, nome) => {
-        /* deleteCategoria(nome); */
-
+    static GerarSku = (nome) => {
         var sku;
-        var skuDados = nome;
+        let skuDados = copiarObjecto(nome);
+        
         let i = 0;
-        for (const column in skuDados) {
-            if(skuDados[column].length <= 2) {
-                skuDados[column] = 0 + skuDados[column];
-            }
 
-            sku = i > 0 ? sku + skuDados[column].substring(0,3) : skuDados[column].substring(0,3);
-            i++;
-            if(i == 7){
-                break;
+        for (const column in skuDados) {
+            if(column !== "fk_categorias_id" && column !== "saldo") {
+                if(skuDados[column].length <= 2) {
+                    skuDados[column] = 0 + skuDados[column];
+                }
+                
+                sku = i > 0 ? sku + skuDados[column].substr(0,3) : skuDados[column].substr(0,3);
+                i++;
+                if(i == 7){
+                    break;
+                }
             }
         }
-        
+        sku = sku.toUpperCase();
         return sku;
     }
 }
-
-/* export function deleteCategoria(obj) {
-    let i = 4;
-    for (const column in obj) {
-        if(column == `atrib${i}_cat`){
-            delete obj[column];
-            i++;
-        }
-    }
-}; */
 
 export default SkuController;
