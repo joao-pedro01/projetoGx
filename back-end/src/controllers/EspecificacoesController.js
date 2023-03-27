@@ -6,7 +6,7 @@ import {
     especificacao,
     listarEspecificacoes
 } from '../models/Especificacoes.js';
-import SkuController from './skuController.js';
+import SkuController from './SkuController.js';
 import { dd, removeNull, removeUndefined } from './functions.js';
 
 // class responsavel por todas acoes das especificacaos
