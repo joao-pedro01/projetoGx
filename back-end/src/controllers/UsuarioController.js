@@ -31,7 +31,6 @@ class UsuarioController {
         };
 
         buscaUsuario({"nome": nome}).then((usuario) => {
-            dd(usuario)
             cadastrarUsuario(query).then((usuario) => {
                 res.status(200).send({message: 'Usuario cadastrado com sucesso'});
             }).catch(err => {

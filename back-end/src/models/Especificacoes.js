@@ -7,8 +7,20 @@ export const listarEspecificacoes = async(params) => {
     return await conn.select('*').table('especificacoes');
   }else {
     return await conn
-      .select('*')
       .table('especificacoes')
+      .select(
+        'especificacoes.*',
+        'categorias.id as id_cat',
+        'categorias.is_active as is_active_cat',
+        'categorias.tipo as tipo_cat',
+        'categorias.marca_cat',
+        'categorias.atrib1_cat',
+        'categorias.atrib2_cat',
+        'categorias.atrib3_cat',
+        'categorias.atrib4_cat',
+        'categorias.atrib5_cat',
+        'categorias.atrib6_cat'
+      )
       .where('especificacoes.is_active', params.is_active)
       .innerJoin('categorias', 'especificacoes.fk_categorias_id', 'categorias.id');
   }
