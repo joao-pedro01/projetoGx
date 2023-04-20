@@ -23,12 +23,12 @@ const CadastroP = () => {
 
 
 useEffect(() => {
-  Axios.get('http://172.22.2.22:8080/api/categorias')
+  Axios.get('http://172.22.2.22:3030/api/categorias')
   .then(res => {
     console.log("Getting from ::::", res.data)
     setValores(res.data)
   }).catch(err => console.log(err))
-  Axios.get('http://172.22.2.22:8080/api/atributos')
+  Axios.get('http://172.22.2.22:3030/api/atributos')
   .then(res => {
     console.log("Getting from ::::", res.data)
     setVAtributos(res.data)
@@ -54,21 +54,11 @@ useEffect(() => {
                     <div className='atributos'>
                     <h3><b>Cadastro de Peças</b></h3>
                       <form className='formCPecas' onSubmit={handleSubmit}>
-                        <InputGroup className="mb-3">
-                          <InputGroup.Text id="basic-addon1"><AiFillTool></AiFillTool></InputGroup.Text>
-                          <Form.Control
-                            type="text"
-                            placeholder="Nome da Peça..."
-                            aria-label="nomepeca"
-                            aria-describedby="basic-addon1"
-                            value={nome} onChange={(e) => setNome(e.target.value)}
-                          />
-                        </InputGroup>
                         <Form.Select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
                           <option value="0">Selecione a categoria...</option>
                           {valores.map((categorias) => (
                             <option key={categorias.id} value={categorias.id}>
-                              {categorias.categoria}
+                              {categorias.nome}
                             </option>
                           ))}
                         </Form.Select> 

@@ -14,8 +14,9 @@ import CadastroE from './pages/cadastroEquipamentos/indexCadastroE';
 import Relatorio from './pages/relatorio/indexRelatorio.jsx';
 import Retirada from './pages/retirada/indexRetirada.jsx';
 import CadastroTeste from './pages/cadastroTeste/indexCadastroTeste'
+import DetalhesPecas from './pages/listaPecas/detalhesPecas/detalhesPecas.jsx'
 import './thema/themeInput.css';
-
+import Axios from "axios";
 
 import { 
   BrowserRouter as Router,
@@ -41,6 +42,16 @@ const useLocalState = (key, defaultValue) => {
 };
 
 const App = () => {
+  const [data, setData] = useState();
+
+
+  useEffect(() => {
+    Axios.get('http://172.22.2.22:3030/api/especificacoes')
+    .then(res => {
+      setData(res.data)
+    }).catch(err => console.log(err))
+  }, []);
+  
   const [theme, setTheme] = useLocalState("theme", "light"); /*Var da troca do thema*/
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -61,6 +72,7 @@ const App = () => {
               <Route exact path="/Relatorio" element={<Relatorio/>}/>
               <Route exact path="/Retirada" element={<Retirada/>}/>
               <Route exact path="/teste" element={<CadastroTeste/>}/>
+              <Route exact path="/pecas/:id" element={<DetalhesPecas/>}/>
             </Routes>
           </Router>
       </div>

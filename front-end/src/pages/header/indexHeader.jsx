@@ -36,7 +36,9 @@ function Header() {
                 />
                 <Button className='search-button me-2' variant="primary"><FaSearch /></Button>
             </Form>
+            <Link to="/">
             <Button className='search-button me-1' variant="danger"><FaSignOutAlt /> Logoff</Button>
+            </Link>
           </Container>
         </Navbar>
     </>

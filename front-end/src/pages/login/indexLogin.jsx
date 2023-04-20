@@ -4,24 +4,40 @@ import './stylesLogin.css'  //import estilizacao css
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Axios from 'axios';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Navigate, useNavigate} from 'react-router-dom';
 
-const Login = () => {
+function Login () {
 
-    const [user, setUser] = useState ('')
-    const [password, setPassword] = useState('')
+    const [usuario, setUsuario] = useState ('')
+    const [senha, setSenha] = useState('')
+    const navigate = useNavigate();
+
      
-    const handleSubmit = (e) => { 
-      e.preventDefault()
-      Axios.post('http://172.16.9.95:8080/api/login',{user, password})
-      .then(function (response){
-        console.log(response)
-        console.log("submit:",{user, password})
-      })
-      .catch(function(error){
-        console.log(error)
-      })
-    }
+    async function handleSubmit (e) {
+        e.preventDefault();
+
+        console.log(`usuario: ${usuario}`);
+        console.log(`senha: ${senha}`);
+
+
+        try {
+          const res = await Axios.post('http://172.22.2.22:3030/api/entrar', {
+            //          const res = await Axios.post('http://172.22.2.22:3030/api/cadastrar', {
+            usuario,
+            senha,
+          });
+          if (!res.data.erro) {
+            console.log(res.data)
+            navigate('/menu');
+          } else {
+            alert("Login invalido");
+            console.log(res.data.erro);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
     return (
         <div className="container">
             <div className="boxLogin">
@@ -31,24 +47,21 @@ const Login = () => {
                 <h1 className="loginTitulo"><b>ESTOQUE</b></h1> {/* titulo da pagina */}
                 <div className='inputsL'> {/* div lista de inputs */}
                     <Form.Control type="text" placeholder="Nome de usuário" required
-                    value= {user} onChange = {(event) => setUser(event.target.value)} />  {/* define o input digitado para a const user*/}
+                    value= {usuario} onChange = {(e) => setUsuario(e.target.value)} />  {/* define o input digitado para a const user*/}
                 </div>
                 <div className='inputsL'>
                     <Form.Control type="password" placeholder="Senha" required
-                    value= {password} onChange = {(event) => setPassword(event.target.value)} /> {/* define o input digitado para a const password*/}
+                    value= {senha} onChange = {(e) => setSenha(e.target.value)} /> {/* define o input digitado para a const password*/}
                 </div>
                 <div className='containerLoginBotao'>
-                <Link to="/menu">
                     <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                </Link>
                 </div>
                 </form>
             </div>
             </div>
-        </div>
-    );
-}
-
+        </div> 
+          );
+        }
 
 export default Login;
 
