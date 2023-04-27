@@ -1,0 +1,19 @@
+.imgNav { 
+    width:50px;
+}
+
+.logoNav { 
+    padding-left: 7px;
+}
+
+.removeUnderline a { 
+    text-decoration: none;
+}
+
+.d-flex { 
+    text-align: center;
+}
+.welcome {
+    color: white;
+    padding-right: 25px;    
+}

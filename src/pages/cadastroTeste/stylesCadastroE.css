@@ -1,0 +1,23 @@
+
+.container { 
+    min-height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:  center;
+    justify-content: center;
+}
+
+.boxCAD { 
+    margin-top: 10px;
+    height: 450px;
+    width: 600px;
+    background-color: #D6D6D6;
+    border-radius: 10px;
+    overflow: visible;
+    padding: 55px 55px 55px 55px;
+}
+
+.atributos h3{
+    padding-bottom: 3%;
+}

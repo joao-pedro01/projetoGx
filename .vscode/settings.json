@@ -1,0 +1,24 @@
+{
+    "favorites.resources": [
+        {
+            "filePath": "src\\pages\\cadastroPecas\\indexCadastroP.jsx",
+            "group": "Default"
+        },
+        {
+            "filePath": "src\\pages\\cadastroPecas\\stylesCadastroP.css",
+            "group": "Default"
+        },
+        {
+            "filePath": "src\\pages\\header\\indexHeader.jsx",
+            "group": "Default"
+        },
+        {
+            "filePath": "src\\pages\\listaPecas\\stylesLista.css",
+            "group": "Default"
+        },
+        {
+            "filePath": "src\\pages\\listaPecas\\indexLista.jsx",
+            "group": "Default"
+        }
+    ]
+}
