@@ -75,10 +75,10 @@ class CategoriasController {
         var dados = req.body;
         
         cadastrarCategoria(dados).then(() => {
-            res.status(200).send({message: `${dados.nome} cadastrado com sucesso`})
+            res.status(200).send({message: `${dados.nome} cadastrado com sucesso`, dados})
         }).catch((err => {
             if(err['errno'] == 1062) {
-                res.status(422).send({message: `${dados.nome} já existe cadastrado`});
+                res.status(422).send({message: `${dados.nome} já esta cadastrado`});
             }else {
                 console.error(err);
                 res.status(500).send({message: `falha ao cadastrar categoria`});

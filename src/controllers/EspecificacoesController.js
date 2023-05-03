@@ -109,7 +109,7 @@ class EspecificacoesController {
                 res.status(422).send({message: `${dados.marca} já existe com SKU: ${dados.SKU}`});
             }else {
                 cadastrarEspecificacao(dados).then(() => {
-                    res.status(200).send({message: `${dados.marca} cadastrado com sucesso`});
+                    res.status(200).send({message: `${dados.marca} cadastrado com sucesso`}, dados);
                 }).catch((err => {
                     console.error(err);
                     res.status(500).send({message: `falha ao cadastrar Especificacao`});
