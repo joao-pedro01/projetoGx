@@ -1,0 +1,20 @@
+tr:hover {
+    background-color: rgb(247, 223, 255);
+}
+th {
+    background-color: white;
+}
+
+.buttonArea {
+    background-color: whitesmoke;
+    height: 80px;
+    width: auto;
+}
+
+.botaoCadastro { 
+    right: auto;
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
